@@ -10,3 +10,4 @@ config/database.rb
 config/ldap.yml
 db/*.db
 log/*
+*.swo
