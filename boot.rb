@@ -11,10 +11,6 @@ Bundler.require(:default, SINATRA_ENV)
 require_relative "config/database.rb"
 
 # setup ldap
-require 'ldap_lookup'
-require 'yaml'
-LDAPLookup::Importable.settings = YAML.load(File.read('config/ldap.yml'))[SINATRA_ENV]
-
 require 'yaml'
 
 # add lib to load path

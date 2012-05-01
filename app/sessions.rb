@@ -1,24 +1,19 @@
 module App
   class Sessions < Sinatra::Base
+    set :root, File.dirname(__FILE__)+ "/../"
     enable :logging 
 
     get "/unauthenticated" do
-      attempted_path = env["warden.options"][:attempted_path]
-
-      redirect "/auth/cas?url=#{attempted_path}"
+      redirect "/auth/login"
     end
 
-    %w[get post].each do |method|
-      self.send(method, "/cas/callback") do
-        ugid = request.env["omniauth.auth"]["uid"]
-        user = User.find_or_create_from_ldap(ugid)
-
-        if user.active?
-          env["warden"].set_user user
-          redirect params["url"]
-        else
-          throw(:warden)
-        end
+    post "/login" do
+	    user = User.first(:email => params[:user][:email])
+      if user.nil? || !user.checkpassword(params[:user][:password])
+        redirect to("/login")
+      else
+        env["warden"].set_user user
+        redirect params["url"]
       end
     end
 
@@ -26,9 +21,13 @@ module App
       "fail"
     end
 
-    delete "/logout" do
+    get "/logout" do
       env["warden"].logout
       redirect "/"
+    end
+
+    get "/login" do
+      haml :"sessions/login"
     end
   end
 end

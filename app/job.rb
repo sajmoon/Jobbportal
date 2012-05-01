@@ -4,6 +4,11 @@ module App
 
     set :root, File.dirname(__FILE__) + "/.."
 
+    before '/new' do
+      env["warden"].authenticate!
+      @current_user = env["warden"].user
+    end
+
     get "/" do
       @jobs = Job.all
       @categories = Category.all
@@ -12,7 +17,6 @@ module App
     end
 
     post "/index" do
-      
       @jobs
       @selected_categories = []
       if defined?(params[:filter][:id])

@@ -20,8 +20,6 @@ gem 'dm-timestamps'
 
 #user auth
 gem 'warden'
-gem 'omniauth-cas'
-gem 'ldap_lookup', :git => 'https://github.com/Frost/ldap_lookup.git'
 
 group :test do
   gem 'rack-test', require: "rack/test"

@@ -22,7 +22,10 @@
   %li
     %a{href: "/companies/new"} Lägg till företag
 %h4
-  Användare
+  = "Användare #{env["warden"].user}"
 %ul
   %li
-    %a{href: "/users/"} Logga in
+    %a{href: "/auth/login"} Logga in
+  %li
+    %a{href: "/auth/logout"} Logga ut
+ 

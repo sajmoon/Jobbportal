@@ -1,3 +1,5 @@
+require 'digest/sha2'
+
 module App
   class Users < Sinatra::Base
     set :root, File.dirname(__FILE__)+ "/../"
@@ -14,8 +16,8 @@ module App
     end
 
     before do
-      env["warden"].authenticate!
-      @current_user = env["warden"].user
+      #env["warden"].authenticate!
+      #@current_user = env["warden"].user
     end
 
     get "/" do
@@ -30,6 +32,11 @@ module App
 
     post "/" do
       @user = User.new(params[:user])
+
+      @user.salt = @user.new_salt
+      @user.hashedpassword = @user.encryptpassword(params[:user][:password], @user.salt)
+      @user.ugid = (0..16).to_a.map{|a| rand(16).to_s(16)}.join
+
       if @user.save
         redirect "/"
       else

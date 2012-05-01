@@ -1,0 +1,30 @@
+%h1
+  Logga in
+
+%form.form-horizontal{acition: "/auth", method: "post"}
+  %fieldset
+    %legend
+      Logga in
+
+    .control-group
+      %label.control-label{for: 'email'} Email
+      .controls
+        %input.input-xlarge{id: 'email', name: "user[email]" }
+        %p.help-block
+          Hoppas du kommer ihåg din email!
+
+    .control-group
+      %label.control-label{for: 'password'} Lösenord
+      .controls
+        %input{id: 'password', name: "user[password]"}
+        %p.help-block
+          Ditt lösenord måste du också komma ihåg. Ring Tarandi annars.
+    .form-actions
+      %input.btn.btn-primary{type: "submit", value: "Logga in"}
+
+%h3
+  Har du inget konto?
+
+%P
+  Du kan alltid skapa ett konto! Woop
+%a.btn.btn-info{href: "/users/new"} Skapa ett konto

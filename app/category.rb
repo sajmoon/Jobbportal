@@ -3,7 +3,11 @@ module App
     enable :logging
 
     set :root, File.dirname(__FILE__) + "/.."
-		
+
+    before '/new' do
+      env["warden"].authenticate!
+    end
+
     get "/" do
       @categories = Category.all
       haml :"categories/index"
