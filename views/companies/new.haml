@@ -1,0 +1,6 @@
+%h1
+  Nytt företag
+
+%form.form{action: "/companies", method: "post"}
+  =haml :"companies/_form"
+  %input{ type: "submit", value: "Skapa"}

@@ -1,0 +1,6 @@
+%h1
+  = @company.name
+
+
+= @company.jobs.each do |job|
+  = haml :"jobs/_job", locals: { job: job }

@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+# Ruby
+if ! which ruby > /dev/null; then
+  echo "[-] Ruby not found, please install Ruby!"
+  echo "[-] http://www.ruby-lang.org/en/"
+  exit 1
+fi
+
+# Bundler
+if ! which bundle > /dev/null; then
+  echo "[-] Bundler not found, please install Bundler!"
+  echo "[-] http://gembundler.com/"
+  exit 1
+fi
+
+# Bundle
+echo "[+] Running 'bundle install'..."
+bundle install
+
+# Database config
+if [ ! -f config/database.rb ]; then
+    echo "[-] No database config found, copying template..."
+    cp config/database.rb.dist config/database.rb
+    echo "[-] Now, go ahead and update config/database.rb to match your setup!"
+    exit 1
+fi
+
+# LDAP config
+if [ ! -f config/ldap.yml ]; then
+    echo "[+] No LDAP config found, copying template..."
+    cp config/ldap.yml.dist config/ldap.yml
+fi
+
+# Setup rake tasks
+echo "[+] Running setup rake tasks..."
+bundle exec rake db:auto_upgrade
+SINATRA_ENV=test bundle exec rake db:auto_upgrade

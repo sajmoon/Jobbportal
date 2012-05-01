@@ -1,0 +1,6 @@
+%h1
+  Lägg till en ny kategori
+
+%form.form{action: "/categories", method: "post"}
+  = haml :"categories/_form", locals: {category: @category}
+  %input{type: "submit", value: "Skapa"}

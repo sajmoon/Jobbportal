@@ -1,0 +1,20 @@
+%label{for: "job_title"} Titel
+%input{id: "job_title", name: "job[title]", value: @job.title}
+
+%label{for: "job_short_description"} Kort beskrivning
+%input{type: "textarea", id: "job_short_description", name: "job[short_description]", value: @job.short_description}
+
+%label{for: "job_description"} Lång Beskrivning
+%input{type: "textarea", id: "job_description", name: "job[description]", value: @job.description}
+
+%label{for: "job_category"} Kategorier:
+- @categories.each do |category|
+  %input{type: "checkbox", name: "categories[id][]", value: category.id, checked: @job.categories.include?(category)}
+  = category.name
+
+
+%label{for: "job_company"} Företag
+%select{id: "job_company_id", name: "job[company_id]"}
+  - @companies.each do |company|
+    %option{value: company.id}= company.name
+

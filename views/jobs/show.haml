@@ -1,0 +1,18 @@
+%h1
+  En specifik annons!
+
+%h5
+  Titel
+= @job.title
+
+%h5
+  Beskrivning
+= @job.description
+
+%h5
+  Företag:
+= @job.company.name
+
+%h5
+  Kategorier
+= @job.categories.map(&:name).join(", ")
