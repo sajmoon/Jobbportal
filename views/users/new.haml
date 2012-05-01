@@ -1,0 +1,3 @@
+%form.form{action: "/users", method: "post"}
+  = haml :"users/_form", locals: {user: @user}
+  %input{type: "submit", value: "Spara"} 
