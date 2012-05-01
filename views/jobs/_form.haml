@@ -1,20 +1,35 @@
-%label{for: "job_title"} Titel
-%input{id: "job_title", name: "job[title]", value: @job.title}
+.control-group
+  %label.control-label{for: "job_title"} Titel
+  .controls
+    %input.input-xlarge{id: "job_title", name: "job[title]", value: @job.title}
+    %p.help-block
+      Titeln på annonsen
 
-%label{for: "job_short_description"} Kort beskrivning
-%input{type: "textarea", id: "job_short_description", name: "job[short_description]", value: @job.short_description}
+.control-group
+  %label.control-label{for: "job_short_description"} Kort beskrivning
+  .controls
+    %input.input-xlarge{type: "textarea", id: "job_short_description", name: "job[short_description]", value: @job.short_description}
+    %p.help-block
+      En kort beskrivning
 
-%label{for: "job_description"} Lång Beskrivning
-%input{type: "textarea", id: "job_description", name: "job[description]", value: @job.description}
+.control-group
+  %label.control-label{for: "job_description"} Lång Beskrivning
+  .controls
+    %input.input-xlarge{type: "textarea", id: "job_description", name: "job[description]", value: @job.description}
+    %p.help-block
+      Längre och mycket detaljerad beskrivning av tjänsten.
+.control-group
+  %label.control-label{for: "job_category"} Kategorier:
+  .controls
+    - @categories.each do |category|
+      %label.checkbox
+        %input{type: "checkbox", name: "categories[id][]", value: category.id, checked: @job.categories.include?(category)}
+        = category.name
 
-%label{for: "job_category"} Kategorier:
-- @categories.each do |category|
-  %input{type: "checkbox", name: "categories[id][]", value: category.id, checked: @job.categories.include?(category)}
-  = category.name
-
-
-%label{for: "job_company"} Företag
-%select{id: "job_company_id", name: "job[company_id]"}
-  - @companies.each do |company|
-    %option{value: company.id}= company.name
+.control-group
+  %label.control-label{for: "job_company"} Företag
+  .controls
+    %select{id: "job_company_id", name: "job[company_id]"}
+      - @companies.each do |company|
+        %option{value: company.id}= company.name
 

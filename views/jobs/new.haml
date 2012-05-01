@@ -1,3 +1,9 @@
-%form.form{action: "/jobs", method: "post"}
-  = haml :"jobs/_form"
-  %input{type: "submit", value: "Spara"} 
+%form.form-horizontal{action: "/jobs", method: "post"}
+  %fieldset
+    %legend
+      Skapa en ny annons
+
+    = haml :"jobs/_form"
+
+    .form-actions
+      %input.btn.btn-primary{type: "submit", value: "Spara"} 
