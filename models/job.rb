@@ -4,7 +4,7 @@ class Job
   # property <name>, <type>
   property :id,                 Serial
   property :title,              String,   required: true
-  property :short_description,  Text,     required: true, default: "short desc"
+  property :short_description,  Text,     required: true
   property :description,        Text,     required: true
   property :created_at,         DateTime, required: true
   property :updated_at,         DateTime, required: true
