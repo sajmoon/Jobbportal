@@ -6,6 +6,8 @@ module App
 
     get "/" do
       @jobs = Job.all(limit: 5)
+      @categories = Category.all
+      @selected_categories = []
       haml :start_page
     end
   end

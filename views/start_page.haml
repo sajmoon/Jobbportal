@@ -1,9 +1,13 @@
 %h1 Datasektionens Jobbportal
 
 .row
-  .span3
+  .span2
     = haml :"menu"
   .span7
     %h2
       Senaste jobben
     = haml :"jobs/_jobs", :locals => { :jobs => @jobs }
+  .span3
+    = haml :"search"
+
+

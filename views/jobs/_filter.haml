@@ -1,0 +1,6 @@
+
+%form.form{action: "/jobs/index", method: "post"}
+  - @categories.each do |cat|
+    %input{type: "checkbox", name: "filter[id][]", value: cat.id, checked: @selected_categories.include?(cat)}
+    = cat.name
+  %input{type: "submit", value: "Filtrera"}
