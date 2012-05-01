@@ -1,3 +1,12 @@
-- jobs.each do |job|
-  %ul.unstyled
-    = haml :"jobs/_job", :locals => { :job => job }
+%table.table.table-striped
+  %thead
+    %th
+      Titel
+    %th
+      Beskrivning
+    %th
+      Kategorier
+  %tbody
+
+    - jobs.each do |job|
+      = haml :"jobs/_job", :locals => { :job => job }

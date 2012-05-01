@@ -1,18 +1,13 @@
-%li
-  .job
-    .title
-      %h4
-        = job.title
-    .description
-      %p
-        = job.description
+%tr
+  %td
+    = job.title
+  %td  
+    = job.description
 
-    .categories
-      %h5
-        = "Kategorier (#{job.categories.count})"
-      %ul
-        - job.categories.each do |category|
-          %li
-            = haml :"categories/_category", locals: { category: category }
+  %td 
+    %ul
+      - job.categories.each do |category|
+        %li
+          = haml :"categories/_category", locals: { category: category }
 
 
