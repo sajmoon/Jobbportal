@@ -13,10 +13,18 @@ module App
 
     post "/index" do
       
-      @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id } )
-      @selected_categories = Category.all(:id => params[:filter][:id].map{ |id| id })
+      @jobs
+      @selected_categories = []
+      if defined?(params[:filter][:id])
+        @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id } )
 
+        @selected_categories = Category.all(:id => params[:filter][:id].map{ |id| id })
+      else
+        @jobs = Job.all
+      end
+      
       @categories = Category.all
+
       haml :"jobs/index"
     end
 
