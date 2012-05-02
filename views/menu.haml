@@ -5,27 +5,32 @@
 %ul
   %li
     %a{href: "/jobs/"} Se alla lediga jobb
-  %li
-    %a{href: "/jobs/new"} Lägg till en annons
+  - unless env["warden"].user.nil?
+    %li
+      %a{href: "/jobs/new"} Lägg till en annons
 %h4
   Kategorier
 %ul
   %li
     %a{href: "/categories/"} Se alla kategorier
-  %li
-    %a{href: "/categories/new"} Lägg till en kategori
+  - unless env["warden"].user.nil?
+    %li
+      %a{href: "/categories/new"} Lägg till en kategori
 %h4
   Företag
 %ul
   %li
     %a{href: "/companies/"} Se alla företag
-  %li
-    %a{href: "/companies/new"} Lägg till företag
+  - unless env["warden"].user.nil?
+    %li
+      %a{href: "/companies/new"} Lägg till företag
 %h4
   = "Användare #{env["warden"].user}"
 %ul
-  %li
-    %a{href: "/auth/login"} Logga in
-  %li
-    %a{href: "/auth/logout"} Logga ut
+  - if env["warden"].user.nil?
+    %li
+      %a{href: "/auth/login"} Logga in
+  - else
+    %li
+      %a{href: "/auth/logout"} Logga ut
  

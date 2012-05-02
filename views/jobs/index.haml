@@ -23,4 +23,7 @@
         %td
           = j.categories.map(&:name).join(", ")
         %td
-          %a.btn{href: "/jobs/#{j.id}/edit"} Redigera
+          %a.btn{href: "/jobs/#{j.id}/"} Mer info
+          - unless env["warden"].user.nil?
+            %a.btn{href: "/jobs/#{j.id}/edit"} Redigera
+
