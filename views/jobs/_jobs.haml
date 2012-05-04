@@ -1,13 +1,12 @@
 %table.table.table-striped
   %thead
-    %th
-      Titel
-    %th
-      Beskrivning
-    %th
-      Kategorier
-    %th
+    %tr
+      %th Företag
+      %th Titel
+      %th Beskrivning
+      %th Tillagd
+      %th Kategorier
+      %th
   %tbody
-
     - jobs.each do |job|
       = haml :"jobs/_job", :locals => { :job => job }

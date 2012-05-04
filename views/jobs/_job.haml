@@ -1,14 +1,15 @@
 %tr
   %td
-    = job.title
-  %td  
-    = job.description
-
-  %td 
-    %ul
-      - job.categories.each do |category|
-        %li
-          = haml :"categories/_category", locals: { category: category }
-
+    = job.company.name
   %td
+    = job.title
+  %td
+    = job.description
+  %td
+    = job.created_at
+  %td
+    = job.categories.map(&:name).join(", ")
+  %td 
     %a.btn.btn-info{href: "/jobs/#{job.id}/" } Mer info
+    - unless env["warden"].user.nil?
+      %a.btn{href: "/jobs/#{job.id}/edit"} Redigera

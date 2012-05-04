@@ -3,27 +3,6 @@
 %a.btn.btn-info{href: "/jobs/new"} Ny annons
 
 = haml :"jobs/_filter"
-%table.table.table-striped
-  %thead
-    %tr
-      %th ID
-      %th Titel
-      %th Beskrivning
-      %th Tillagd
-      %th Kategorier
-      %th
-  %tbody
-    - @jobs.each do |j|
-      %tr
-        %td= j.company.name
-        %td
-          %a{href: "/jobs/#{j.id}/"}= j.title
-        %td= j.description
-        %td= j.created_at
-        %td
-          = j.categories.map(&:name).join(", ")
-        %td
-          %a.btn{href: "/jobs/#{j.id}/"} Mer info
-          - unless env["warden"].user.nil?
-            %a.btn{href: "/jobs/#{j.id}/edit"} Redigera
+
+= haml :"jobs/_jobs", :locals => {:jobs => @jobs}
 
