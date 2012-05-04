@@ -1,0 +1,13 @@
+%h1
+  Users for company
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        Namn
+  %tbody
+    - users.each do |user|
+      %tr
+        %td
+          %a{href: "/users/#{user.id}"}= user.name

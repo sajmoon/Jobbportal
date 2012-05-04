@@ -8,6 +8,7 @@
       %th Id
       %th Status
       %th Namn
+      %th Roll
       %th
   %tbody
     - @users.each do |user|
@@ -15,6 +16,7 @@
         %td= user.id
         %td= user_status user
         %td= user.name
+        %td= user.role
         %td
           %a.btn{href: "/users/#{user.id}/edit"} Redigera
 

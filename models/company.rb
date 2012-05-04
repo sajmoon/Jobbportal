@@ -7,4 +7,5 @@ class Company
   property :img_url,    String
 
   has n, :jobs
+  has n, :users
 end

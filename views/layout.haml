@@ -29,6 +29,12 @@
             Jobbportalen
           = haml :menu
     .container-fluid
+      - unless @errors.nil?
+        .errors
+          %ul
+            - @errors.each do |e|
+              %li
+                = e.to_s
       = yield
       %hr
         %footer

@@ -1,4 +1,3 @@
-require 'digest/sha2'
 
 module App
   class Users < Sinatra::Base
@@ -40,6 +39,7 @@ module App
       if @user.save
         redirect "/"
       else
+        @errors = @user.errors
         haml :'users/new'
       end
     end
@@ -66,6 +66,10 @@ module App
         flash[:error] = 'Unable to destroy User!'
       end
       redirect url(:users, :index)
+    end
+    get "/:id" do |id|
+      @user = User.get(id)
+      haml :"users/show"
     end
   end
 end

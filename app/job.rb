@@ -15,10 +15,11 @@ module App
       @selected_categories = []
       haml :"jobs/index"
     end
-
-    post "/index" do
+    
+    post "/filter" do
       @jobs
       @selected_categories = []
+      puts params[:filter][:id].map{ |id| id}
       if defined?(params[:filter][:id])
         @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id } )
 
@@ -57,7 +58,7 @@ module App
       end
 
       if @job.save
-	redirect to("/")
+	      redirect to("/")
       else
         haml :"jobs/new"
       end
@@ -94,6 +95,21 @@ module App
     get "/:id/" do |id|
       @job = Job.get(id)
       haml :"jobs/show"
+    end
+
+    get "/:id/delete" do |id|
+      puts "delete!"
+      @job = Job.get(id)
+      @job.active = false
+
+      if @job.save
+        puts "save"
+        redirect "/"
+      else
+        puts "errors"
+        @errors = @job.errors
+        redirect "/jobs/#{id}"
+      end
     end
       
   end

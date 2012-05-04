@@ -5,7 +5,7 @@ module App
     set :root, File.dirname(__FILE__) + "/.."
 
     get "/" do
-      @jobs = Job.all(limit: 5)
+      @jobs = Job.all(limit: 5, active: true)
       @categories = Category.all
       @selected_categories = []
       haml :start_page
