@@ -13,7 +13,8 @@ module App
         redirect to("/login")
       else
         env["warden"].set_user user
-        redirect params["url"]
+        redirect "/"
+        #redirect params["url"]
       end
     end
 
