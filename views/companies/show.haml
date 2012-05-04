@@ -1,6 +1,6 @@
 %h1
   = @company.name
 
+= haml :"jobs/_jobs", locals: {jobs: @company.jobs}
 
-= @company.jobs.each do |job|
-  = haml :"jobs/_job", locals: { job: job }
+= haml :"users/_users", locals: {users: @company.users}

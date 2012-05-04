@@ -18,6 +18,9 @@ class User
 
   # Validations
   validates_format_of        :role,     :with => /[A-Za-z]/
+  validates_presence_of      :password
+
+  belongs_to :company,        required: false
 
   def new_salt
     "newsalt"
@@ -44,7 +47,8 @@ class User
   end
 
   def active?
-    self.expires_at >= Date.today
+    true
   end
+
 end
 

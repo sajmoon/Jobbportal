@@ -1,6 +1,6 @@
 %tr
   %td
-    = job.company.name
+    %a{href:"/companies/#{job.company.id}/"}= job.company.name
   %td
     = job.title
   %td
@@ -10,6 +10,10 @@
   %td
     = job.categories.map(&:name).join(", ")
   %td 
-    %a.btn.btn-info{href: "/jobs/#{job.id}/" } Mer info
+    %a.btn.btn-primary{href: "/jobs/#{job.id}/" } Mer info
     - unless env["warden"].user.nil?
-      %a.btn{href: "/jobs/#{job.id}/edit"} Redigera
+      -if @env["warden"].user.company_id == job.company.id
+        %a.btn.btn-info{href: "/jobs/#{job.id}/edit"} Redigera
+      - if env["warden"].user.role == Role.admin
+        %a.btn.btn-warning{href: "/jobs/#{job.id}/delete"} Ta bort
+
