@@ -8,12 +8,16 @@ gem 'thin'
 
 gem 'haml'
 
+gem 'heroku'
+
+
+
 #datamapper
 gem 'dm-sqlite-adapter'
 gem 'dm-validations'
 gem 'dm-constraints'
 gem 'dm-migrations'
-gem 'dm-aggregates'
+
 gem 'dm-types'
 gem 'dm-core'
 gem 'dm-timestamps'
