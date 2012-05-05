@@ -1,7 +1,13 @@
 %h1 Ändra!
 
-%form.form{action: "/jobs/#{@job.id}", method: "post"}
+%form.form-horizontal{action: "/jobs/#{@job.id}", method: "post"}
   %input{type: "hidden", name: "_method", :value => "put"}
+  %fieldset
+    %legend
+      Ändra
+  
 
-  = haml :"jobs/_form"
-  %input{type: "submit", value: "Spara ändringarna"}
+    = haml :"jobs/_form"
+
+  .form-actions
+    %input.btn.btn-primary{type: "submit", value: "Spara ändringarna"}
