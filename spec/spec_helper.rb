@@ -5,6 +5,7 @@ require 'bundler'
 Bundler.setup
 Bundler.require
 
+require 'minitest/spec'
 require 'rack/test'
 
 class MiniTest::Spec
