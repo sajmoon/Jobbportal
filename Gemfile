@@ -21,6 +21,8 @@ gem 'dm-timestamps'
 #user auth
 gem 'warden'
 
+gem 'RedCloth'
+
 group :test do
   gem 'rack-test', require: "rack/test"
 

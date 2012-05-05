@@ -1,18 +1,16 @@
-%h1
-  En specifik annons!
+.row
+  .span12
+    %h1
+      = @job.title
+    %a{href: "/companies/#{@job.company.id}"}= @job.company.name
+.row
+  .span12
+    %h5
+      Kategorier
+    = @job.categories.map(&:name).join(", ")
 
-%h5
-  Titel
-= @job.title
 
-%h5
-  Beskrivning
-= @job.description
+.row
+  .span12
+    = RedCloth.new(@job.description).to_html
 
-%h5
-  Företag:
-= @job.company.name
-
-%h5
-  Kategorier
-= @job.categories.map(&:name).join(", ")

@@ -15,7 +15,8 @@
 .control-group
   %label.control-label{for: "job_description"} Lång Beskrivning
   .controls
-    %input.input-xlarge{type: "textarea", id: "job_description", name: "job[description]", value: @job.description}
+    %textarea.input-xlarge{type: "textarea", id: "job_description", name: "job[description]"}
+      = @job.description
     %p.help-block
       Längre och mycket detaljerad beskrivning av tjänsten.
 .control-group
