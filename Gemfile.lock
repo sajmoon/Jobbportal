@@ -7,6 +7,8 @@ GEM
     daemons (1.1.8)
     data_objects (0.10.8)
       addressable (~> 2.1)
+    dm-aggregates (1.2.0)
+      dm-core (~> 1.2.0)
     dm-constraints (1.2.0)
       dm-core (~> 1.2.0)
     dm-core (1.2.0)
@@ -82,6 +84,7 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
+  dm-aggregates
   dm-constraints
   dm-core
   dm-migrations
