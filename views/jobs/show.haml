@@ -7,10 +7,13 @@
   .span12
     %h5
       Kategorier
-    = @job.categories.map(&:name).join(", ")
-
-
+    = @job.display_categories
 .row
   .span12
-    = RedCloth.new(@job.description).to_html
-
+    = @job.formated_description
+    
+.row
+  .span12
+    %h3
+      Intresserad? 
+      %a{href: @job.apply_url}

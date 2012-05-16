@@ -6,11 +6,11 @@
   %td
     = job.created_at
   %td
-    = job.categories.map(&:name).join(", ")
+    = job.display_categories
   %td 
     %a.btn.btn-primary{href: "/jobs/#{job.id}/" } Mer info
     - unless env["warden"].user.nil?
-      -if @env["warden"].user.company_id == job.company.id
+      -if env["warden"].user.company_id == job.company.id
         %a.btn.btn-info{href: "/jobs/#{job.id}/edit"} Redigera
       - if env["warden"].user.role == Role.admin
         %a.btn.btn-warning{href: "/jobs/#{job.id}/delete"} Ta bort

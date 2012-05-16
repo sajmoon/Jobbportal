@@ -94,6 +94,9 @@ module App
 
     get "/:id/" do |id|
       @job = Job.get(id)
+      @job.viewcount = @job.viewcount + 1
+      @job.save!
+      
       haml :"jobs/show"
     end
 

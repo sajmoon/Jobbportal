@@ -1,5 +1,5 @@
 %h1
-  = @company.name
+  = "Annonser från #{@company.name}"
 
 = haml :"jobs/_jobs", locals: {jobs: @company.jobs}
 
