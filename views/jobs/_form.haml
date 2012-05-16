@@ -33,5 +33,14 @@
     %select{id: "job_company_id", name: "job[company_id]"}
       - @companies.each do |company|
         %option{value: company.id}= company.name
+    %p.help-block
+      Det företag som annonsen tillhör
+
+.control-group
+  %label.control-label{for: "job_apply_url"}Adress till extern sida
+  .controls
+    %input.input-xlarge{type: "textarea", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
+    %p.help-block
+      Den länken man kan trycka på för att söka.
 
 
