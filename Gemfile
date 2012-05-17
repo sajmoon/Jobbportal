@@ -25,6 +25,8 @@ gem 'warden'
 
 gem 'RedCloth'
 
+gem 'pg', '0.10.0'
+
 group :test do
   gem 'rack-test', require: "rack/test"
 
