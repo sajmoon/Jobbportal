@@ -6,7 +6,6 @@ vendor/gems/*
 !vendor/gems/cache/
 .sass-cache/*
 *.swp
-config/database.rb
 config/ldap.yml
 db/*.db
 log/*
