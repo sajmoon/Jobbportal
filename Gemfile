@@ -12,6 +12,7 @@ gem 'heroku'
 
 #datamapper
 gem 'dm-sqlite-adapter'
+gem 'dm-postgres-adapter'
 gem 'dm-validations'
 gem 'dm-constraints'
 gem 'dm-migrations'
