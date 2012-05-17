@@ -54,6 +54,7 @@ GEM
     minitest (2.12.1)
     multi_json (1.0.4)
     netrc (0.7.1)
+    pg (0.10.0)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -97,6 +98,7 @@ DEPENDENCIES
   haml
   heroku
   minitest
+  pg (= 0.10.0)
   rack-test
   rake
   sinatra
