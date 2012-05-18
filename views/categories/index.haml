@@ -1,6 +1,8 @@
 %h1 Kategorier
 
-%a.btn.btn-info{href: "/categories/new"} Ny Kategori
+- unless env["warden"].user.nil?
+  -if env["warden"].user.role == Role.admin
+    %a.btn.btn-info{href: "/categories/new"} Ny Kategori
 
 %table.table.table-striped
   %thead
