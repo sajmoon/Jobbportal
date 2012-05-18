@@ -25,7 +25,9 @@ namespace :db do
   desc "Seed a standard admin user, admin@d.kth.se, password: admin"
   task :seed do
     require_relative"boot.rb"
-    admin = User.new(first_name: "Admin", last_name: "Admin", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", hashedpassword: admin.encryptpassword("admin", "adminsaltish"))
+
+    admin = User.new(first_name: "Admin", last_name: "Admin", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish")
+    admin.hashedpassword = admin.encryptpassword("admin", "adminsaltish")
 
     admin.save
 
