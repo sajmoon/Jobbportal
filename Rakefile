@@ -29,7 +29,9 @@ namespace :db do
 
     admin.save
 
-    puts "Errors: #{admin.errors}"
+    admin.errors.each do |e|
+      puts "Error: #{e.to_s}"
+    end
 
   end
 end
