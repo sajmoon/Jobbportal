@@ -26,7 +26,10 @@ namespace :db do
   task :seed do
     require_relative"boot.rb"
     admin = User.new(first_name: "Admin", last_name: "Admin", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
+
     admin.save
+
+    puts "Errors: #{admin.errors}"
 
   end
 end
