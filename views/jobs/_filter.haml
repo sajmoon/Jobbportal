@@ -1,6 +1,10 @@
 
 %form.form{action: "/jobs/filter", method: "post"}
-  - @categories.each do |cat|
-    %input{type: "checkbox", name: "filter[id][]", value: cat.id, checked: @selected_categories.include?(cat)}
-    = cat.name
-  %input{type: "submit", value: "Filtrera"}
+  .fieldset
+    .control-group
+      .controls
+        - @categories.each do |cat|
+          %label.checkbox.inline
+            %input{type: "checkbox", name: "filter[id][]", value: cat.id, checked: @selected_categories.include?(cat)}
+            = cat.name
+        %input.btn.btn-primary{type: "submit", value: "Filtrera"}

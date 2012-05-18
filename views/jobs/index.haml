@@ -1,7 +1,7 @@
 %h1 Datasektionens Jobbportal
 
 - unless env["warden"].user.nil?
-  - if env["wardern"].user.role == Role.admin
+  - if env["warden"].user.role == Role.admin
 
     %a.btn.btn-info{href: "/jobs/new"} Ny annons
 

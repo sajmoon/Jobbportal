@@ -1,7 +1,7 @@
 %h1 Kategorier
 
 - unless env["warden"].user.nil?
-  -if env["warden"].user.role == Role.admin
+  - if env["warden"].user.role == Role.admin
     %a.btn.btn-info{href: "/categories/new"} Ny Kategori
 
 %table.table.table-striped
