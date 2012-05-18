@@ -11,7 +11,6 @@ gem 'haml'
 gem 'heroku'
 
 #datamapper
-gem 'dm-sqlite-adapter'
 gem 'dm-postgres-adapter'
 gem 'dm-validations'
 gem 'dm-constraints'
@@ -30,6 +29,7 @@ gem 'pg', '0.10.0'
 
 group :test do
   gem 'rack-test', require: "rack/test"
+  gem 'dm-sqlite-adapter'
 
   gem 'minitest'
 
