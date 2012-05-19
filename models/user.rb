@@ -7,14 +7,14 @@ class User
 
   # Properties
   property :id,               Serial
-  property :ugid,             String
   property :first_name,       String, required: true
-  property :last_name,        String, required: true
+  property :last_name,        String, required: true, default: ""
   property :email,            String, required: true
   property :role,             String, default: ""
   property :hashedpassword,   String, required: true
   property :salt,	            String, required: true
   property :expires_at,       Date
+  property :created_at,       Date
 
   # Validations
   validates_format_of        :role,     :with => /[A-Za-z]/
@@ -22,7 +22,7 @@ class User
   belongs_to :company,        required: false
 
   def new_salt
-    "newsalt"
+    salt = (0..16).to_a.map{|a| rand(16).to_s(16)}.join
   end
 
   def name

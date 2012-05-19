@@ -39,10 +39,10 @@ module App
 
       @user.salt = @user.new_salt
       @user.hashedpassword = @user.encryptpassword(params[:user][:password], @user.salt)
-      @user.ugid = (0..16).to_a.map{|a| rand(16).to_s(16)}.join
+      @created_at = Time.now
 
       if @user.save
-        redirect "/"
+        redirect "/users/"
       else
         @errors = @user.errors
         haml :'users/new'
