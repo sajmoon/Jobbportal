@@ -3,14 +3,14 @@
   %li
     %a{href: "/jobs/"} Se alla lediga jobb
   
-  - if env["warden"].user.nil?
+  - if @current_user.nil?
     %li
       %a{href: "/auth/login"} Företag loggar in här..
   - else
-    - if env["warden"].user.role == Role.rep
+    - if @current_user.role == Role.rep
       %li
         %a{href: "/jobs/new"} Lägg till en annons
-    - if env["warden"].user.role == Role.admin
+    - if @current_user.role == Role.admin
       %li
         %a{href: "/categories/"} Se alla kategorier
       %li

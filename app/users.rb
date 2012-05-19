@@ -15,8 +15,8 @@ module App
     end
 
     before do
-      #env["warden"].authenticate!
-      #@current_user = env["warden"].user
+      env["warden"].authenticate!
+      @current_user = env["warden"].user
     end
 
     get "/" do
