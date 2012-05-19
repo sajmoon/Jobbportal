@@ -4,6 +4,10 @@ module App
 
     set :root, File.dirname(__FILE__) + "/.."
 
+    before do
+      @current_user = env["warden"].user
+    end
+
     before '/new' do
       env["warden"].authenticate!
       @current_user = env["warden"].user
@@ -40,7 +44,13 @@ module App
     get "/new" do
       @job = Job.new
       @categories = Category.all
-      @companies = Company.all
+      if @current_user.role == Role.admin
+        @companies = Company.all
+      else 
+        @companies = []
+        @companies << Company.get(@current_user.company_id)
+      end
+      @job.created_by = @current_user.id
       haml :"jobs/new"
     end
 
@@ -67,7 +77,12 @@ module App
     get "/:id/edit" do |id|
       @job = Job.get(id)
       @categories = Category.all
-      @companies = Company.all
+      if @current_user.role == Role.admin
+        @companies = Company.all
+      else 
+        @companies = []
+        @companies << Company.get(@current_user.company_id)
+      end
       haml :"jobs/edit"
     end
 

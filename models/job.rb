@@ -11,6 +11,7 @@ class Job
   property :active,             Boolean,  required: true, default: true
   property :viewcount,          Integer,  required: true, default: 0
   property :apply_url,          String,   required: true, default: ""
+  property :created_by,         Integer,  required: true, default: 0
 
   has n, :categories, :through => Resource
 
