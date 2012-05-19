@@ -4,7 +4,7 @@ module App
     register Sinatra::Flash
 
     set :root, File.dirname(__FILE__) + "/.."
-    
+
     before_filter [[:new, "/new"], [:del, "/delete"], [:edit, "/:id/edit"]] do
       unless Role.is_company_rep(env["warden"], params[:id])
         flash[:warning] = "You are not authorized to do that."
@@ -43,13 +43,13 @@ module App
     get "/new" do
       @job = Job.new
       @categories = Category.all
-      if @current_user.role == Role.admin
+      if Role.is_admin(env["warden"])
         @companies = Company.all
       else 
         @companies = []
         @companies << Company.get(@current_user.company_id)
       end
-      @job.created_by = @current_user.id
+      @job.created_by = Role.get_user(env["warden"]).id
       haml :"jobs/new"
     end
 
