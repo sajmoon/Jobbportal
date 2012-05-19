@@ -1,18 +1,17 @@
 module App
   class Categories < Sinatra::Base
     enable :logging
+    register Sinatra::Flash
 
     set :root, File.dirname(__FILE__) + "/.."
     
     before do
-      env["warden"].authenticate!
-      @current_user = env["warden"].user
+      unless Role.is_admin(env["warden"])
+        flash[:warning] = "Du ska inte se detta."
+        redirect "/"
+      end
     end
     
-    before '/new' do
-      env["warden"].authenticate!
-    end
-
     get "/" do
       @categories = Category.all
       haml :"categories/index"
