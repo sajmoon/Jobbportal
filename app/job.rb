@@ -5,14 +5,9 @@ module App
 
     set :root, File.dirname(__FILE__) + "/.."
     
-    before do
-      @current_user = env["warden"].user
-
-    end
-
-    before_filter [[:new, "/new"], [:del, "/delete"]] do
-      unless Role.is_company_rep(@current_user)
-        flash[:warning] = "Not authorized for that action"
+    before_filter [[:new, "/new"], [:del, "/delete"], [:edit, "/:id/edit"]] do
+      unless Role.is_company_rep(env["warden"], params[:id])
+        flash[:warning] = "You are not authorized to do that."
         redirect "/"
       end
     end
@@ -81,11 +76,11 @@ module App
     get "/:id/edit" do |id|
       @job = Job.get(id)
       @categories = Category.all
-      if @current_user.role == Role.admin
+      if Role.is_admin(env["warden"])
         @companies = Company.all
       else 
         @companies = []
-        @companies << Company.get(@current_user.company_id)
+        @companies << Company.get(Role.get_user(env["warden"]).company_id)
       end
       haml :"jobs/edit"
     end

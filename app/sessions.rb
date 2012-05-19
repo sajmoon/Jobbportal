@@ -9,7 +9,7 @@ module App
     end
 
     post "/login" do
-	    user = User.first(:email => params[:user][:email])
+      user = User.first(:email => params[:user][:email])
       if user.nil? || !user.checkpassword(params[:user][:password])
         redirect to("/login")
       else
@@ -17,6 +17,7 @@ module App
         if user.role == Role.admin
           #flash[:warning] = "Loggat in som admin"
           env["warden"].set_user(user, :scope => :admin )
+          puts "user: #{user.name}"
           flash[:warning] = "Loggat in som admin"
         elsif user.role == Role.rep
           #flash[:warning] = "Loggat in som företagsrepresentant"
@@ -27,7 +28,6 @@ module App
           env["warden"].set_user(user, :scope => :user)
           flash[:warning] = "Loggat in"
         end
-          
         redirect "/"
         #redirect params["url"]
       end

@@ -1,23 +1,22 @@
-
 %ul.nav
   %li
     %a{href: "/jobs/"} Se alla lediga jobb
   
-  - if @current_user.nil?
+  - if env["warden"].user.nil? && env["warden"].user(:company).nil? && env["warden"].user(:admin).nil?
     %li
       %a{href: "/auth/login"} Företag loggar in här..
+  
   - else
-    - if @current_user.role == Role.rep
+    - if env["warden"].authenticated?(:company) || env["warden"].authenticated?(:admin)
       %li
         %a{href: "/jobs/new"} Lägg till en annons
-    - if @current_user.role == Role.admin
-      %li
-        %a{href: "/categories/"} Se alla kategorier
-      %li
-        %a{href: "/companies/"} Se alla företag
-      %li
-        %a{href: "/companies/new"} Lägg till företag
-
+      - if env["warden"].authenticated?(:admin)
+        %li
+          %a{href: "/categories/"} Se alla kategorier
+        %li
+          %a{href: "/companies/"} Se alla företag
+        %li
+          %a{href: "/companies/new"} Lägg till företag
     %li
       %a{href: "/auth/logout"} Logga ut
  

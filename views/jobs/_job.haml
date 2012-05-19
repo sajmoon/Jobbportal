@@ -11,13 +11,12 @@
     %a.btn.btn-primary{href: "/jobs/#{job.id}/" } 
       %i.icon-info-sign.icon-white 
       Mer info
-    - unless env["warden"].user.nil?
-      -if env["warden"].user.company_id == job.company.id
-        %a.btn.btn-info{href: "/jobs/#{job.id}/edit"} 
-          %i.icon-edit.icon-white
-          Redigera
-      - if env["warden"].user.role == Role.admin
-        %a.btn.btn-warning{href: "/jobs/#{job.id}/delete"} 
-          %i.icon-trash.icon-white 
-          Ta bort
+    -if Role.is_company_rep(env["warden"], job.company_id)
+      %a.btn.btn-info{href: "/jobs/#{job.id}/edit"} 
+        %i.icon-edit.icon-white
+        Redigera
+    - if env["warden"].authenticated?(:admin)
+      %a.btn.btn-warning{href: "/jobs/#{job.id}/delete"} 
+        %i.icon-trash.icon-white 
+        Ta bort
 

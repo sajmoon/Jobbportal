@@ -23,11 +23,31 @@ class Role
     list
   end
 
-  def self.is_company_rep(user)
-    if !user.nil? && user.role == Role.rep
+  #deprecatead right?
+  def self.is_company_rep(warden, company_id = 0)
+    if warden.authenticated?(:company) && warden.user(:company).company_id == company_id || warden.authenticated?(:admin)
       true
     else
       false
     end
+  end
+
+  def self.is_admin(warden)
+    if warden.authenticated?(:admin)
+      true
+    else 
+      false
+    end
+  end
+
+  def self.get_user(warden)
+    user = warden.user
+    if user.nil?
+      user = warden.user(:company)
+    end
+    if user.nil?
+      user = warden.user(:admin)
+    end
+    user
   end
 end

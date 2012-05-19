@@ -13,9 +13,9 @@ use Warden::Manager do |manager|
 
   manager.default_scope = :user
 
-  manager.scope_defaults :user,                              :strategies => [:password]
-  manager.scope_defaults :company,           store: false,   :strategies => [:password]
-  manager.scope_defaults :admin,             store: false,   :strategies => [:password]
+  manager.scope_defaults :user,     :strategies => [:password]
+  manager.scope_defaults :company,  :strategies => [:password]
+  manager.scope_defaults :admin,    :strategies => [:password]
 
 end
 
