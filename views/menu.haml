@@ -15,8 +15,7 @@
           %a{href: "/categories/"} Se alla kategorier
         %li
           %a{href: "/companies/"} Se alla företag
-        %li
-          %a{href: "/companies/new"} Lägg till företag
     %li
-      %a{href: "/auth/logout"} Logga ut
+      %a{href: "/auth/logout"} 
+        = "Logga ut #{Role.get_user(env["warden"]).first_name}"
  

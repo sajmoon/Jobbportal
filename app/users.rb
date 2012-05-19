@@ -17,15 +17,11 @@ module App
     end
 
     before do
-      env["warden"].authenticate!
-      @current_user = env["warden"].user
-    end
-
-    before_filter [[:new, "/new"], [:del, "/delete"]] do
-      unless @current_user.role == Role.admin
+      unless Role.is_admin(env["warden"]) || Role.is_company_rep(env["warden"])
         flash[:warning] = "You are not authorized to do that"
-        redirect "/"
+        env["warden"].authenticate!
       end
+      @current_user = Role.get_user(env["warden"])      
     end
 
     get "/" do
@@ -59,11 +55,15 @@ module App
     end
 
     put "/:id" do |id|
-      @user = User.get(id)
-      if @user.update(params["user"])
-        redirect to("/")
+      if @user.id == @current_user.id || Role.is_admin(env["warden"])
+        @user = User.get(id)
+        if @user.update(params["user"])
+          redirect to("/")
+        else
+          haml :'users/edit'
+        end
       else
-        haml :'users/edit'
+        redirect "/"
       end
     end
 
@@ -76,9 +76,14 @@ module App
       end
       redirect url(:users, :index)
     end
+
     get "/:id" do |id|
       @user = User.get(id)
-      haml :"users/show"
+      if @user.id == @current_user.id
+        haml :"users/show"
+      else
+        redirect "/"
+      end
     end
   end
 end

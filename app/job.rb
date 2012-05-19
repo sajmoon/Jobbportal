@@ -8,7 +8,7 @@ module App
     before_filter [[:new, "/new"], [:del, "/delete"], [:edit, "/:id/edit"]] do
       unless Role.is_company_rep(env["warden"], params[:id])
         flash[:warning] = "You are not authorized to do that."
-        redirect "/"
+        authenticate!
       end
     end
 
