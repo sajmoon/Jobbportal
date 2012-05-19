@@ -4,6 +4,8 @@
   %td
     = job.title
   %td
+    = job.short_description
+  %td
     = job.created_at
   %td
     = job.display_categories
@@ -19,4 +21,5 @@
       %a.btn.btn-warning{href: "/jobs/#{job.id}/delete"} 
         %i.icon-trash.icon-white 
         Ta bort
+
 
