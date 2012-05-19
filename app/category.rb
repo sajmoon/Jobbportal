@@ -3,7 +3,12 @@ module App
     enable :logging
 
     set :root, File.dirname(__FILE__) + "/.."
-
+    
+    before do
+      env["warden"].authenticate!
+      @current_user = env["warden"].user
+    end
+    
     before '/new' do
       env["warden"].authenticate!
     end

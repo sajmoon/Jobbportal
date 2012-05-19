@@ -4,6 +4,11 @@ module App
 
     set :root,  File.dirname(__FILE__) + "/.."
 
+    before do
+      env["warden"].authenticate!
+      @current_user = env["warden"].user
+    end
+
     get "/" do
       @companies = Company.all
       haml :"companies/index"
