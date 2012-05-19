@@ -9,9 +9,10 @@ Bundler.require(:default, SINATRA_ENV)
 
 # setup database
 require_relative "config/database.rb"
+require_relative "models/sinatra_before_filter.rb"
 
-# setup ldap
 require 'yaml'
+require 'sinatra/flash'
 
 # add lib to load path
 $LOAD_PATH.unshift 'lib'
@@ -23,7 +24,7 @@ end
 
 # require models
 Dir.glob("models/*.rb").each do |model|
-  require_relative model
+    require_relative model
 end
 
 DataMapper::Logger.new($stdout, :debug)

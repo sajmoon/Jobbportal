@@ -29,6 +29,7 @@
             Jobbportalen
           = haml :menu
     .container-fluid
+      = styled_flash
       - unless @errors.nil?
         .errors
           %ul
