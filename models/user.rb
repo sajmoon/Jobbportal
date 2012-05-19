@@ -18,7 +18,6 @@ class User
 
   # Validations
   validates_format_of        :role,     :with => /[A-Za-z]/
-  validates_presence_of      :password
 
   belongs_to :company,        required: false
 

@@ -19,12 +19,29 @@
   .controls
     %input.input-xlarge{type: 'password', id: 'password', name: 'user[password]'}
 
+.control-group
+  %label.control-label{for: 'role'} Roll
+  .controls
+    %select{id: 'role', name: 'user[role'}
+      %option{value: ""} Välj ett
+
+      - Role.get_hash_of_roles(@user).each do |r|
+        - if r[:selected] == true
+          %option{value: r[:n], selected: "true" }
+            = r[:n]
+        -else
+          %option{value: r[:n]}
+            = r[:n]
+
 .control-groups
   %label.control-label{for: 'company_id'} Företag
   .controls
     %select{id: 'company_id', name: 'user[company_id]'}
       %option{value: ""} Välj ett..
       - Company.all.each do |company|
-        %option{value: company.id}= company.name
+        -if @user.company_id == company.id 
+          %option{value: company.id, selected: true}= company.name
+        -else 
+          %option{value: company.id}= company.name
 
 

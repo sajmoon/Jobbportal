@@ -1,6 +1,9 @@
 %h1
-  Logga in
-
+  Lägg till eller ändra annonser
+%p
+  Som företag kan du få ett konto här för att lägga upp och administrera dina egna jobb erbjudanden.
+%p
+  För det behöver du ett konto. Maila foretag@d.kth.se för hjälp och information om priser.
 %form.form-horizontal{acition: "/auth", method: "post"}
   %fieldset
     %legend
@@ -9,7 +12,10 @@
     .control-group
       %label.control-label{for: 'email'} Email
       .controls
-        %input.input-xlarge{id: 'email', name: "user[email]" }
+        .input-prepend
+          %span.add-on
+            @
+          %input.input-xlarge{id: 'email', name: "user[email]", type: "text", size: "16" }
         %p.help-block
           Hoppas du kommer ihåg din email!
 
@@ -22,9 +28,3 @@
     .form-actions
       %input.btn.btn-primary{type: "submit", value: "Logga in"}
 
-%h3
-  Har du inget konto?
-
-%P
-  Du kan alltid skapa ett konto! Woop
-%a.btn.btn-info{href: "/users/new"} Skapa ett konto
