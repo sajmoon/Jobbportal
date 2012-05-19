@@ -19,6 +19,8 @@ gem 'dm-aggregates'
 gem 'dm-types'
 gem 'dm-core'
 gem 'dm-timestamps'
+gem 'less'
+gem 'therubyracer'
 
 #user auth
 gem 'warden'
