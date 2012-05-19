@@ -22,4 +22,12 @@ class Role
     puts list
     list
   end
+
+  def self.is_company_rep(user)
+    if !user.nil? && user.role == Role.rep
+      true
+    else
+      false
+    end
+  end
 end

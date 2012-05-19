@@ -3,6 +3,8 @@ module App
   class Users < Sinatra::Base
     set :root, File.dirname(__FILE__)+ "/../"
     set :method_override, true
+    register Sinatra::Flash
+
 
     helpers do
       def user_status(user)
@@ -17,6 +19,13 @@ module App
     before do
       env["warden"].authenticate!
       @current_user = env["warden"].user
+    end
+
+    before_filter [[:new, "/new"], [:del, "/delete"]] do
+      unless @current_user.role == Role.admin
+        flash[:warning] = "You are not authorized to do that"
+        redirect "/"
+      end
     end
 
     get "/" do

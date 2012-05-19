@@ -2,6 +2,7 @@ module App
   class Sessions < Sinatra::Base
     set :root, File.dirname(__FILE__)+ "/../"
     enable :logging 
+    register Sinatra::Flash
 
     get "/unauthenticated" do
       redirect "/auth/login"
@@ -12,7 +13,21 @@ module App
       if user.nil? || !user.checkpassword(params[:user][:password])
         redirect to("/login")
       else
-        env["warden"].set_user user
+        
+        if user.role == Role.admin
+          #flash[:warning] = "Loggat in som admin"
+          env["warden"].set_user(user, :scope => :admin )
+          flash[:warning] = "Loggat in som admin"
+        elsif user.role == Role.rep
+          #flash[:warning] = "Loggat in som företagsrepresentant"
+          env["warden"].set_user(user, :scope => :company)
+          flash[:warning] = "Loggat in som representant"
+        else
+          #flash[:warning] = "scope user"
+          env["warden"].set_user(user, :scope => :user)
+          flash[:warning] = "Loggat in"
+        end
+          
         redirect "/"
         #redirect params["url"]
       end

@@ -9,8 +9,14 @@ Warden::Manager.serialize_into_session {|user| user.id }
 Warden::Manager.serialize_from_session {|id| User.get(id) }
 
 use Warden::Manager do |manager|
-  manager.default_strategies :password
   manager.failure_app = App::Sessions
+
+  manager.default_scope = :user
+
+  manager.scope_defaults :user,                              :strategies => [:password]
+  manager.scope_defaults :company,           store: false,   :strategies => [:password]
+  manager.scope_defaults :admin,             store: false,   :strategies => [:password]
+
 end
 
 Warden::Strategies.add(:password) do

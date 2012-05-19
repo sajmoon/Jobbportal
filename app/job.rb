@@ -1,16 +1,20 @@
 module App
   class Jobs < Sinatra::Base
     enable :logging
+    register Sinatra::Flash
 
     set :root, File.dirname(__FILE__) + "/.."
-
+    
     before do
       @current_user = env["warden"].user
+
     end
 
-    before '/new' do
-      env["warden"].authenticate!
-      @current_user = env["warden"].user
+    before_filter [[:new, "/new"], [:del, "/delete"]] do
+      unless Role.is_company_rep(@current_user)
+        flash[:warning] = "Not authorized for that action"
+        redirect "/"
+      end
     end
 
     get "/" do
