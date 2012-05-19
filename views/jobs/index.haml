@@ -1,15 +1,16 @@
 %h1 Datasektionens Jobbportal
 
-- unless @current_user.nil?
-  - if @current_user.role == Role.admin
+- unless env["warden"].user(:admin).nil?
+  %a.btn.btn-info{href: "/jobs/new"} Ny annons
 
-    %a.btn.btn-info{href: "/jobs/new"} Ny annons
+.row
+  .span12
+    .search
+      = haml :"search"
 
-.search
-  = haml :"search"
+    .joblist
+      %h2
+        Senaste jobben
+      = haml :"jobs/_jobs", :locals => {:jobs => @jobs}
 
-.joblist
-  %h2
-    Senaste jobben
-  = haml :"jobs/_jobs", :locals => {:jobs => @jobs}
 
