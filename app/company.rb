@@ -1,12 +1,16 @@
 module App
   class Companies < Sinatra::Base
     enable :logging
+    register Sinatra::Flash 
 
     set :root,  File.dirname(__FILE__) + "/.."
 
     before do
-      env["warden"].authenticate!
-      @current_user = env["warden"].user
+      unless Role.is_company_rep(env["warden"], params[:id])
+        flash[:warning] = "You are not authorized to do that."
+        redirect "/"
+      end
+      @current_user = Role.get_user(env["warden"])
     end
 
     get "/" do
