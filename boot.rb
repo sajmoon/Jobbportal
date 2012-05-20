@@ -9,10 +9,14 @@ Bundler.require(:default, SINATRA_ENV)
 
 # setup database
 require_relative "config/database.rb"
+
+#helpers
 require_relative "models/sinatra_before_filter.rb"
 
 require 'yaml'
 require 'sinatra/flash'
+
+
 
 # add lib to load path
 $LOAD_PATH.unshift 'lib'
