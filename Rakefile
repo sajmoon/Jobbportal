@@ -22,19 +22,41 @@ namespace :db do
     puts "Auto Upgrade complete!"
   end
 
-  desc "Seed a standard admin user, admin@d.kth.se, password: admin"
-  task :seed do
-    require_relative"boot.rb"
+  namespace :seed do
 
-    admin = User.new(first_name: "Admin", last_name: "Admin", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
-    admin.hashedpassword = admin.encryptpassword("admin", "adminsaltish")
+    desc "Seed a standard admin user, admin@d.kth.se, password: admin"
+    task :admin do
+      require_relative"boot.rb"
 
-    admin.save
+      admin = User.new(first_name: "Admin", last_name: "Admin", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
+      admin.hashedpassword = admin.encryptpassword("admin", "adminsaltish")
 
-    admin.errors.each do |e|
-      puts "Error: #{e.to_s}"
+      admin.save
+
+      admin.errors.each do |e|
+        puts "Error: #{e.to_s}"
+      end
     end
 
+    desc "Seed some standard categories"
+    task :categories do
+      require_relative "boot.rb"
+      ["Heltid", "Deltid", "Sommarjob"].each do |c|
+        puts "Create category: #{c}"
+        cat = Category.new(name: c)
+        cat.save!
+      end
+    end
+
+    desc "Seed a set of standard companies"
+    task :companies do
+      require_relative "boot.rb"
+      ["Fristaende", "Datasektionen"].each do |i|
+        puts "Creating company: #{i}"
+        c = Company.new(name: i, created_at: Time.now)
+        c.save!
+      end
+    end
   end
 end
 
