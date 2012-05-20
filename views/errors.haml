@@ -1,0 +1,8 @@
+- unless errors.nil?
+  .errors
+    %h4
+      Det blev fel någonstans
+    %ul.unstyled
+      - errors.each do |e|
+        %li
+          = e.to_s
