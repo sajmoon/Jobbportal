@@ -69,6 +69,13 @@ module App
       if @job.save
 	      redirect to("/")
       else
+        @categories = Category.all
+        if Role.is_admin(env["warden"])
+          @companies = Company.all
+        else 
+          @companies = []
+          @companies << Company.get(@current_user.company_id)
+        end
         haml :"jobs/new"
       end
     end
