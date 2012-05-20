@@ -1,3 +1,10 @@
-%label{for: "category_name"} Namn:
-%input{id: "category_name", name: "category[name]", value: @category.name}
+-unless @category.nil?
+  = haml :"errors", locals: { errors: @category.errors }  
+        
+.control-group
+  %label.control-label{for: "category_name"} Namn:
+  .controls
+    %input.input-xlarge{id: "category_name", name: "category[name]", value: @category.name}
+    %p.help-block
+      Kategorins namn
 

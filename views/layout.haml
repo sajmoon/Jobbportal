@@ -1,5 +1,5 @@
 !!!
-%html{lang: "en"}
+%html{lang: "se"}
   %head
     %title Datasektionens Jobbportal
     %meta{charset: "utf-8" }
@@ -30,12 +30,6 @@
           = haml :menu
     .container-fluid
       = styled_flash
-      - unless @errors.nil?
-        .errors
-          %ul
-            - @errors.each do |e|
-              %li
-                = e.to_s
       = yield
       %hr
         %footer

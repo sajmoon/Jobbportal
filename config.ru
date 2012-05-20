@@ -27,7 +27,7 @@ Warden::Strategies.add(:password) do
 
   def authenticate!
     u = User.authenticate(params[:username], params[:password])
-    u.nil? ? fail!("Could not log in") : success!(u)
+    u.nil? ? fail!("Du kan inte logga in") : success!(u)
   end
 end
 

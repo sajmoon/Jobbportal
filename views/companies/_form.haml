@@ -1,3 +1,5 @@
+-unless @company.nil?
+  = haml :"errors", locals: { errors: @company.errors }  
 %label{for: "company_name"} Namn:
 %input{id: "company_name", name: "company[name]", value: @company.name}
 

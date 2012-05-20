@@ -1,5 +1,7 @@
 .row
   .span6
+    -unless @job.nil?  
+      = haml :"errors", locals: { errors: @job.errors }  
     .control-group
       %label.control-label{for: "job_title"} Titel
       .controls

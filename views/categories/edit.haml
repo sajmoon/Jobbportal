@@ -3,7 +3,9 @@
     %form.form-horizontal{action: "/categories", method: "post"}
       %fieldset
         %legend
-          Lägg till en ny kategori
+          Ändra en kategori
+      
         = haml :"categories/_form", locals: {category: @category}
+      
       .form-actions
-        %input.btn.btn-primary{type: "submit", value: "Skapa"}
+        %input.btn.btn-primary{type: "submit", value: "Ändra"}

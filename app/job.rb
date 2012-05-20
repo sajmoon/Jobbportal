@@ -7,7 +7,7 @@ module App
 
     before_filter [[:new, "/new"], [:del, "/delete"], [:edit, "/:id/edit"]] do
       unless Role.is_company_rep(env["warden"], params[:id])
-        flash[:warning] = "You are not authorized to do that."
+        flash[:warning] = "Du ska inte se detta."
         authenticate!
       end
     end
@@ -120,14 +120,10 @@ module App
       @job.active = false
 
       if @job.save
-        puts "save"
         redirect "/"
       else
-        puts "errors"
-        @errors = @job.errors
         redirect "/jobs/#{id}"
       end
     end
-      
   end
 end
