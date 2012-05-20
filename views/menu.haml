@@ -12,9 +12,11 @@
         %a{href: "/jobs/new"} Lägg till en annons
       - if env["warden"].authenticated?(:admin)
         %li
-          %a{href: "/categories/"} Se alla kategorier
+          %a{href: "/categories/"} Kategorier
         %li
-          %a{href: "/companies/"} Se alla företag
+          %a{href: "/companies/"} Företag
+        %li
+          %a{href: "/users/new"} Användare
     %li
       %a{href: "/auth/logout"} 
         = "Logga ut #{Role.get_user(env["warden"]).first_name}"
