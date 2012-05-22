@@ -1,16 +1,19 @@
-.row
-  .span12
-    %h1
-      = @job.title
-    %a{href: "/companies/#{@job.company.id}"}= @job.company.name
+%h1
+  = @job.title
+%a{href: "/companies/#{@job.company.id}"}= @job.company.name
+
+
 .row
   .span12
     %h5
       Kategorier
-    = @job.display_categories
+    %p
+      = @job.display_categories
+%hr
 .row
   .span12
-    = @job.formated_description
+    %p
+      = @job.formated_description
     
 .row
   .span12
