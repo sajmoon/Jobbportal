@@ -46,8 +46,11 @@ class User
   end
 
   def active?
-    true
+    if DateTime.now - self.expires_at < 1
+      false
+    else
+      true
+    end
   end
-
 end
 
