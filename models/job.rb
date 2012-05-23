@@ -25,4 +25,20 @@ class Job
   def formated_description
     RedCloth.new(self.description).to_html
   end
+
+  def time_ago
+    if self.created_at.nil?
+      0
+    else
+      (DateTime.now - self.created_at)
+    end
+  end
+
+  def is_new
+    if self.time_ago < 2
+      true
+    else
+      false
+    end
+  end
 end

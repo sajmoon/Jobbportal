@@ -6,14 +6,16 @@ module App
     set :root, File.dirname(__FILE__) + "/.."
 
     before_filter [[:new, "/new"], [:del, "/delete"], [:edit, "/:id/edit"]] do
+      puts "before filter #{params}"
+      puts Role.is_company_rep(env["warden"], params[:id])
       unless Role.is_company_rep(env["warden"], params[:id])
         flash[:warning] = "Du ska inte se detta."
-        authenticate!
+        env["warden"].authenticate!
       end
     end
 
     get "/" do
-      @jobs = Job.all
+      @jobs = Job.all(order: [ :created_at.desc])
       @categories = Category.all
       @selected_categories = []
       haml :"jobs/index"
@@ -47,7 +49,7 @@ module App
         @companies = Company.all
       else 
         @companies = []
-        @companies << Company.get(@current_user.company_id)
+        @companies << Company.get(Role.get_user(env["warden"]).company.id)
       end
       @job.created_by = Role.get_user(env["warden"]).id
       haml :"jobs/new"
@@ -74,7 +76,7 @@ module App
           @companies = Company.all
         else 
           @companies = []
-          @companies << Company.get(@current_user.company_id)
+          @companies << Company.get(Role.get_user(env["warden"]).company_id)
         end
         haml :"jobs/new"
       end

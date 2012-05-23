@@ -6,6 +6,11 @@
   %td
     = job.short_description
   %td
+
+    - if job.is_new
+      %span.label.label-success
+        New
+    
     = job.created_at
   %td
     = job.display_categories

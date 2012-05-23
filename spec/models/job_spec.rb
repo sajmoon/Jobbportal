@@ -22,5 +22,4 @@ describe Job do
   it "can has no categories" do
     job.categories.count.must_equal 0
   end
-
 end

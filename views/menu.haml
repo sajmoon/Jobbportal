@@ -16,7 +16,7 @@
         %li
           %a{href: "/companies/"} Företag
         %li
-          %a{href: "/users/new"} Användare
+          %a{href: "/users/"} Användare
     %li
       %a{href: "/auth/logout"} 
         = "Logga ut #{Role.get_user(env["warden"]).first_name}"

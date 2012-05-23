@@ -1,4 +1,5 @@
 require 'digest/sha2'
+require 'date'
 class User
   include DataMapper::Resource
   include DataMapper::Validate
@@ -46,7 +47,9 @@ class User
   end
 
   def active?
-    if DateTime.now - self.expires_at < 1
+    if self.expires_at.nil?
+      true
+    elsif (DateTime.now - self.expires_at).to_i < 1
       false
     else
       true
