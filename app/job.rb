@@ -24,10 +24,9 @@ module App
     post "/filter" do
       @jobs
       @selected_categories = []
-      puts params[:filter][:id].map{ |id| id}
-      if defined?(params[:filter][:id])
-        @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id } )
 
+      if defined?(params[:filter][:id])
+        @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id } , order: [ :created_at.desc ] )
         @selected_categories = Category.all(:id => params[:filter][:id].map{ |id| id })
       else
         @jobs = Job.all
