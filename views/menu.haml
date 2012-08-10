@@ -15,9 +15,9 @@
           %a{href: "/categories/"} Kategorier
         %li
           %a{href: "/companies/"} Företag
-        %li
-          %a{href: "/users/"} Användare
+    %li
+      %a{href: "/companies/#{Role.get_user(env["warden"]).id}/"} Din profil
     %li
       %a{href: "/auth/logout"} 
-        = "Logga ut #{Role.get_user(env["warden"]).first_name}"
+        = "Logga ut #{Role.get_user(env["warden"]).name}"
  

@@ -2,12 +2,11 @@ module App
   class Jobs < Sinatra::Base
     enable :logging
     register Sinatra::Flash
+    register Sinatra::Reloader
 
     set :root, File.dirname(__FILE__) + "/.."
 
     before_filter [[:new, "/new"], [:del, "/delete"], [:edit, "/:id/edit"]] do
-      puts "before filter #{params}"
-      puts Role.is_company_rep(env["warden"], params[:id])
       unless Role.is_company_rep(env["warden"], params[:id])
         flash[:warning] = "Du ska inte se detta."
         env["warden"].authenticate!
@@ -15,7 +14,7 @@ module App
     end
 
     get "/" do
-      @jobs = Job.all(order: [ :created_at.desc])
+      @jobs = Job.all(order: [ :created_at.desc]).running_now
       @categories = Category.all
       @selected_categories = []
       haml :"jobs/index"
@@ -44,11 +43,9 @@ module App
     get "/new" do
       @job = Job.new
       @categories = Category.all
+      @job.company = Role.get_user(env["warden"])
       if Role.is_admin(env["warden"])
         @companies = Company.all
-      else 
-        @companies = []
-        @companies << Company.get(Role.get_user(env["warden"]).company.id)
       end
       @job.created_by = Role.get_user(env["warden"]).id
       haml :"jobs/new"
@@ -61,6 +58,8 @@ module App
 
       categories = params[:categories][:id]
   
+      @job.company = Company.get(@job.company_id)
+      
       @job.categories = []
       categories.each do |c|
         cat = Category.get(c)
@@ -75,7 +74,6 @@ module App
           @companies = Company.all
         else 
           @companies = []
-          @companies << Company.get(Role.get_user(env["warden"]).company_id)
         end
         haml :"jobs/new"
       end
@@ -88,7 +86,6 @@ module App
         @companies = Company.all
       else 
         @companies = []
-        @companies << Company.get(Role.get_user(env["warden"]).company_id)
       end
       haml :"jobs/edit"
     end
@@ -123,7 +120,6 @@ module App
     end
 
     get "/:id/delete" do |id|
-      puts "delete!"
       @job = Job.get(id)
       @job.active = false
 

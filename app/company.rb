@@ -2,29 +2,46 @@ module App
   class Companies < Sinatra::Base
     enable :logging
     register Sinatra::Flash 
-
+    register Sinatra::Reloader
+    
     set :root,  File.dirname(__FILE__) + "/.."
 
-    before do
-      unless Role.is_company_rep(env["warden"], params[:id])
+    def check_auth
+      unless Role.is_admin(env["warden"])
         flash[:warning] = "You are not authorized to do that."
         redirect "/"
       end
       @current_user = Role.get_user(env["warden"])
     end
 
+    def check_auth_self(id)
+      puts "id: #{id}"
+      puts Role.get_user(env["warden"]).id.to_s == id
+      unless Role.get_user(env["warden"]).id.to_s == id
+        flash[:warning] = "You are not authorized to see a profle"
+        redirect "/"
+      end
+      @current_user = Role.get_user(env["warden"])
+    end
+
     get "/" do
+      get_auth
       @companies = Company.all
       haml :"companies/index"
     end
 
     get "/new" do
+      check_auth
       @company = Company.new
       haml :"companies/new"
     end
 
     post "/" do
+      check_auth
       @company = Company.new(params[:company])
+      @company.salt = @company.new_salt
+      @company.hashedpassword = @company.encryptpassword(params[:company][:password], @company.salt)
+      
       if @company.save
         redirect to("/")
       else
@@ -33,6 +50,7 @@ module App
     end
 
     get "/:id/" do |id|
+      check_auth_self(id)
       @company = Company.get(id)
       haml :"companies/show"
     end

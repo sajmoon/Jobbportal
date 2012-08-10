@@ -5,6 +5,8 @@
     %meta{charset: "utf-8" }
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport" }
     %link{href: "/css/bootstrap.min.css", rel: "stylesheet" }
+    %link{href: "/css/jquery-ui.custom.css", rel: "stylesheet" }
+    %link{href: "/css/flash.css", rel: "stylesheet"}
     %link{href: "/css/voting-list.css", rel: "stylesheet" }
     %link{href: "/css/bootstrap-responsive.min.css", rel: "stylesheet" }
     /[if lt IE 9]
@@ -13,9 +15,12 @@
     %link{href: "http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png", rel: "apple-touch-icon-precomposed", sizes: "114x114" }
     %link{href: "http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png", rel: "apple-touch-icon-precomposed", sizes: "72x72" }
     %link{href: "http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png", rel: "apple-touch-icon-precomposed" }
-    %script{src: "/js/jquery.js"}
+    %script{src: "/js/jquery.min.js"}
+    %script{src: "/js/jquery-ui.min.js"}
     %script{src: "/js/bootstrap.min.js"}
     %script{src: "/js/rails.js"}
+    %script{src: "/js/application.js"}
+    %script{src: "/js/jquery.timeago.js"}
   %body
     .navbar.navbar-fixed-top
       .navbar-inner
@@ -29,8 +34,9 @@
             Jobbportalen
           = haml :menu
     .container-fluid
-      = styled_flash
-      = yield
+      .row-fluid
+        = styled_flash
+        = yield
       %hr
         %footer
           %p.pull-right

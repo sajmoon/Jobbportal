@@ -25,10 +25,10 @@ namespace :db do
   namespace :seed do
 
     desc "Seed a standard admin user, admin@d.kth.se, password: admin"
-    task :admin do
-      require_relative"boot.rb"
+    task :datasektionen do
+      require_relative "boot.rb"
 
-      admin = User.new(first_name: "Admin", last_name: "Admin", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
+      admin = Company.new(name: "Datasektionen", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
       admin.hashedpassword = admin.encryptpassword("admin", "adminsaltish")
 
       admin.save

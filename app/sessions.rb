@@ -3,29 +3,30 @@ module App
     set :root, File.dirname(__FILE__)+ "/../"
     enable :logging 
     register Sinatra::Flash
-
+    register Sinatra::Reloader
+    
     get "/unauthenticated" do
       redirect "/auth/login"
     end
 
     post "/login" do
-      user = User.first(:email => params[:user][:email])
-      if user.nil? || !user.checkpassword(params[:user][:password])
+      company = Company.first(:email => params[:company][:email])
+      if company.nil? || !company.checkpassword(params[:company][:password])
         redirect to("/login")
       else
         
-        if user.role == Role.admin
+        if company.role == Role.admin
           #flash[:warning] = "Loggat in som admin"
-          env["warden"].set_user(user, :scope => :admin )
-          puts "user: #{user.name}"
+          env["warden"].set_user(company, :scope => :admin )
+          puts "user: #{company.name}"
           flash[:warning] = "Loggat in som admin"
-        elsif user.role == Role.rep
+        elsif company.role == Role.rep
           #flash[:warning] = "Loggat in som företagsrepresentant"
-          env["warden"].set_user(user, :scope => :company)
+          env["warden"].set_user(company, :scope => :company)
           flash[:warning] = "Loggat in som representant"
         else
           #flash[:warning] = "scope user"
-          env["warden"].set_user(user, :scope => :user)
+          env["warden"].set_user(company, :scope => :user)
           flash[:warning] = "Loggat in"
         end
         redirect "/"

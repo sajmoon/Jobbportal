@@ -11,7 +11,8 @@
       %span.label.label-success
         New
     
-    = job.created_at
+    %abbr{class: "timeago", title: "#{job.starttime}"}
+      = job.starttime
   %td
     = job.display_categories
   %td 

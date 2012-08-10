@@ -1,10 +1,9 @@
-
 module App
   class Users < Sinatra::Base
     set :root, File.dirname(__FILE__)+ "/../"
     set :method_override, true
     register Sinatra::Flash
-
+    register Sinatra::Reloader
 
     helpers do
       def user_status(user)

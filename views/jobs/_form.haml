@@ -35,31 +35,34 @@
           Vilka kategorier bör annonsen vara associerad med
 
     .control-group
-      %label.control-label{for: "job_company"} Företag
+      %label.control-label{for: "job_company_id"} Företag
       .controls
-
-        %select{id: "job_company_id", name: "job[company_id]"}
-          %option{value: 0, } Välj ett..
-          - @companies.each do |company|
-            -if company.id == @job.company_id
-              %option{value: company.id, selected: true}= company.name
-            -else
-              %option{value: company.id}= company.name
+        %p
+          = @job.company.name rescue "no company"
+        %input.input-xlarge{type: "hidden", id: "job_company_id", name: "job[company_id]", value: @job.company.id}
         %p.help-block
           Det företag som annonsen tillhör
 
     .control-group
-      %label.control-label{for: "job_created_by"} Vem har skapat annonsen?
-      .controls
-        %input{type: "hidden", name: "job[created_by]", value: @job.created_by}
-        = User.get(@job.created_by).name rescue ""
-
-    .control-group
-      %label.control-label{for: "job_apply_url"}Adress till extern sida
+      %label.control-label{for: "job_apply_url"}Webadress till extern sida
       .controls
         %input.input-xlarge{type: "textarea", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
         %p.help-block
           Den länken man kan trycka på för att söka.
+
+    .control-group
+      %label.control-label{for: "job_starttime"} Tid då annonsen ska börja visas.
+      .controls
+        %input.input-xlarge{class: "timeselector", id: "job_starttime", name: "job[starttime]", value: @job.starttime}
+        %p.help-block
+          Titeln på annonsen
+    
+    .control-group
+      %label.control-label{for: "job_endtime"} Tid då annonsen ska sluta visas.
+      .controls
+        %input.input-xlarge{class: "timeselector", id: "job_endtime", name: "job[endtime]", value: @job.endtime}
+        %p.help-block
+          Titeln på annonsen
   .span4
     %h3
       Help
@@ -78,7 +81,3 @@
 
         * an item
         * and another
-
-    
-
-

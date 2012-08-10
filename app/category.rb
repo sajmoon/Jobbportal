@@ -2,6 +2,7 @@ module App
   class Categories < Sinatra::Base
     enable :logging
     register Sinatra::Flash
+    register Sinatra::Reloader
 
     set :root, File.dirname(__FILE__) + "/.."
     

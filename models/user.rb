@@ -34,18 +34,6 @@ class User
     name
   end
 
-  def encryptpassword(password, salt)
-    Digest::SHA512.hexdigest("#{password}:#{salt}")
-  end
-
-  def checkpassword(password)
-    if Digest::SHA512.hexdigest("#{password}:#{self.salt}") == self.hashedpassword
-      true
-    else
-      false
-    end
-  end
-
   def active?
     if self.expires_at.nil?
       true

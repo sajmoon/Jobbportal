@@ -1,6 +1,16 @@
 %h1
   = "Annonser från #{@company.name}"
 
-= haml :"jobs/_jobs", locals: {jobs: @company.jobs}
+.active_ads
+  %h2
+    Aktiva Annonser
+  = haml :"companies/_jobs", locals: {jobs: @company.jobs.running_now}
+.upcomming_ads
+  %h2
+    Kommande annonser
+  = haml :"companies/_jobs", locals: {jobs: @company.jobs.not_started}
 
-= haml :"users/_users", locals: {users: @company.users}
+.previous_ads
+  %h2
+    Tidigare Annonser
+  = haml :"companies/_jobs", locals: {jobs: @company.jobs.has_ended}
