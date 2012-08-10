@@ -40,7 +40,7 @@ class Job
   end
 
   def self.not_ended
-    all(:endtime.gte => Date.today) )
+    all(:endtime.gte => Date.today)
   end
 
   def self.has_ended
