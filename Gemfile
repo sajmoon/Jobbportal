@@ -31,7 +31,6 @@ group :production do
   gem 'less'
   gem 'dm-postgres-adapter'
   gem 'less'
-  gem 'therubyracer'
 end
 
 group :development do
