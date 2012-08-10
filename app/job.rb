@@ -2,7 +2,6 @@ module App
   class Jobs < Sinatra::Base
     enable :logging
     register Sinatra::Flash
-    register Sinatra::Reloader
 
     set :root, File.dirname(__FILE__) + "/.."
 
@@ -20,6 +19,10 @@ module App
       haml :"jobs/index"
     end
     
+    get "/filter" do
+      "nu gjorde du fel"
+    end
+
     post "/filter" do
       @jobs
       @selected_categories = []

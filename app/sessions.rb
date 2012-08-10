@@ -3,7 +3,6 @@ module App
     set :root, File.dirname(__FILE__)+ "/../"
     enable :logging 
     register Sinatra::Flash
-    register Sinatra::Reloader
     
     get "/unauthenticated" do
       redirect "/auth/login"

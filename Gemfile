@@ -5,6 +5,7 @@ gem 'rake'
 gem 'sinatra', require: "sinatra/base"
 gem 'sinatra-flash'
 
+gem 'eventmachine', '1.0.0.rc.4'
 gem 'thin'
 
 gem 'haml'
@@ -12,7 +13,6 @@ gem 'haml'
 gem 'heroku'
 
 #datamapper
-gem 'dm-postgres-adapter'
 gem 'dm-validations'
 gem 'dm-constraints'
 gem 'dm-migrations'
@@ -20,15 +20,25 @@ gem 'dm-aggregates'
 gem 'dm-types'
 gem 'dm-core'
 gem 'dm-timestamps'
-gem 'less'
-gem 'therubyracer'
 
 #user auth
 gem 'warden'
 
 gem 'RedCloth'
 
-gem 'pg', '0.10.0'
+group :production do
+  gem 'pg', '0.10.0'
+  gem 'less'
+  gem 'dm-postgres-adapter'
+  gem 'less'
+  gem 'therubyracer'
+end
+
+group :development do
+  gem 'sqlite3'
+  gem 'sqlite3-ruby'
+  gem 'sinatra-contrib'
+end
 
 group :test do
   gem 'rack-test', require: "rack/test"

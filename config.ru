@@ -51,3 +51,6 @@ map "/companies/" do
   run App::Companies
 end
 
+map "/admin/" do
+  run App::Admin
+end

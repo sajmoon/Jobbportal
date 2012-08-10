@@ -15,8 +15,7 @@ require_relative "models/sinatra_before_filter.rb"
 
 require 'yaml'
 require 'sinatra/flash'
-
-
+require 'date'
 
 # add lib to load path
 $LOAD_PATH.unshift 'lib'

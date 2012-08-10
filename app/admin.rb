@@ -1,7 +1,6 @@
 module App
   class Admin < Sinatra::Base
     enable :logging
-    register Sinatra::Reloader
     register Sinatra::Flash
 
     set :root, File.dirname(__FILE__) + "/.."
