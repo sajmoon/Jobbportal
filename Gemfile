@@ -30,7 +30,6 @@ group :production do
   gem 'pg', '0.10.0'
   gem 'less'
   gem 'dm-postgres-adapter'
-  gem 'less'
 end
 
 group :development do

@@ -24,7 +24,7 @@ module App
     end
 
     get "/" do
-      get_auth
+      check_auth
       @companies = Company.all
       haml :"companies/index"
     end
