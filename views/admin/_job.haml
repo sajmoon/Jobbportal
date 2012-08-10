@@ -1,0 +1,26 @@
+%tr
+  %td
+    = job.company.name
+  %td
+    = job.title
+  %td
+    = job.starttime.strftime("%Y-%m-%d") rescue "No starttime"
+    till
+    = job.endtime.strftime("%Y-%m-%d") rescue "No starttime"
+  %td
+    - unless job.starttime.nil?
+      = (job.endtime - job.starttime).to_i
+  %td 
+    %a.btn.btn-primary{href: "/jobs/#{job.id}/" } 
+      %i.icon-info-sign.icon-white 
+      Mer info
+    -if Role.is_company_rep(env["warden"], job.company_id)
+      %a.btn.btn-info{href: "/jobs/#{job.id}/edit"} 
+        %i.icon-edit.icon-white
+        Redigera
+    - if env["warden"].authenticated?(:admin)
+      %a.btn.btn-warning{href: "/jobs/#{job.id}/delete"} 
+        %i.icon-trash.icon-white 
+        Ta bort
+
+

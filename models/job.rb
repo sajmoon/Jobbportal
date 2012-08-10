@@ -1,4 +1,4 @@
-require 'sinatra/reloader'
+require 'date'
 class Job
   include DataMapper::Resource
 
@@ -13,8 +13,11 @@ class Job
   property :apply_url,          String,   required: true, default: ""
   property :created_by,         Integer,  required: true, default: 0
   property :company_id,         Integer,  required: true
-  property :starttime,          Date
-  property :endtime,            Date
+  property :starttime,          DateTime
+  property :endtime,            DateTime
+  property :paid,               Boolean, default: false
+  property :paid_at,            DateTime
+  property :total_cost,         Integer
 
   has n, :categories, :through => Resource
 
@@ -43,7 +46,15 @@ class Job
   def self.has_ended
     all(:endtime.lt => Date.today)
   end
+  
+  def self.is_paid
+    all(paid: true)
+  end
 
+  def self.not_paid
+    all(paid: false)
+  end
+  
   def self.is_active
     all(active: true) 
   end
@@ -53,6 +64,12 @@ class Job
   end
 
   def is_new
-    true
+    unless self.starttime.nil?
+      if (self.starttime - Date.today).abs.to_i < 1
+        true
+      else
+        false
+      end
+    end
   end
 end

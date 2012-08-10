@@ -15,6 +15,9 @@
           %a{href: "/categories/"} Kategorier
         %li
           %a{href: "/companies/"} Företag
+    - if env["warden"].authenticated?(:admin)
+      %li
+        %a{href: "/admin"} Admin
     %li
       %a{href: "/companies/#{Role.get_user(env["warden"]).id}/"} Din profil
     %li
