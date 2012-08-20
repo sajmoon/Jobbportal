@@ -11,22 +11,20 @@ module App
     post "/login" do
       company = Company.first(:email => params[:company][:email])
       if company.nil? || !company.checkpassword(params[:company][:password])
+        flash[:warning] = "Inloggning misslyckades"
         redirect to("/login")
       else
         
         if company.role == Role.admin
-          #flash[:warning] = "Loggat in som admin"
           env["warden"].set_user(company, :scope => :admin )
           puts "user: #{company.name}"
-          flash[:warning] = "Loggat in som admin"
+          flash[:success] = "Loggat in som admin"
         elsif company.role == Role.rep
-          #flash[:warning] = "Loggat in som företagsrepresentant"
           env["warden"].set_user(company, :scope => :company)
-          flash[:warning] = "Loggat in som representant"
+          flash[:success] = "Loggat in som representant"
         else
-          #flash[:warning] = "scope user"
           env["warden"].set_user(company, :scope => :user)
-          flash[:warning] = "Loggat in"
+          flash[:success] = "Loggat in"
         end
         redirect "/"
         #redirect params["url"]
@@ -34,11 +32,13 @@ module App
     end
 
     get "/failure" do
-      "fail"
+      flash[:warning] = "Det gick inte som det skulle"
+      redirect "/"
     end
 
     get "/logout" do
       env["warden"].logout
+      flash[:success] = "Utloggning lyckades"
       redirect "/"
     end
 

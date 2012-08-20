@@ -14,8 +14,6 @@ module App
     end
 
     def check_auth_self(id)
-      puts "id: #{id}"
-      puts Role.get_user(env["warden"]).id.to_s == id
       unless Role.get_user(env["warden"]).id.to_s == id
         flash[:warning] = "You are not authorized to see a profle"
         redirect "/"
@@ -38,9 +36,11 @@ module App
     post "/" do
       check_auth
       @company = Company.new(params[:company])
-      @company.salt = @company.new_salt
-      @company.hashedpassword = @company.encryptpassword(params[:company][:password], @company.salt)
       
+      unless params[:company][:password].nil?
+        @company.salt = @company.new_salt
+      end
+
       if @company.save
         redirect to("/")
       else

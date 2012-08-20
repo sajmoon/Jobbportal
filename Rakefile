@@ -24,12 +24,18 @@ namespace :db do
 
   namespace :seed do
 
+    desc "Clear all data"
+    task :clear do
+      puts "Clear all companies"
+      require_relative "boot.rb"
+      Company.all.destroy
+    end
+
     desc "Seed a standard admin user, admin@d.kth.se, password: admin"
     task :datasektionen do
       require_relative "boot.rb"
 
       admin = Company.new(name: "Datasektionen", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
-      admin.hashedpassword = admin.encryptpassword("admin", "adminsaltish")
 
       admin.save
 

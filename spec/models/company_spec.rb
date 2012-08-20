@@ -1,26 +1,12 @@
 require 'spec_helper'
 
 describe Company do
-  let(:company) { Fabricate(:company)}
-  it 'can be created' do 
-    company.must_be_instance_of(Company)
-  end
+  include Rack::Test::Methods
 
-  it "is valid" do
-    company.valid?.must_equal true
-  end
+  subject { Fabricate.build(:company) }
 
-  describe "company user interactions" do
-    let (:user1) { Fabricate(:user) }
-    let (:user2) { Fabricate(:user) }
+  it { should be_instance_of(Company) }
 
-    it "can has many users" do
-      company.users.count.must_equal 0
-      company.users << user1
-      company.save!
+  it { should be_valid }
 
-      user1.company.name.must_equal company.name
-      user1.company.nil?.must_equal false
-    end
-  end
 end

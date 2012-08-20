@@ -7,9 +7,9 @@ Bundler.require
 
 require 'minitest/autorun'
 require 'minitest/spec'
-require 'minitest/pride'
+require 'rspec'
 require 'rack/test'
 
-class MiniTest::Spec
-  include Rack::Test::Methods
+RSpec.configure do |conf|
+  conf.include Rack::Test::Methods
 end

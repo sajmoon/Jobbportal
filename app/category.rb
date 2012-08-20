@@ -8,7 +8,7 @@ module App
     before do
       unless Role.is_admin(env["warden"])
         flash[:warning] = "Du ska inte se detta."
-        authenticate!
+        redirect "/"
       end
     end
     

@@ -1,7 +1,4 @@
-%ul.nav
-  %li
-    %a{href: "/jobs/"} Se alla lediga jobb
-  
+%ul.nav.pull-right
   - if env["warden"].user.nil? && env["warden"].user(:company).nil? && env["warden"].user(:admin).nil?
     %li
       %a{href: "/auth/login"} Företag loggar in här..

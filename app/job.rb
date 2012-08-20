@@ -59,14 +59,15 @@ module App
       @job.created_at = Time.now
       @job.updated_at = Time.now
 
-      categories = params[:categories][:id]
-  
       @job.company = Company.get(@job.company_id)
       
-      @job.categories = []
-      categories.each do |c|
-        cat = Category.get(c)
-        @job.categories << cat
+      unless params[:categories].nil?
+        categories = params[:categories][:id]
+        @job.categories = []
+        categories.each do |c|
+          cat = Category.get(c)
+          @job.categories << cat
+        end
       end
 
       if @job.save

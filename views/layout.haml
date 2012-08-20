@@ -33,9 +33,9 @@
             %img{src: "/img/logo.png"}
             Jobbportalen
           = haml :menu
+    = styled_flash
     .container-fluid
       .row-fluid
-        = styled_flash
         = yield
       %hr
         %footer

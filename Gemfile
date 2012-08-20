@@ -45,4 +45,6 @@ group :test do
 
   gem 'fabrication'
   gem 'faker'
+  gem 'rspec'
+  gem 'shoulda'
 end
