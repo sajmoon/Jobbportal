@@ -33,8 +33,8 @@ end
 
 group :development do
   gem 'sqlite3'
-  gem 'sqlite3-ruby'
   gem 'sinatra-contrib'
+  gem 'shotgun'
 end
 
 group :test do

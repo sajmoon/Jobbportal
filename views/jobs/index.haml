@@ -1,9 +1,11 @@
-%h1 Datasektionens Jobbportal
+.row-fluid
+  .span12
+    %h1 Datasektionens Jobbportal
 
-- unless env["warden"].user(:admin).nil?
-  %a.btn.btn-info{href: "/jobs/new"} Ny annons
+    - unless env["warden"].user(:admin).nil?
+      %a.btn.btn-info{href: "/jobs/new"} Ny annons
 
-.row
+.row-fluid
   .span12
     .search
       = haml :"search"

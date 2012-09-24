@@ -1,4 +1,4 @@
-!!!
+<!DOCTYPE html>
 %html{lang: "se"}
   %head
     %title Datasektionens Jobbportal
@@ -8,6 +8,7 @@
     %link{href: "/css/jquery-ui.custom.css", rel: "stylesheet" }
     %link{href: "/css/flash.css", rel: "stylesheet"}
     %link{href: "/css/voting-list.css", rel: "stylesheet" }
+    <!-- Bootstrap -->
     %link{href: "/css/bootstrap-responsive.min.css", rel: "stylesheet" }
     /[if lt IE 9]
       %script{src: "http://html5shim.googlecode.com/svn/trunk/html5.js"}
@@ -33,10 +34,14 @@
             %img{src: "/img/logo.png"}
             Jobbportalen
           = haml :menu
-    = styled_flash
+    - flash.each do |name, msg|
+      .alert{class: "alert-#{name}" }
+        %button.close{"data-dismiss" => "alert"}
+          x
+        .message
+          = msg
     .container-fluid
-      .row-fluid
-        = yield
+      = yield
       %hr
         %footer
           %p.pull-right
