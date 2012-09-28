@@ -4,14 +4,17 @@
   %td
     = job.title
   %td
-    = job.short_description
+    = job.number_of_days
+    - if job.paid?
+      %span.label.label-success
+        Betalad
+    - if !job.paid?
+      %span.label.label-warning
+        Inte betalad
   %td
-
     - if job.is_new
       %span.label.label-success
         New
-    
-    = job.time_ago
   %td
     = job.display_categories
   %td 
@@ -25,6 +28,6 @@
     - if env["warden"].authenticated?(:admin)
       %a.btn.btn-warning{href: "/jobs/#{job.id}/delete"} 
         %i.icon-trash.icon-white 
-        Ta bort
+          Ta bort
 
 

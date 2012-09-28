@@ -1,22 +1,21 @@
-%h1
-  = @job.title
-%a{href: "/companies/#{@job.company.id}"}= @job.company.name
+.row-fluid
+  .span8.offset1
+    .top
+      %h1
+        = @job.title
+      %img{src: "#{@job.company.img_url}", width: "100", height: "30", vspace: "10", hspace: "10",  alt: "#{@job.company.name}"}
+      %a{href: "/companies/#{@job.company.id}"}= @job.company.name
+  
 
-
-.row
-  .span12
     %h5
       Kategorier
     %p
       = @job.display_categories
-%hr
-.row
-  .span12
+    %hr
+    
     %p
       = @job.formated_description
-    
-.row
-  .span12
+        
     %h3
       Intresserad? 
       %a{href: "http://#{@job.apply_url}"} Sök nu!

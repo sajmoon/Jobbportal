@@ -25,7 +25,7 @@ class Role
 
   #deprecatead right?
   def self.is_company_rep(warden, company_id = 0)
-    if warden.authenticated?(:company) || warden.authenticated?(:admin)
+    if (warden.authenticated?(:company) && warden.user.id = company_id )|| warden.authenticated?(:admin)
       true
     else
       false

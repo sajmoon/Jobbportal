@@ -84,14 +84,21 @@ module App
     end
 
     get "/:id/edit" do |id|
-      @job = Job.get(id)
+      puts "1"
+			@job = Job.get(id)
       @categories = Category.all
+			puts "#{env['warden'].user.id}"
       if Role.is_admin(env["warden"])
-        @companies = Company.all
-      else 
+      	puts "admin"
+				@companies = Company.all
+			elsif @job.may_edit(env["warden"])
+				puts "edit"
         @companies = []
+      	haml :"jobs/edit"
+			else
+				puts "else"
+				redirect "/" 
       end
-      haml :"jobs/edit"
     end
 
 

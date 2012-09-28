@@ -3,10 +3,10 @@
     %tr
       %th Företag
       %th Titel
-      %th Beskrivning
+      %th Antal dagar/betalstatus
       %th Tillagd
       %th Kategorier
       %th
   %tbody
     - jobs.each do |job|
-      = haml :"jobs/_job", :locals => { :job => job }
+      = haml :"companies/_job", :locals => { :job => job }
