@@ -25,9 +25,3 @@
       %a.btn.btn-info{href: "/jobs/#{job.id}/edit"} 
         %i.icon-edit.icon-white
         Redigera
-    - if env["warden"].authenticated?(:admin)
-      %a.btn.btn-warning{href: "/jobs/#{job.id}/delete"} 
-        %i.icon-trash.icon-white 
-          Ta bort
-
-

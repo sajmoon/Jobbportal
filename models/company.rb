@@ -21,6 +21,8 @@ class Company
 
   before :save, :encryptpassword
 
+  validates_uniqueness_of :email, :name
+
   def new_salt
     salt = (0..16).to_a.map{|a| rand(16).to_s(16)}.join
   end

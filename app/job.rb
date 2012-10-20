@@ -5,13 +5,14 @@ module App
 
     set :root, File.dirname(__FILE__) + "/.."
 
-    before_filter [[:new, "/new"], [:del, "/delete"], [:edit, "/:id/edit"]] do
+    before_filter [[:new, "/new"], [:del, "/delete"], [:create, "/"], [:edit, "/:id/edit"]] do
       unless Role.is_company_rep(env["warden"], params[:id])
         flash[:warning] = "Du ska inte se detta."
         env["warden"].authenticate!
       end
     end
 
+    # index
     get "/" do
       @jobs = Job.all(order: [ :created_at.desc]).running_now
       @categories = Category.all
@@ -39,21 +40,27 @@ module App
       haml :"jobs/index"
     end
 
+    # index
     get "/index" do
       redirect to("/")
     end
 
+    # new
     get "/new" do
       @job = Job.new
       @categories = Category.all
       @job.company = Role.get_user(env["warden"])
+      
+      puts "company: #{@job.company_id}"
       if Role.is_admin(env["warden"])
         @companies = Company.all
       end
+      
       @job.created_by = Role.get_user(env["warden"]).id
       haml :"jobs/new"
     end
 
+    # create
     post "/" do
       @job = Job.new(params[:job])
       @job.created_at = Time.now
@@ -61,6 +68,7 @@ module App
 
       @job.company = Company.get(@job.company_id)
       
+      puts "company: #{@job.company}"
       unless params[:categories].nil?
         categories = params[:categories][:id]
         @job.categories = []
@@ -74,15 +82,17 @@ module App
 	      redirect to("/")
       else
         @categories = Category.all
+        puts "company id: #{@job.company.id}"
         if Role.is_admin(env["warden"])
           @companies = Company.all
         else 
-          @companies = []
+          @companies << Company.get(@job.company)
         end
         haml :"jobs/new"
       end
     end
 
+    # edit
     get "/:id/edit" do |id|
       puts "1"
 			@job = Job.get(id)
@@ -101,7 +111,7 @@ module App
       end
     end
 
-
+    #Update!
     put "/:id" do |id|
       @job = Job.get(id)
       categories = params[:categories][:id]

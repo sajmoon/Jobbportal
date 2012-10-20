@@ -5,14 +5,9 @@
     = job.title
   %td
     = job.short_description
-  %td
-
     - if job.is_new
       %span.label.label-success
         New
-    
-    %abbr{class: "timeago", title: "#{job.starttime}"}
-      = job.starttime
   %td
     = job.display_categories
   %td 

@@ -15,7 +15,7 @@ module App
 
     def check_auth_self(id)
       unless Role.get_user(env["warden"]).id.to_s == id
-        flash[:warning] = "You are not authorized to see a profle"
+        flash[:warning] = "You are not authorized to see this profile"
         redirect "/"
       end
       @current_user = Role.get_user(env["warden"])
@@ -26,16 +26,19 @@ module App
       @companies = Company.all
       haml :"companies/index"
     end
-
+  
+    # new
     get "/new" do
       check_auth
       @company = Company.new
       haml :"companies/new"
     end
 
+    # create
     post "/" do
       check_auth
       @company = Company.new(params[:company])
+      puts "post!"
       
       unless params[:company][:password].nil?
         @company.salt = @company.new_salt
@@ -48,7 +51,8 @@ module App
       end
     end
 
-    get "/:id/" do |id|
+    # show
+    get "/:id/?" do |id|
       check_auth_self(id)
       @company = Company.get(id)
       haml :"companies/show"
