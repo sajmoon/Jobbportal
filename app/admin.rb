@@ -2,14 +2,12 @@ module App
   class Admin < Sinatra::Base
     enable :logging
     register Sinatra::Flash
+    register Sinatra::Authorization
 
     set :root, File.dirname(__FILE__) + "/.."
 
     before do 
-      unless Role.is_admin(env["warden"])
-        flash[:warning] = "Du ska inte se detta."
-        env["warden"].authenticate!
-      end
+      authorize_admin
     end
 
     get "/" do

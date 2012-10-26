@@ -6,10 +6,7 @@ module App
     set :root, File.dirname(__FILE__) + "/.."
     
     before do
-      unless Role.is_admin(env["warden"])
-        flash[:warning] = "Du ska inte se detta."
-        redirect "/"
-      end
+      authorize_admin
     end
     
     get "/" do

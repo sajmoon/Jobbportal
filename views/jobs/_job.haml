@@ -14,7 +14,7 @@
     %a.btn.btn-primary{href: "/jobs/#{job.id}/" } 
       %i.icon-info-sign.icon-white 
       Mer info
-    -if job.may_edit(env["warden"])
+    - if may_edit(job.id)
       %a.btn.btn-info{href: "/jobs/#{job.id}/edit"} 
         %i.icon-edit.icon-white
         Redigera

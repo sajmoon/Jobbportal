@@ -1,18 +1,17 @@
 %ul.nav.pull-right
-  - if env["warden"].user.nil? && env["warden"].user(:company).nil? && env["warden"].user(:admin).nil?
+  - if env["warden"].user.nil?
     %li
       %a{href: "/auth/login"} Företag loggar in här..
-  
   - else
-    - if env["warden"].authenticated?(:company) || env["warden"].authenticated?(:admin)
+    - if env["warden"].authenticated?
       %li
         %a{href: "/jobs/new"} Lägg till en annons
-      - if env["warden"].authenticated?(:admin)
+      - if env["warden"].user.admin?
         %li
           %a{href: "/categories/"} Kategorier
         %li
           %a{href: "/companies/"} Företag
-    - if env["warden"].authenticated?(:admin)
+    - if env["warden"].user.admin?
       %li
         %a{href: "/admin"} Admin
     %li

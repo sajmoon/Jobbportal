@@ -1,34 +1,30 @@
 module App
   class Sessions < Sinatra::Base
-    set :root, File.dirname(__FILE__)+ "/../"
+    set :root, File.dirname(__FILE__) + "/../"
     enable :logging 
-    register Sinatra::Flash
     
+    register Sinatra::Flash
+
     get "/unauthenticated" do
-      redirect "/auth/login"
+      redirect "/"
     end
 
+    get "/login" do
+      puts "get login"
+      haml :"sessions/login"
+    end
+    
     post "/login" do
       company = Company.first(:email => params[:company][:email])
       if company.nil? || !company.checkpassword(params[:company][:password])
         flash[:warning] = "Inloggning misslyckades"
         redirect to("/login")
       else
-        
-        if company.role == Role.admin
-          env["warden"].set_user(company, :scope => :admin )
-          puts "user: #{company.name}"
-          flash[:success] = "Loggat in som admin"
-        elsif company.role == Role.rep
-          env["warden"].set_user(company, :scope => :company)
-          flash[:success] = "Loggat in som representant"
-        else
-          env["warden"].set_user(company, :scope => :user)
-          flash[:success] = "Loggat in"
-        end
-        redirect "/"
+        env["warden"].set_user(company)
+        flash[:success] = "Loggat in som #{company.role}"
         #redirect params["url"]
       end
+      redirect "/"
     end
 
     get "/failure" do
@@ -40,10 +36,6 @@ module App
       env["warden"].logout
       flash[:success] = "Utloggning lyckades"
       redirect "/"
-    end
-
-    get "/login" do
-      haml :"sessions/login"
     end
   end
 end

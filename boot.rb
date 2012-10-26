@@ -20,6 +20,8 @@ require 'date'
 # add lib to load path
 $LOAD_PATH.unshift 'lib'
 
+require 'sinatra/authorization'
+
 # require sub-apps
 Dir.glob("app/*.rb").each do |app|
   require_relative app
@@ -33,4 +35,3 @@ end
 DataMapper::Logger.new($stdout, :debug)
 
 DataMapper.finalize
-

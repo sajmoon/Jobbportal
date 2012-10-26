@@ -1,6 +1,7 @@
 require 'date'
 class Job
   include DataMapper::Resource
+  include Sinatra::Authorization
 
   property :id,                 Serial
   property :title,              String,   required: true
@@ -75,17 +76,5 @@ class Job
 
 	def number_of_days
 		(endtime - starttime).to_i
-	end
-
-  def may_edit(warden)
-		user = Role.get_user(warden)
-		if user.nil?
-			false
-		elsif user.id == self.company_id
-			puts "#{user.id} #{self.company_id}"
-			true
-		else
-			false
-		end
 	end
 end

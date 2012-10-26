@@ -23,6 +23,8 @@ gem 'dm-timestamps'
 
 #user auth
 gem 'warden'
+gem 'sinatra-can'
+gem 'sinatra-contrib'
 
 gem 'RedCloth'
 

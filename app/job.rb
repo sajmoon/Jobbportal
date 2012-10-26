@@ -1,17 +1,10 @@
 module App
   class Jobs < Sinatra::Base
-    enable :logging
     register Sinatra::Flash
+    register Sinatra::Authorization
 
     set :root, File.dirname(__FILE__) + "/.."
-
-    before_filter [[:new, "/new"], [:del, "/delete"], [:create, "/"], [:edit, "/:id/edit"]] do
-      unless Role.is_company_rep(env["warden"], params[:id])
-        flash[:warning] = "Du ska inte se detta."
-        env["warden"].authenticate!
-      end
-    end
-
+    
     # index
     get "/" do
       @jobs = Job.all(order: [ :created_at.desc]).running_now
@@ -47,12 +40,12 @@ module App
 
     # new
     get "/new" do
+      authorize_company_rep
       @job = Job.new
       @categories = Category.all
       @job.company = Role.get_user(env["warden"])
-      
-      puts "company: #{@job.company_id}"
-      if Role.is_admin(env["warden"])
+      puts "new"
+      if env["warden"].user.admin?
         @companies = Company.all
       end
       
@@ -63,6 +56,7 @@ module App
     # create
     post "/" do
       @job = Job.new(params[:job])
+      authorize_company_rep(@job.company_id)
       @job.created_at = Time.now
       @job.updated_at = Time.now
 
@@ -77,43 +71,44 @@ module App
           @job.categories << cat
         end
       end
-
+      
+      @companies = []
       if @job.save
 	      redirect to("/")
       else
         @categories = Category.all
-        puts "company id: #{@job.company.id}"
+        puts "company id: #{@job.company_id}"
         if Role.is_admin(env["warden"])
           @companies = Company.all
         else 
-          @companies << Company.get(@job.company)
+          @companies << Company.get(@job.company_id)
         end
         haml :"jobs/new"
       end
     end
 
     # edit
-    get "/:id/edit" do |id|
-      puts "1"
+    get "/:id/edit/?" do |id|
+      authorize_company_rep(id)
 			@job = Job.get(id)
       @categories = Category.all
-			puts "#{env['warden'].user.id}"
-      if Role.is_admin(env["warden"])
+      if env["warden"].user.admin?
       	puts "admin"
 				@companies = Company.all
 			elsif @job.may_edit(env["warden"])
 				puts "edit"
         @companies = []
-      	haml :"jobs/edit"
 			else
 				puts "else"
 				redirect "/" 
       end
+      haml :"jobs/edit"
     end
 
     #Update!
-    put "/:id" do |id|
+    put "/:id/?" do |id|
       @job = Job.get(id)
+      authorize_company_rep(id)
       categories = params[:categories][:id]
   
       @job.categories = []
@@ -132,7 +127,7 @@ module App
       end
     end
 
-    get "/:id/" do |id|
+    get "/:id/?" do |id|
       @job = Job.get(id)
       @job.viewcount = @job.viewcount + 1
       @job.save!
@@ -141,6 +136,7 @@ module App
     end
 
     get "/:id/delete" do |id|
+      authorize_admin
       @job = Job.get(id)
       @job.active = false
 

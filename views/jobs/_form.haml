@@ -39,7 +39,7 @@
       .controls
         %p
           = @job.company.name rescue "no company"
-        %input.input-xlarge{type: "hidden", id: "job_company_id", name: "job[company_id]", value: @job.company.id}
+        %input.input-xlarge{type: "hidden", id: "job_company_id", name: "job[company_id]", value: @job.company_id}
         %p.help-block
           Det företag som annonsen tillhör
 

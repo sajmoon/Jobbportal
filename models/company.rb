@@ -40,4 +40,22 @@ class Company
       false
     end
   end
+
+  def admin?
+    role == "admin"
+  end
+
+  def company_rep?(id = 0)
+    rep = false
+    if self.role == Role.rep
+      if id.to_i == 0
+        rep = true
+      elsif self.id == id.to_i
+        rep = true
+      end
+    elsif self.role == Role.admin
+      rep = true
+    end
+    rep
+  end
 end
