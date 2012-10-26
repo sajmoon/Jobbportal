@@ -7,28 +7,14 @@ module App
     
     # index
     get "/" do
-      @jobs = Job.all(order: [ :created_at.desc]).running_now
+      @jobs = Job.running_now
       @categories = Category.all
       @selected_categories = Category.all
-      haml :"jobs/index"
-    end
-    
-    get "/filter" do
-      "nu gjorde du fel"
-    end
-
-    post "/filter" do
-      @jobs
-      @selected_categories = []
 
       if defined?(params[:filter][:id])
-        @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id } , order: [ :created_at.desc ] ).running_now
+        @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id }).running_now
         @selected_categories = Category.all(:id => params[:filter][:id].map{ |id| id })
-      else
-        @jobs = Job.all
       end
-      
-      @categories = Category.all
 
       haml :"jobs/index"
     end

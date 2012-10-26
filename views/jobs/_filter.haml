@@ -1,9 +1,9 @@
-%form.form{action: "/jobs/filter", method: "post"}
+%form.form{action: "/jobs/", method: "get"}
   .fieldset
     .control-group
       .controls.well
         - @categories.each do |cat|
           %label.checkbox.inline
-            %input{type: "checkbox", name: "filter[id][]", value: cat.id, checked: @selected_categories.include?(cat)}
+            %input{type: "checkbox", name: "filter[id][]", value: cat.id, checked: (@selected_categories.include?(cat) rescue false)}
             = cat.name
         %input.btn.btn-primary.btn-mini{type: "submit", value: "Filtrera"}

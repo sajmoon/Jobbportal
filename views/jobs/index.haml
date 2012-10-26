@@ -1,11 +1,11 @@
 .row-fluid
   .span12
     .search
-      = haml :"search"
+      = haml :"search", locals: {categories: @categories, selected_categories: @selected_categories }
 
     .joblist
       %h2
         Senaste jobben
-      = haml :"jobs/_jobs", :locals => {:jobs => @jobs}
+      = haml :"jobs/_jobs", locals: {jobs: @jobs }
 
 

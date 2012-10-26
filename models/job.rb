@@ -24,6 +24,10 @@ class Job
 
   belongs_to :company
 
+  def self.desc
+    all(:order => :created_at.desc )
+  end
+
   def display_categories
     self.categories.map(&:name).join(", ")
   end
@@ -61,7 +65,7 @@ class Job
   end
 
   def self.running_now
-    all.is_active.has_started.not_ended
+    all.is_active.has_started.not_ended.desc
   end
 
   def is_new
