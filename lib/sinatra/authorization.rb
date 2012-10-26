@@ -4,7 +4,7 @@ module Sinatra
       def authorize_admin
         @current_user = current_user
         unless @current_user.admin?
-          flash[:warning] = "You are not authorized to do that."
+          flash[:warning] = "Du ska inte se detta"
           redirect "/"
         end
       end
@@ -12,7 +12,7 @@ module Sinatra
       def authorize_company_rep(id = 0)
         @current_user = current_user
         unless may_edit(id)
-          flash[:warning] = "You are not authorized to see this page"
+          flash[:warning] = "Du ska inte se detta"
           redirect "/"
         end
       end
