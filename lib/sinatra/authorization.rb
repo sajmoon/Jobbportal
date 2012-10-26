@@ -26,10 +26,8 @@ module Sinatra
       end
 
       def is_company_rep?(id = 0)
-        puts "may edit"
         edit = true
         if !current_user.nil?
-          puts "not nil2"
           unless current_user.company_rep?(id) || current_user.admin?
             edit = false
           end
