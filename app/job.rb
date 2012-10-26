@@ -92,12 +92,11 @@ module App
       authorize_company_rep(id)
 			@job = Job.get(id)
       @categories = Category.all
-      if env["warden"].user.admin?
-      	puts "admin"
+      @companies = []
+      if current_user.admin?
 				@companies = Company.all
-			elsif @job.may_edit(env["warden"])
-				puts "edit"
-        @companies = []
+			elsif may_edit(id)
+        @companies << Company.get(@job.company_id)
 			else
 				puts "else"
 				redirect "/" 
