@@ -11,8 +11,6 @@ module Sinatra
 
       def authorize_company_rep(id = 0)
         @current_user = current_user
-        puts "comprep: #{@current_user.company_rep?(id)}"
-        puts "admin?: #{@current_user.admin?}"
         unless may_edit(id)
           flash[:warning] = "You are not authorized to see this page"
           redirect "/"
@@ -24,10 +22,15 @@ module Sinatra
       end
 
       def may_edit(id = 0)
+        is_company_rep?(id)
+      end
+
+      def is_company_rep?(id = 0)
         puts "may edit"
         edit = true
-        if !@current_user.nil?
-          unless @current_user.company_rep?(id) || @current_user.admin?
+        if !current_user.nil?
+          puts "not nil2"
+          unless current_user.company_rep?(id) || current_user.admin?
             edit = false
           end
         else
