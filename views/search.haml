@@ -1,4 +1,6 @@
-%a#filter_button.toggle
-  Vad söker du?
-#filter_toggle
+%button.btn.btn-link.btn-mini
+  %span#filter_button.toggle
+    %i.icon-filter
+    Vad söker du?
+#filter_toggle.hide
   = haml :"jobs/_filter"
