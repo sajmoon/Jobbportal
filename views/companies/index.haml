@@ -1,19 +1,21 @@
-%h1 Företag
+.row-fluid
+  .span10.offset1
+    %h1 Företag
+    %hr
+    %a.btn.btn-info{href: "/companies/new"} Nytt företag
 
-%a.btn.btn-info{href: "/companies/new"} Nytt företag
+    %table
+      %thead
+        %th
+          Företag
+        %th
+          Antal annonser
 
-%table
-  %thead
-    %th
-      Företag
-    %th
-      Antal annonser
-
-  %tbody
-    - @companies.each do |company|
-      %tr
-        %td
-          %a{href: "/companies/#{company.id}/"}
-            = company.name
-        %td
-          = company.jobs.count
+      %tbody
+        - @companies.each do |company|
+          %tr
+            %td
+              %a{href: "/companies/#{company.id}/"}
+                = company.name
+            %td.pull-right
+              = company.jobs.count

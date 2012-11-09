@@ -1,21 +1,23 @@
-%h1 Kategorier
+.row-fluid
+  .span10.offset1
+    %h1 Kategorier
+    %hr
+    %a.btn.btn-info{href: "/categories/new"} Lägg till en ny kategori
 
-%a.btn.btn-info{href: "/categories/new"} Lägg till en ny kategori
+    - unless env["warden"].user.nil?
+      - if env["warden"].user.role == Role.admin
+        %a.btn.btn-info{href: "/categories/new"} Ny Kategori
 
-- unless env["warden"].user.nil?
-  - if env["warden"].user.role == Role.admin
-    %a.btn.btn-info{href: "/categories/new"} Ny Kategori
-
-%table.table.table-striped
-  %thead
-    %tr
-      %th ID
-      %th Name
-      %th
-  %tbody
-    - @categories.each do |c|
-      %tr
-        %td= c.id
-        %td= c.name
-        %td
-          %a.btn{href: "/categories/#{c.id}/edit"} Redigera
+    %table.table.table-striped
+      %thead
+        %tr
+          %th ID
+          %th Name
+          %th
+      %tbody
+        - @categories.each do |c|
+          %tr
+            %td= c.id
+            %td= c.name
+            %td
+              %a.btn{href: "/categories/#{c.id}/edit"} Redigera

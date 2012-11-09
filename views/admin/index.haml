@@ -1,17 +1,26 @@
-%h1
-  Admin sida
+.row-fluid
+  .span10.offset1
+    %h1
+      Admin sida
+    %hr
+        
+    %br
+    
+    %h4
+      Alla annonser som är färdiga
+    
+    = haml :"admin/_jobs", locals: {jobs: @jobs.has_ended.not_paid}
+    
+    %br
 
-%h3
-  Alla annonser som är färdiga
-
-= haml :"admin/_jobs", locals: {jobs: @jobs.has_ended.not_paid}
-
-%h3
-  Alla annonser som färdiga och betalade
-
-= haml :"admin/_jobs", locals: { jobs: @jobs.has_ended.is_paid}
-
-%h3
-  Alla annonser som inte är färdiga
-
-=haml :"admin/_jobs", locals: { jobs: @jobs.not_ended }
+    %h4
+      Alla annonser som färdiga och betalade
+    
+    = haml :"admin/_jobs", locals: { jobs: @jobs.has_ended.is_paid}
+    
+    %br
+    
+    %h4
+      Alla annonser som inte är färdiga
+    
+    =haml :"admin/_jobs", locals: { jobs: @jobs.not_ended }

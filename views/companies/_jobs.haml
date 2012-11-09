@@ -6,7 +6,7 @@
       %th Antal dagar/betalstatus
       %th Tillagd
       %th Kategorier
-      %th
+      %th 
   %tbody
     - jobs.each do |job|
       = haml :"companies/_job", :locals => { :job => job }

@@ -1,7 +1,9 @@
-%h1
-  Nytt företag
-
-%form.form{action: "/companies", method: "post"}
-  =haml :"companies/_form"
-  %br
-  %input{ type: "submit", value: "Skapa"}
+.row-fluid
+  .span10.offset1
+    %h1
+      Nytt företag
+    
+    %form.form{action: "/companies", method: "post"}
+      =haml :"companies/_form"
+      %br
+      %input{ type: "submit", value: "Skapa", class: "btn btn-primary"}

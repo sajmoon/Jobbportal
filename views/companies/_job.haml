@@ -9,7 +9,7 @@
       %span.label.label-success
         Betalad
     - if !job.paid?
-      %span.label.label-warning
+      %span.label.label-important
         Inte betalad
   %td
     - if job.is_new
@@ -18,7 +18,7 @@
   %td
     = job.display_categories
   %td 
-    %a.btn.btn-primary{href: "/jobs/#{job.id}/" } 
+    %a.btn.btn-info{href: "/jobs/#{job.id}/" } 
       %i.icon-info-sign.icon-white 
       Mer info
     -if Role.is_company_rep(env["warden"], job.company_id)

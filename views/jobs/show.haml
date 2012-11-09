@@ -3,20 +3,34 @@
     .top
       %h1
         = @job.title
-      %img{src: "#{@job.company.img_url}", width: "100", height: "30", vspace: "10", hspace: "10",  alt: "#{@job.company.name}"}
-      %a{href: "/companies/#{@job.company.id}"}= @job.company.name
-  
 
-    %h5
-      Kategorier
-    %p
-      = @job.display_categories
+      %hr
+      .row-fluid
+        .span3.shift
+          %h4
+            Företag
+          %a{href: "/companies/#{@job.company.id}"}= @job.company.name
+          %br 
+            %img{src: "#{@job.company.img_url}", width: "100", height: "30", vspace: "10", hspace: "10",  alt: "#{@job.company.name}"}
+
+          %h4
+            Kategorier
+          %p
+            = @job.display_categories
+          
+          //LOL GÖR OM?
+          %h4
+            Ansökningsstopp
+          = @job.endtime.strftime("%Y-%m-%d") rescue "No endtime"
+
+        .span8
+          %h4 Beskrivning
+          %p
+            = @job.formated_description
+
+         
     %hr
-    
-    %p
-      = @job.formated_description
-        
-    %h3
+    %h4
       Intresserad? 
       %a{href: "http://#{@job.apply_url}"} Sök nu!
 

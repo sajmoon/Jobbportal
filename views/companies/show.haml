@@ -1,17 +1,24 @@
-%h1
-  = "Annonser från #{@company.name}"
-%h5
-  Här kan du se vilka annonser ni har haft ute senaste tiden.
-.active_ads
-  %h4
-    Aktiva Annonser
-  = haml :"companies/_jobs", locals: {jobs: @company.jobs.running_now}
-.upcomming_ads
-  %h4
-    Kommande annonser
-  = haml :"companies/_jobs", locals: {jobs: @company.jobs.not_started}
+.row-fluid
+  .span10.offset1
+    %h1
+      = "Annonser från #{@company.name}"
+    %hr
+    %h5
+      Här kan du se vilka annonser ni har haft ute senaste tiden.
+    .active_ads
+      %h4
+        Aktiva Annonser
+      = haml :"companies/_jobs", locals: {jobs: @company.jobs.running_now}
 
-.previous_ads
-  %h4
-    Tidigare Annonser
-  = haml :"jobs/_jobs", locals: {jobs: @company.jobs.has_ended}
+    %hr
+    .upcomming_ads
+      %h4
+        Kommande annonser
+      = haml :"companies/_jobs", locals: {jobs: @company.jobs.not_started}
+    
+    %hr
+    .previous_ads
+      %h4
+        Tidigare Annonser
+      = haml :"jobs/_jobs", locals: {jobs: @company.jobs.has_ended}
+    
