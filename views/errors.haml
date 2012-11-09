@@ -1,6 +1,12 @@
-- unless errors.nil?
-  .errors
-    %ul.unstyled
-      - errors.each do |e|
-        %li
-          = e.to_s
+.alert
+  - unless errors.nil?
+    %button.close{ data: { dismiss: "alert" } }
+      x
+    .errors
+      %strong
+        Valideringsfel!
+      Mongo, du skrev fel.
+      %ul
+        - errors.each do |e, msg|
+          %li
+            = e

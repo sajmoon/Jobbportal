@@ -2,29 +2,44 @@
   .span6
     -unless @job.nil?  
       = haml :"errors", locals: { errors: @job.errors }  
-    .control-group
+    .control-group{ class: ( "error" if @job.errors.has_key?(:title) ) }
       %label.control-label{for: "job_title"} Titel
       .controls
         %input.input-xlarge{type: "text", id: "job_title", name: "job[title]", value: @job.title}
         %p.help-block
           Titeln på annonsen
+          - if @job.errors.has_key?(:title)
+            %br
+            %span
+              %small
+                = @job.errors[:title][0]
 
-    .control-group
+    .control-group{ class: ( "error" if @job.errors.has_key?(:short_description) ) }
       %label.control-label{for: "job_short_description"} Kort beskrivning
       .controls
         %input.input-xlarge{type: "text", id: "job_short_description", name: "job[short_description]", value: @job.short_description}
         %p.help-block
           En kort beskrivning
+          - if @job.errors.has_key?(:short_description)
+            %br
+            %span
+              %small
+                = @job.errors[:short_description][0]
 
-    .control-group
+    .control-group{ class: ( "error" if @job.errors.has_key?(:description) ) }
       %label.control-label{for: "job_description"} Lång Beskrivning
       .controls
         %textarea.input-xlarge{type: "textarea", id: "job_description", name: "job[description]", rows: 10}
           = @job.description
         %p.help-block
           Längre och mycket detaljerad beskrivning av tjänsten.
+          - if @job.errors.has_key?(:description)
+            %br
+            %span
+              %small
+                = @job.errors[:description][0]
 
-    .control-group
+    .control-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
       %label.control-label{for: "job_category"} Kategorier:
       .controls
         - @categories.each do |category|
@@ -33,8 +48,13 @@
             = category.name
         %p.help-block 
           Vilka kategorier bör annonsen vara associerad med
+          - if @job.errors.has_key?(:categories)
+            %br
+            %span
+              %small
+                = @job.errors[:categories][0]
 
-    .control-group
+    .control-group{ class: ( "error" if @job.errors.has_key?(:company) ) }
       %label.control-label{for: "job_company_id"} Företag
       .controls
         %p
@@ -42,30 +62,50 @@
         %input.input-xlarge{type: "hidden", id: "job_company_id", name: "job[company_id]", value: @job.company_id}
         %p.help-block
           Det företag som annonsen tillhör
+          - if @job.errors.has_key?(:company)
+            %br
+            %span
+              %small
+                = @job.errors[:company][0]
 
-    .control-group
+    .control-group{ class: ( "error" if @job.errors.has_key?(:apply_url) ) }
       %label.control-label{for: "job_apply_url"}Webadress till extern sida
       .controls
         %input.input-xlarge{type: "text", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
         %p.help-block
           Den länken man kan trycka på för att söka.
+          - if @job.errors.has_key?(:apply_url)
+            %br
+            %span
+              %small
+                = @job.errors[:apply_url][0]
 
-    .control-group
+    .control-group{ class: ( "error" if @job.errors.has_key?(:starttime) ) }
       %label.control-label{for: "job_starttime"} Tid då annonsen ska börja visas.
       .controls
         %input.input-xlarge{type: "text", class: "timeselector", id: "job_starttime", name: "job[starttime]", value: @job.starttime}
         %p.help-block
           Klicka i textfältet för en kalender.
+          - if @job.errors.has_key?(:starttime)
+            %br
+            %span
+              %small
+                = @job.errors[:startime][0]
     
-    .control-group
+    .control-group{ class: ( "error" if @job.errors.has_key?(:endtime) ) }
       %label.control-label{for: "job_endtime"} Tid då annonsen ska sluta visas.
       .controls
         %input.input-xlarge{type: "text", class: "timeselector", id: "job_endtime", name: "job[endtime]", value: @job.endtime}
         %p.help-block
           Klicka i textfältet för en kalender.
+          - if @job.errors.has_key?(:endtime)
+            %br
+            %span
+              %small
+                = @job.errors[:endtime][0]
   .span4
     %h3
-      Help
+      Instruktioner
 
     %P
       För att formatera din text kan du använda ett mark-up språk som heter Textile. Se länken nedan för referens samt kolla exemplet nedan.
