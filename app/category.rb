@@ -46,5 +46,19 @@ module App
         haml :"categories/edit"
       end
     end
+
+    get "/:id/delete" do |id|
+      authorize_admin
+      @category = Category.get(id)
+
+
+      if @category.destroy
+        flash[:notice] = "Kategorin borttagen"
+        redirect "/categories/"
+      else
+        flash[:alert] = "Kunde inte tabort"
+        redirect @category
+      end
+    end
   end
 end
