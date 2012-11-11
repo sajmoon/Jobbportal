@@ -76,16 +76,16 @@ module App
     # edit
     get "/:id/edit/?" do |id|
       authorize_company_rep(id)
-			@job = Job.get(id)
+      @job = Job.get(id)
       @categories = Category.all
       @companies = []
       if current_user.admin?
-				@companies = Company.all
-			elsif may_edit(id)
+        @companies = Company.all
+      elsif may_edit(id)
         @companies << Company.get(@job.company_id)
-			else
-				puts "else"
-				redirect "/" 
+      else
+        flash[:alert] = "Du ska inte se detta"
+        redirect "/" 
       end
       haml :"jobs/edit"
     end

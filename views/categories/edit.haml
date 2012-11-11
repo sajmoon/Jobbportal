@@ -1,6 +1,7 @@
 .row
   .span12
-    %form.form-horizontal{action: "/categories", method: "post"}
+    %form.form-horizontal{action: "/categories/#{@category.id}", method: "post"}
+      %input{type: "hidden", name: "_method", :value => "put"}
       %fieldset
         %legend
           Ändra en kategori

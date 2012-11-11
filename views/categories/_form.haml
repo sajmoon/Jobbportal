@@ -1,5 +1,4 @@
--unless @category.nil?
-  = haml :"errors", locals: { errors: @category.errors }  
+= haml :"errors", locals: { errors: @category.errors }  
         
 .control-group
   %label.control-label{for: "category_name"} Namn:
