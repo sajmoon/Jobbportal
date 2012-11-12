@@ -1,4 +1,4 @@
-%tr
+%tr.warning
   %td
     = job.company.name
   %td
@@ -11,6 +11,8 @@
     - if !job.paid?
       %span.label.label-important
         Inte betalad
+    %small
+      = "Reference: DJOB-#{job.id}"
   %td
     - if job.is_new
       %span.label.label-success
