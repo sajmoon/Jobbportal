@@ -1,6 +1,7 @@
 .row
   .span12
-    %form.form-horizontal{action: "/categories", method: "post"}
+    %form.form-horizontal{action: "/categories/#{@category.id}", method: "post"}
+      %input{type: "hidden", name: "_method", :value => "put"}
       %fieldset
         %legend
           Ändra en kategori
@@ -9,3 +10,5 @@
       
       .form-actions
         %input.btn.btn-primary{type: "submit", value: "Ändra"}
+    %a.btn.btn-warn{ href: "/categories/#{@category.id}/delete" }
+      Ta bort kategorien helt

@@ -1,6 +1,11 @@
-- unless errors.nil?
-  .errors
-    %ul.unstyled
-      - errors.each do |e|
-        %li
-          = e.to_s
+- unless errors.empty?
+  .alert
+    %button.close{ data: { dismiss: "alert" } }
+      x
+    .errors
+      %strong
+        Valideringsfel!
+      %ul
+        - errors.each do |e, msg|
+          %li
+            = e

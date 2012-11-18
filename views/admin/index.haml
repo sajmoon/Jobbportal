@@ -5,7 +5,11 @@
     %hr
         
     %br
-    
+
+    - unless @errors.nil?
+      %p
+        - @errors.each do |msg|
+          = msg.to_s
     %h4
       Alla annonser som är färdiga
     
@@ -14,7 +18,7 @@
     %br
 
     %h4
-      Alla annonser som färdiga och betalade
+      Alla annonser som är färdiga och betalade
     
     = haml :"admin/_jobs", locals: { jobs: @jobs.has_ended.is_paid}
     
