@@ -5,7 +5,11 @@
     %hr
         
     %br
-    
+
+    - unless @errors.nil?
+      %p
+        - @errors.each do |msg|
+          = msg.to_s
     %h4
       Alla annonser som är färdiga
     
