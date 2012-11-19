@@ -1,4 +1,4 @@
-%tr.warning
+%tr{ class: ( job.paid? ? "success" : "warning" )}
   %td
     = job.company.name
   %td
@@ -20,10 +20,10 @@
   %td
     = job.display_categories
   %td 
-    %a.btn.btn-info{href: "/jobs/#{job.id}/" } 
+    %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/" } 
       %i.icon-info-sign.icon-white 
       Mer info
     -if Role.is_company_rep(env["warden"], job.company_id)
-      %a.btn.btn-info{href: "/jobs/#{job.id}/edit"} 
+      %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/edit"} 
         %i.icon-edit.icon-white
         Redigera
