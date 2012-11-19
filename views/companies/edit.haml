@@ -4,6 +4,35 @@
       Ändra
     %form.form-horizontal{action: "/companies/#{@company.id}", method: "post"}
       %input{type: "hidden", name: "_method", :value => "put"}
-      =haml :"companies/_form"
+      -unless @company.nil?
+        = haml :"errors", locals: { errors: @company.errors }  
+      .control-group
+        %label.control-label{for: 'name'} Namn:
+        .controls
+          %input.input-xlarge{type: "text", id: 'name', name: "company[name]", value: @company.name}
+
+      .control-group
+        %label.control-label{for: 'email'} Email:
+        .controls
+          %input.input-xlarge{type: "text", id: 'email', name: "company[email]", value: @company.email}
+
+      .control-group
+        %label.control-label{for: 'role'} Roll
+        .controls
+          %select.input-xlarge{id: 'role', name: 'company[role'}
+            %option{value: ""} Välj ett
+
+            - Role.get_hash_of_roles(@company).each do |r|
+              - if r[:selected] == true
+                %option{value: r[:n], selected: "true" }
+                  = r[:n]
+              -else
+                %option{value: r[:n]}
+                  = r[:n]
+
+      .control-group
+        %label.control-label{for: "company_img_url"} Url logo
+        .controls
+          %input.input-xlarge{id: "company_img_url", type: "text", name: "company[img_url]", value: @company.img_url}
       %br
       %input{ type: "submit", value: "Updatera", class: "btn btn-primary"}
