@@ -10,7 +10,6 @@ module App
     end
 
     get "/login" do
-      puts "get login"
       haml :"sessions/login"
     end
     
