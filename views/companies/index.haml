@@ -25,6 +25,9 @@
               = company.jobs.count
             %td
               - if env["warden"].user.admin?
+                %a.btn.btn-info.btn-mini{href: "/companies/#{company.id}/edit"}
+                  %i.icon-remove.icon-white
+                  Ändra
                 %a.btn.btn-warning.btn-mini{href: "/companies/#{company.id}/delete"}
                   %i.icon-remove.icon-white
                   Ta bort

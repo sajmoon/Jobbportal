@@ -53,8 +53,24 @@ module App
         flash[:success] = "Kunde inte ta bort foretaget"
         redirect "/companies/#{id}/"
       end
+    end
 
+    get '/:id/edit/?' do |id|
+      authorize_admin
+      @company = Company.get(id)
+      haml :"companies/edit"
+    end
 
+    put "/:id/?" do |id|
+      @company = Company.get(id)
+      authorize_admin
+      
+      if @company.update(params[:company])
+        flash[:success] = "Updated!"
+        redirect to("/")
+      else
+        haml :"companies/edit"
+      end
     end
   end
 end

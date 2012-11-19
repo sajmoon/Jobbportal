@@ -18,7 +18,7 @@
 .control-group
   %label.control-label{for: 'role'} Roll
   .controls
-    %select{id: 'role', name: 'company[role'}
+    %select.input-xlarge{id: 'role', name: 'company[role'}
       %option{value: ""} Välj ett
 
       - Role.get_hash_of_roles(@company).each do |r|
@@ -30,6 +30,6 @@
             = r[:n]
 
 .control-group
-  %label{for: "company_img_url"} Url logo
+  %label.control-label{for: "company_img_url"} Url logo
   .controls
-    %input{id: "company_img_url", type: "text", name: "company[img_url]", value: @company.img_url}
+    %input.input-xlarge{id: "company_img_url", type: "text", name: "company[img_url]", value: @company.img_url}
