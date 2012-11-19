@@ -35,6 +35,14 @@ namespace :db do
     task :datasektionen do
       require_relative "boot.rb"
 
+      admin = Company.first(email: "admin@d.kth.se")
+      
+      unless admin.nil?
+        puts "Ta bort Datasektionen"
+        admin.destroy!
+      end
+
+      puts "Skapa Datasektionen"
       admin = Company.new(name: "Datasektionen", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
 
       admin.save
