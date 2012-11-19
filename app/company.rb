@@ -42,5 +42,19 @@ module App
       @company = Company.get(id)
       haml :"companies/show"
     end
+
+    get '/:id/delete/?' do |id|
+      authorize_admin
+      @company = Company.get(id)
+      if @company.destroy
+        flash[:success] = "Tog bort foretag"
+        redirect "/companies/"
+      else
+        flash[:success] = "Kunde inte ta bort foretaget"
+        redirect "/companies/#{id}/"
+      end
+
+
+    end
   end
 end

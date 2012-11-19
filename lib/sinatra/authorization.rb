@@ -3,6 +3,10 @@ module Sinatra
     module Helpers
       def authorize_admin
         @current_user = current_user
+        if @current_user.nil?
+          flash[:warning] = "Du ska inte se detta"
+          redirect "/"
+        end
         unless @current_user.admin?
           flash[:warning] = "Du ska inte se detta"
           redirect "/"
