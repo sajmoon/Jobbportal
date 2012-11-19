@@ -4,12 +4,14 @@
     %hr
     %a.btn.btn-info{href: "/companies/new"} Nytt företag
 
-    %table
+    %table.table.table-striped.table-bordered
       %thead
         %th
           Företag
         %th
-          Antal annonser
+          betalda annonser / Antal annonser
+        %th
+          Alternativ
 
       %tbody
         - @companies.each do |company|
@@ -17,5 +19,12 @@
             %td
               %a{href: "/companies/#{company.id}/"}
                 = company.name
-            %td.pull-right
+            %td
+              = company.jobs.is_paid.count
+              = "/"
               = company.jobs.count
+            %td
+              - if env["warden"].user.admin?
+                %a.btn.btn-warning.btn-mini{href: "/companies/#{company.id}/delete"}
+                  %i.icon-remove.icon-white
+                  Ta bort
