@@ -31,3 +31,13 @@
                 %a.btn.btn-warning.btn-mini{href: "/companies/#{company.id}/delete"}
                   %i.icon-remove.icon-white
                   Ta bort
+  .span6
+    %h3
+      Inactive companies
+    %table.table.table-striped.table-bordered
+      - @inactiveCompanies.each do |company|
+        %tr
+          %td
+            = company.name
+
+

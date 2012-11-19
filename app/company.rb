@@ -8,7 +8,8 @@ module App
   
     get "/" do
       authorize_admin
-      @companies = Company.all
+      @companies = Company.active
+      @inactiveCompanies = Company.inactive
       haml :"companies/index"
     end
   
@@ -46,7 +47,8 @@ module App
     get '/:id/delete/?' do |id|
       authorize_admin
       @company = Company.get(id)
-      if @company.destroy
+      @company.active = false
+      if @company.save
         flash[:success] = "Tog bort foretag"
         redirect "/companies/"
       else
@@ -62,8 +64,8 @@ module App
     end
 
     put "/:id/?" do |id|
-      @company = Company.get(id)
       authorize_admin
+      @company = Company.get(id)
       
       if @company.update(params[:company])
         flash[:success] = "Updated!"

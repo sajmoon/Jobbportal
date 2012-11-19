@@ -1,22 +1,23 @@
 .row-fluid
-  .span10.offset1
+  .span6
     %h1 Kategorier
     %hr
 
     - unless env["warden"].user.nil?
       - if env["warden"].user.role == Role.admin
-        %a.btn.btn-info{href: "/categories/new"} Lägg till en ny kategori
+        %a.btn.btn-info.btn-mini{href: "/categories/new"} Lägg till en ny kategori
 
-    %table.table.table-striped
+    %table.table.table-striped.table-bordered
       %thead
         %tr
           %th ID
           %th Name
-          %th
       %tbody
         - @categories.each do |c|
           %tr
-            %td= c.id
-            %td= c.name
+            %td= "##{c.id}"
             %td
-              %a.btn{href: "/categories/#{c.id}/edit"} Redigera
+              = c.name
+              %a.btn.btn-mini.btn-primary.pull-right{href: "/categories/#{c.id}/edit"}
+                %i.icon-info-sign.icon-white
+                Redigera

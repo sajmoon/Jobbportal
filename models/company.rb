@@ -15,6 +15,7 @@ class Company
   property :created_on,     Date
   property :updated_at,     DateTime
   property :updated_on,     Date
+  property :active,         Boolean,  default: true
 
   has n, :jobs
   has n, :users
@@ -57,5 +58,13 @@ class Company
       rep = true
     end
     rep
+  end
+
+  def self.active
+    all(active: true)
+  end
+
+  def self.inactive
+    all(active: false)
   end
 end
