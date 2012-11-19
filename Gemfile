@@ -12,6 +12,8 @@ gem 'haml'
 
 gem 'heroku'
 
+gem 'builder'
+
 #datamapper
 gem 'dm-validations'
 gem 'dm-constraints'

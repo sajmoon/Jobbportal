@@ -10,6 +10,7 @@ GEM
     backports (2.6.4)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
+    builder (3.0.4)
     cancan (1.6.8)
     daemons (1.1.9)
     data_objects (0.10.8)
@@ -136,6 +137,7 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
+  builder
   dm-aggregates
   dm-constraints
   dm-core
