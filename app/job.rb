@@ -18,6 +18,7 @@ module App
       
       haml :"jobs/index"
     end
+
     get '/rss.xml' do
       @jobs = Job.running_now
       builder do |xml|

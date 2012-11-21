@@ -31,8 +31,9 @@ module Sinatra
 
       def is_company_rep?(id = 0)
         edit = true
-        if !current_user.nil?
-          unless current_user.company_rep?(id) || current_user.admin?
+        job = Job.get(id)
+        unless current_user.nil?
+          unless current_user.company_rep?(job.company_id) || current_user.admin?
             edit = false
           end
         else
