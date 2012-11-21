@@ -31,10 +31,12 @@ module Sinatra
 
       def is_company_rep?(id = 0)
         edit = true
-        job = Job.get(id)
         unless current_user.nil?
-          unless current_user.company_rep?(job.company_id) || current_user.admin?
-            edit = false
+          unless id == 0
+            job = Job.get(id)
+            unless current_user.company_rep?(job.company_id) || current_user.admin?
+              edit = false
+            end
           end
         else
           edit = false;
