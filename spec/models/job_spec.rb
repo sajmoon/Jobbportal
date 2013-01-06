@@ -12,12 +12,12 @@ describe Job do
   it 'is assosicated with a company' do
     job.company = company
     job.save!
-    company.jobs.count.must_equal 1
+    company.jobs.count.should eq(1)
     company.jobs.first.should be_instance_of(Job)
     job.company.should be_instance_of(Company)
   end
 
   it "can has no categories" do
-    job.categories.count.must_equal 0
+    job.categories.count.should eq 0
   end
 end

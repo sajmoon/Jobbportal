@@ -1,10 +1,13 @@
+require 'rspec/core/rake_task'
 %w[bundler rake/testtask].each { |lib| require lib }
 
 task :default => :spec
 
-Rake::TestTask.new(:spec) do |t|
-  t.libs << "spec"
-  t.test_files = FileList['spec/**/*_spec.rb']
+RSpec::Core::RakeTask.new do |task|
+  task.rspec_opts = ["-c", "-f progress", "-r ./spec/spec_helper.rb"]
+  task.pattern = 'spec/**/*_spec.rb'
+  # t.libs << "spec"
+  #t.test_files = FileList['spec/**/*_spec.rb']
 end
 
 namespace :db do
