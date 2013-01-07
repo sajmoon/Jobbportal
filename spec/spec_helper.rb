@@ -2,20 +2,19 @@ SINATRA_ENV = 'test' unless defined?(SINATRA_ENV)
 
 require File.expand_path(File.dirname(__FILE__) + "/../boot")
 
-require 'bundler'
-Bundler.setup
-Bundler.require
+require 'fabrication'
+require 'faker'
 
 require 'minitest/autorun'
 require 'minitest/spec'
-require 'rspec'
+require 'minitest/pride'
 require 'rack/test'
 
-def app
-  Sinatra::Application
+class MiniTest::Spec
+    include Rack::Test::Methods
 end
 
-RSpec.configure do |conf|
-  conf.before(:each) { DataMapper.auto_migrate! }
-  conf.include Rack::Test::Methods
-end
+#clean the database
+Job.auto_migrate!
+Company.auto_migrate!
+Category.auto_migrate!

@@ -1,12 +1,31 @@
 require 'spec_helper'
 
 describe Company do
-  include Rack::Test::Methods
 
-  subject { Fabricate.build(:company) }
+  after do
+    Company.destroy
+  end
 
-  it { should be_instance_of(Company) }
+  describe "with empty db" do
+    it "has not companies" do
+      Company.all.count.must_equal 0
+    end
+  end
 
-  it { should be_valid }
+  describe "basic" do
+    let(:company) { Fabricate :company }
 
+    it { company.must_be_instance_of(Company) }
+
+    it "should not have any errors" do
+      company.errors.each do |e|
+        e.must_equal "simon"
+      end
+      company.errors.count.must_equal 0
+    end
+
+    it "is valid" do
+      company.valid?.must_equal true
+    end
+  end
 end

@@ -43,14 +43,14 @@ end
 
 group :test do
   gem 'rack-test', require: "rack/test"
-  gem 'dm-sqlite-adapter'
 
   gem 'minitest'
  
   gem 'fabrication'
   gem 'faker'
-  gem 'rspec'
-  gem 'shoulda'
-  gem 'cucumber-sinatra'
   gem 'capybara'
+
+  gem 'capybara_minitest_spec'
+  
+  gem 'dm-sqlite-adapter'
 end

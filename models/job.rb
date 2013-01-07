@@ -7,22 +7,27 @@ class Job
   property :title,              String,   required: true
   property :short_description,  Text,     required: true
   property :description,        Text,     required: true
-  property :created_at,         DateTime, required: true
-  property :updated_at,         DateTime, required: true
+  property :created_at,         Date,     required: true
+  property :updated_at,         Date,     required: true
   property :active,             Boolean,  required: true, default: true
   property :viewcount,          Integer,  required: true, default: 0
   property :apply_url,          String,   required: true, default: ""
   property :created_by,         Integer,  required: true, default: 0
   property :company_id,         Integer,  required: true
-  property :starttime,          DateTime
-  property :endtime,            DateTime
+  property :starttime,          Date,     required: true, default: lambda { |r, p| Date.now }
+  property :endtime,            Date
   property :paid,               Boolean, default: false
-  property :paid_at,            DateTime
+  property :paid_at,            Date
   property :total_cost,         Integer
+  property :weeks,              Integer
 
   has n, :categories, :through => Resource
 
   belongs_to :company
+
+  before :save do
+    self.endtime = self.starttime + weeks*7
+  end
 
   def self.desc
     all(:order => :created_at.desc )
