@@ -12,6 +12,7 @@ class MiniTest::Spec
   include Warden::Test::Helpers
 
   before do
+    Capybara.default_driver = :selenium
     logout
   end
   

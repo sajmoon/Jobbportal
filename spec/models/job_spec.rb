@@ -4,7 +4,7 @@ describe Job do
   let (:company) { Fabricate(:company) }
   let (:category1) { Fabricate(:category) }
   
-  after do
+  after :each do
     Job.destroy
     CategoryJob.destroy
     Company.destroy
@@ -44,12 +44,6 @@ describe Job do
   it "has endtime" do
     job = Fabricate(:job, company: company)
     job.endtime.must_equal ( job.starttime + 7*job.weeks )
-  end
-
-  it "can has no categories" do
-    job = Fabricate(:job, company: company)
-    Job.count.must_equal 1
-    job.categories.count.must_equal 0
   end
 
   it "is valid" do

@@ -27,6 +27,7 @@ describe "if signed in as company1" do
   before :each do
     Company.destroy
     Job.destroy
+    CategoryJob.destroy
     @company1 = Fabricate :company, name: "company1"
     @company2 = Fabricate :company, name: "company2"
     @job1 = Fabricate :job, company: @company1
@@ -36,6 +37,8 @@ describe "if signed in as company1" do
   end
 
   after :each do
+    Job.destroy
+    Company.destroy
     logout
   end
 
@@ -46,6 +49,7 @@ describe "if signed in as company1" do
   end
 
   it "validates that test suite is setup ok" do
+    Company.count.must_equal 2
     Job.count.must_equal 3
     @company1.jobs.count.must_equal 1
     @company2.jobs.count.must_equal 2
@@ -53,6 +57,8 @@ describe "if signed in as company1" do
 
   it "can see all jobs in index page" do
     visit "/jobs/"
+
+    page.must_have_content "Senaste jobben"
 
     [@job1, @job2, @job3].each do |job|
       page.must_have_content job.title
