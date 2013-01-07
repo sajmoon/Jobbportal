@@ -55,7 +55,7 @@ namespace :db do
     desc "Seed some standard categories"
     task :categories do
       require_relative "boot.rb"
-      ["Heltid", "Deltid", "Sommarjob"].each do |c|
+      ["Heltid", "Deltid", "Sommarjobb"].each do |c|
         puts "Create category: #{c}"
         cat = Category.new(name: c)
         cat.save!
