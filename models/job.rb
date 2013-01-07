@@ -26,7 +26,9 @@ class Job
   belongs_to :company
 
   before :save do
-    self.endtime = self.starttime + weeks*7
+    unless self.weeks.nil?
+      self.endtime = self.starttime + self.weeks*7
+    end
   end
 
   def self.desc
