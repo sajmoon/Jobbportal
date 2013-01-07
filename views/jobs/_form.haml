@@ -93,9 +93,13 @@
                 = @job.errors[:startime][0]
     
     .control-group{ class: ( "error" if @job.errors.has_key?(:endtime) ) }
-      %label.control-label{for: "job_endtime"} Tid då annonsen ska sluta visas.
+      %label.control-label{for: "job_endtime"} Hur många veckor ska annonsen visas.
       .controls
-        %input.input-xlarge{type: "text", class: "timeselector", id: "job_endtime", name: "job[endtime]", value: @job.endtime}
+        %select{id: "job_number_of_weeks", name: "job[weeks]"}
+          %option{value: "1" }
+            En vecka
+          %option{value: "2" }
+            Två veckor
         %p.help-block
           Klicka i textfältet för en kalender.
           - if @job.errors.has_key?(:endtime)

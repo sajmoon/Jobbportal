@@ -20,7 +20,6 @@ class MiniTest::Spec
   end
 end
 
-
 class Capybara::Session
   def params
     Hash[*URI.parse(current_url).query.split(/\?|=|&/)]

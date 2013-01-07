@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe Company do
 
-  after do
+  before do
     Company.destroy
+    Job.destroy
   end
 
   describe "with empty db" do

@@ -10,7 +10,7 @@
     = job.endtime.strftime("%Y-%m-%d") rescue "No starttime"
   %td
     - unless job.starttime.nil?
-      = (job.endtime - job.starttime).to_i
+      = job.weeks
   %td
     = job.display_categories
   %td 

@@ -16,7 +16,7 @@ class Job
   property :company_id,         Integer,  required: true
   property :starttime,          Date,     required: true, default: lambda { |r, p| Date.now }
   property :endtime,            Date
-  property :paid,               Boolean, default: false
+  property :paid,               Boolean,  default: false
   property :paid_at,            Date
   property :total_cost,         Integer
   property :weeks,              Integer

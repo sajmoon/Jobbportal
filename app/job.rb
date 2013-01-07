@@ -42,6 +42,7 @@ module App
         end
       end
     end
+ 
     # index
     get "/index" do
       redirect to("/")
@@ -71,11 +72,12 @@ module App
 
       @job.company = Company.get(@job.company_id)
       
-      puts "company: #{@job.company}"
+      @job.endtime = @job.starttime + @job.weeks*7
+      
       unless params[:categories].nil?
         categories = params[:categories][:id]
         @job.categories = []
-        categories.each do |c|
+       categories.each do |c|
           cat = Category.get(c)
           @job.categories << cat
         end

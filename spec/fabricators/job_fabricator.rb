@@ -6,6 +6,6 @@ Fabricator(:job) do
   updated_at    { Time.now }
   active        { true }
   apply_url     { Faker::Internet.url }
-  starttime     { Date.today }
+  starttime     { Date.today - 1}
   weeks         { 2 }
 end
