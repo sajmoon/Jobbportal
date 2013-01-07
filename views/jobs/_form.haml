@@ -92,7 +92,6 @@
               %small
                 = @job.errors[:startime][0]
     
-    %input.input-xlarge{type: "text", id: "job_weeks", name: "job[weeks]", value: @job.weeks }
     .control-group{ class: ( "error" if @job.errors.has_key?(:weeks) ) }
       %label.control-label{for: "job_endtime"} Hur många veckor ska annonsen visas.
       .controls
