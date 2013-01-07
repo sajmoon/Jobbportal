@@ -9,6 +9,11 @@ module App
       redirect "/"
     end
 
+    post "/unauthenticated" do
+      flash[:alert] = env["warden.options"][:message]
+      redirect "/"
+    end
+
     get "/login" do
       haml :"sessions/login"
     end

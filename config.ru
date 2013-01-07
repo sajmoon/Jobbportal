@@ -27,9 +27,15 @@ Warden::Strategies.add(:password) do
   end
 
   def authenticate!
-    puts "authenticate #{params[:username]}"
     u = Company.authenticate(params[:username], params[:password])
     u.nil? ? fail!("Inloggning misslyckades") : success!(u)
+  end
+end
+
+Warden::Manager.after_set_user do |user, auth, opts|
+  unless user.active?
+    auth.logout
+    throw(:warden, :message => "Du har ett inaktiverat konto!")
   end
 end
 
