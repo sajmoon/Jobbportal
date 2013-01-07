@@ -54,7 +54,7 @@ module App
       @job = Job.new
       @categories = Category.all
       @job.company = Role.get_user(env["warden"])
-      puts "new"
+      
       if env["warden"].user.admin?
         @companies = Company.all
       end

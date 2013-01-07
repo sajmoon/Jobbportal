@@ -14,7 +14,7 @@ class Job
   property :apply_url,          String,   required: true, default: ""
   property :created_by,         Integer,  required: true, default: 0
   property :company_id,         Integer,  required: true
-  property :starttime,          Date,     required: true, default: lambda { |r, p| Date.now }
+  property :starttime,          Date,     required: true, default: lambda { |r, p| Date.today }
   property :endtime,            Date
   property :paid,               Boolean,  default: false
   property :paid_at,            Date

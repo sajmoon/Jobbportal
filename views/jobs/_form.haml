@@ -1,5 +1,5 @@
 .row
-  .span6
+  .span6#job_form
     -unless @job.nil?  
       = haml :"errors", locals: { errors: @job.errors }  
     .control-group{ class: ( "error" if @job.errors.has_key?(:title) ) }
@@ -92,17 +92,18 @@
               %small
                 = @job.errors[:startime][0]
     
-    .control-group{ class: ( "error" if @job.errors.has_key?(:endtime) ) }
+    %input.input-xlarge{type: "text", id: "job_weeks", name: "job[weeks]", value: @job.weeks }
+    .control-group{ class: ( "error" if @job.errors.has_key?(:weeks) ) }
       %label.control-label{for: "job_endtime"} Hur många veckor ska annonsen visas.
       .controls
         %select{id: "job_number_of_weeks", name: "job[weeks]"}
-          %option{value: "1" }
-            En vecka
-          %option{value: "2" }
-            Två veckor
+          %option{value: "1", selected: ( "selected" if @job.weeks == 1)} En vecka
+          %option{value: "2", selected: ( "selected" if @job.weeks == 2)} Två veckor
+          %option{value: "3", selected: ( "selected" if @job.weeks == 3)} Tre veckor
+          %option{value: "3", selected: ( "selected" if @job.weeks == 4)} Fyra veckor
         %p.help-block
           Klicka i textfältet för en kalender.
-          - if @job.errors.has_key?(:endtime)
+          - if @job.errors.has_key?(:weeks)
             %br
             %span
               %small
