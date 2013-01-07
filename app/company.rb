@@ -44,6 +44,7 @@ module App
       haml :"companies/show"
     end
 
+    #delete
     get '/:id/delete/?' do |id|
       authorize_admin
       @company = Company.get(id)

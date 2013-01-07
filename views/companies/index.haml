@@ -1,5 +1,5 @@
 .row-fluid
-  .span10.offset1
+  .span12
     %h1 Företag
     %hr
     %a.btn.btn-info{href: "/companies/new"} Nytt företag
@@ -31,13 +31,24 @@
                 %a.btn.btn-warning.btn-mini{href: "/companies/#{company.id}/delete"}
                   %i.icon-remove.icon-white
                   Ta bort
-  .span6
+.row-fluid
+  .span12
     %h3
       Inactive companies
     %table.table.table-striped.table-bordered
-      - @inactiveCompanies.each do |company|
-        %tr
-          %td
-            = company.name
+      %thead
+        %th
+          Företag
+        %th
+          Antal betalda / Antal annonser
+      %tbody
+        - @inactiveCompanies.each do |company|
+          %tr
+            %td
+              = company.name
+            %td
+              = company.jobs.is_paid.count
+              = "/"
+              = company.jobs.count
 
 
