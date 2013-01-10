@@ -4,6 +4,7 @@
     %title Datasektionens Jobbportal
     %meta{charset: "utf-8" }
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport" }
+    %link{href: "/css/djobb.css", rel: "stylesheet" }
     %link{href: "/css/bootstrap.min.css", rel: "stylesheet" }
     %link{href: "/css/jquery-ui.custom.css", rel: "stylesheet" }
     %link{href: "/css/voting-list.css", rel: "stylesheet" }
@@ -30,12 +31,10 @@
             -# = %span.icon-bar
             - # =%span.icon-bar
           %a.hidden-phone.brand{href: "/"}
-            %img{src: "/img/logo.png"}
-            Jobbportalen
+            %img{src: "/img/datasektionen_3.png", width: "180", height: "40"}
           %a.visible-phone.brand{href: "/"}
             %center
-              %img{src: "/img/logo.png"}
-              Jobbportalen
+              %img{src: "/img/datasektionen_3.png", width: "180", height: "40"}
               
           = haml :menu
     - flash.each do |name, msg|

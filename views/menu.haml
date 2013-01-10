@@ -1,28 +1,26 @@
 %ul.nav.pull-right
   - if env["warden"].user.nil?
-    %li.divider-vertical
-    %li
+    %li.menu-push-down
       %a{href: "/auth/login"} 
         %i.icon-off
         = "Logga in"
       -#%a.btn.btn-mini{href: "/auth/login"} Företag loggar in här..
   - else
     - if env["warden"].authenticated?
-      %li
+      %li.menu-push-down
         %a{href: "/jobs/new"} Lägg till en annons
       - if env["warden"].user.admin?
-        %li.hidden-phone
+        %li.hidden-phone.menu-push-down
           %a{href: "/categories/"} Kategorier
-        %li.hidden-phone
+        %li.hidden-phone.menu-push-down
           %a{href: "/companies/"} Företag
     - if env["warden"].user.admin?
-      %li.hidden-phone
+      %li.hidden-phone.menu-push-down
         %a{href: "/admin"} Admin
-    %li
+    %li.menu-push-down
       %a{href: "/companies/#{Role.get_user(env["warden"]).id}/"} Din profil
 
-    %li.divider-vertical
-    %li
+    %li.menu-push-down
       -#%a.hidden-phone.btn.btn-mini{href: "/auth/logout"} 
         -#= "Logga ut #{Role.get_user(env["warden"]).name}"
       %a.hidden-tablet.hidden-phone{href: "/auth/logout"} 

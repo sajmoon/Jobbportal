@@ -1,5 +1,5 @@
 .row-fluid
-  .span6
+  .span10.offset1.hidden-phone
     %h1 Kategorier
     %hr
 
@@ -21,3 +21,27 @@
               %a.btn.btn-mini.btn-primary.pull-right{href: "/categories/#{c.id}/edit"}
                 %i.icon-info-sign.icon-white
                 Redigera
+                
+  .span12.visible-phone
+    %h1 Kategorier
+    %hr
+
+    - unless env["warden"].user.nil?
+      - if env["warden"].user.role == Role.admin
+        %a.btn.btn-info.btn-mini{href: "/categories/new"} Lägg till en ny kategori
+
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th ID
+          %th Name
+      %tbody
+        - @categories.each do |c|
+          %tr
+            %td= "##{c.id}"
+            %td
+              = c.name
+              %a.btn.btn-mini.btn-primary.pull-right{href: "/categories/#{c.id}/edit"}
+                %i.icon-info-sign.icon-white
+                Redigera
+
