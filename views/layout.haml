@@ -25,13 +25,18 @@
     .navbar.navbar-fixed-top
       .navbar-inner
         .container-fluid
-          %a.btn.btn-navbar{"data-target" =>".nav-collapse", "data-toggle" => "collapse"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand{href: "/"}
+          -# = %a.btn.btn-navbar{"data-target" =>".nav-collapse", "data-toggle" => "collapse"}
+            -# = %span.icon-bar
+            -# = %span.icon-bar
+            - # =%span.icon-bar
+          %a.hidden-phone.brand{href: "/"}
             %img{src: "/img/logo.png"}
             Jobbportalen
+          %a.visible-phone.brand{href: "/"}
+            %center
+              %img{src: "/img/logo.png"}
+              Jobbportalen
+              
           = haml :menu
     - flash.each do |name, msg|
       .alert{class: "alert-#{name}" }

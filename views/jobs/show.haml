@@ -1,5 +1,43 @@
 .row-fluid
-  .span8.offset1
+  .span10.offset1.hidden-phone
+    .top
+      %h1
+        = @job.title
+
+      %hr
+      .row-fluid
+        .span3.shift
+          %h4
+            Företag
+          -#%a{href: "/companies/#{@job.company.id}"}= @job.company.name
+          = @job.company.name
+          %br 
+            -# %img{src: "#{@job.company.img_url}", width: "100", height: "30", vspace: "10", hspace: "10",  alt: "#{@job.company.name}"}
+            %img{src: "#{@job.company.img_url}", width: "100", height: "30",  alt: "#{@job.company.name}"}
+
+          %h4
+            Kategorier
+          %p
+            = @job.display_categories
+          
+          //LOL GÖR OM?
+          %h4
+            Ansökningsstopp
+          = @job.endtime.strftime("%Y-%m-%d") rescue "No endtime"
+
+          %h4
+            Intresserad? 
+            %a{href: "http://#{@job.apply_url}"} Sök nu!
+        
+
+        .span8
+          %h4 Beskrivning
+          %p
+            = @job.formated_description 
+    %hr
+
+
+  .span12.visible-phone
     .top
       %h1
         = @job.title
@@ -23,6 +61,10 @@
             Ansökningsstopp
           = @job.endtime.strftime("%Y-%m-%d") rescue "No endtime"
 
+          %h4
+            Intresserad? 
+            %a{href: "http://#{@job.apply_url}"} Sök nu!
+        
         .span8
           %h4 Beskrivning
           %p
@@ -30,7 +72,4 @@
 
          
     %hr
-    %h4
-      Intresserad? 
-      %a{href: "http://#{@job.apply_url}"} Sök nu!
 
