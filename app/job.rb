@@ -147,7 +147,7 @@ module App
     get "/:id/delete" do |id|
       authorize_admin
       @job = Job.get(id)
-      @job.destroy
+      @job.destroy!
 
       redirect "/admin/"
     end
