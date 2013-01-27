@@ -26,9 +26,13 @@
       %a.btn.btn-info-btn-mini{href: "/jobs/#{job.id}/edit"} 
         %i.icon-edit.icon-white
         Redigera
-    - if env["warden"].authenticated?(:admin)
-      %a.btn.btn-warning.btn-mini{href: "/jobs/#{job.id}/delete"} 
-        %i.icon-trash.icon-white
-        Ta bort
+    - if @current_user.admin?
+      - if job.active?
+        %a.btn.btn-warning.btn-mini{href: "/jobs/#{job.id}/delete"} 
+          %i.icon-trash.icon-white
+          Ta bort
+      - else
+        %pan.label.label-important
+          Dold
 
 

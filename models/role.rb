@@ -33,7 +33,7 @@ class Role
   end
 
   def self.is_admin(warden)
-    if warden.authenticated?(:admin)
+    if warden.authenticated?(:company) && warden.user(:company).admin?
       true
     else 
       false
