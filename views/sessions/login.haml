@@ -1,34 +1,34 @@
-.span9.offset3
-  .loginform
-    %h1
-      Lägg till eller ändra annonser
-    %p
-      Som företag kan du få ett konto här för att kunna lägga upp och administrera era egna jobberbjudanden.
-    %p
-      Maila 
-      %a{href: "mailto:foretag@d.kth.se"}
-        foretag@d.kth.se
-      för att få hjälp med att skapa ett konto och för information om priser.
-    %form.form-horizontal{acition: "/auth", method: "post"}
-      %fieldset
-        %legend
-          Logga in
-
-        .control-group
-          %label.control-label{for: 'email'} Email
-          .controls
-            .input-prepend
-              %span.add-on
-                @
-              %input.input-xlarge{id: 'email', name: "company[email]", type: "text", size: "16" }
-            %p.help-block
-              Hoppas du kommer ihåg din email!
-
-        .control-group
-          %label.control-label{for: 'password'} Lösenord
-          .controls
-            %input{type: 'password', id: 'password', name: "company[password]"}
-            %p.help-block
-              Ditt lösenord måste du också komma ihåg.
-        .form-actions
-          %input.btn.btn-primary{type: "submit", value: "Logga in"}
+.row-fluid
+  .span10.offset1
+    .loginform
+      %h1
+        Lägg till eller ändra annonser
+      %p
+        Som företag kan du få ett konto här för att kunna lägga upp och administrera era egna jobberbjudanden.
+      %p
+        Maila 
+        %a{href: "mailto:foretag@d.kth.se"}
+          foretag@d.kth.se
+        för att få hjälp med att skapa ett konto och för information om priser.
+      %form.form-horizontal{acition: "/auth", method: "post"}
+        %fieldset
+          %legend
+            Logga in
+  
+          .control-group
+            %label.control-label{for: 'email'} Email
+            .controls
+              .input-prepend
+                %span.add-on
+                  @
+                %input.input-xlarge{id: 'email', name: "company[email]", type: "text", size: "16" }
+              %p.help-block
+  
+          .control-group
+            %label.control-label{for: 'password'} Lösenord
+            .controls
+              %input{type: 'password', id: 'password', name: "company[password]"}
+              %p.help-block
+          .form-actions
+            %input.btn.btn-primary{type: "submit", value: "Logga in"}
+  

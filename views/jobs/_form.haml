@@ -40,7 +40,7 @@
                 = @job.errors[:description][0]
 
     .control-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
-      %label.control-label{for: "job_category"} Kategorier:
+      %label.control-label{for: "job_category"} Kategorier
       .controls
         - @categories.each do |category|
           %label.checkbox
@@ -69,11 +69,11 @@
                 = @job.errors[:company][0]
 
     .control-group{ class: ( "error" if @job.errors.has_key?(:apply_url) ) }
-      %label.control-label{for: "job_apply_url"}Webadress till extern sida
+      %label.control-label{for: "job_apply_url"}Webbadress till externt anmälningsformulär
       .controls
         %input.input-xlarge{type: "text", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
         %p.help-block
-          Den länken man kan trycka på för att söka.
+          Lämnas fältet tomt, så visas den registrerade mailadressen.
           - if @job.errors.has_key?(:apply_url)
             %br
             %span
@@ -101,7 +101,6 @@
           %option{value: "3", selected: ( "selected" if @job.weeks == 3)} Tre veckor
           %option{value: "3", selected: ( "selected" if @job.weeks == 4)} Fyra veckor
         %p.help-block
-          Klicka i textfältet för en kalender.
           - if @job.errors.has_key?(:weeks)
             %br
             %span
@@ -117,7 +116,7 @@
     %a{href: "http://redcloth.org/textile"} Länk till referens
 
     .example
-      %textarea.span3{class: "exampleinput", name: "exampleinput", rows: 10, col: 150}
+      %textarea.span8{class: "exampleinput", name: "exampleinput", rows: 10, col: 150}
         h1. Give RedCloth a try!
 
         A *simple* paragraph with

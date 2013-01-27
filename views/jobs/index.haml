@@ -1,13 +1,25 @@
 .row-fluid
-  .span10.offset1
-    .joblist
-      %h2
-        Senaste jobben
-      %hr
-    .search
-      = haml :"search", locals: {categories: @categories, selected_categories: @selected_categories }
-    
-
-      = haml :"jobs/_jobs", locals: {jobs: @jobs }
+  .hidden-phone
+    .span10.offset1
+      .joblist
+        %h2
+          Senaste annonserna
+        %hr
+      .search
+        = haml :"search", locals: {categories: @categories, selected_categories: @selected_categories }
+      
+  
+        = haml :"jobs/_jobs", locals: {jobs: @jobs }
+  .visible-phone
+    .span12
+      .joblist
+        %h2
+          Senaste annonserna
+        %hr
+      .search
+        = haml :"search", locals: {categories: @categories, selected_categories: @selected_categories }
+      
+  
+        = haml :"jobs/_jobs", locals: {jobs: @jobs }
 
 
