@@ -26,9 +26,11 @@
           = @job.endtime.strftime("%Y-%m-%d") rescue "No endtime"
 
           %h4
-            Intresserad? 
-            %a{href: "http://#{@job.apply_url}"} Sök nu!
-        
+            Intresserad?
+            - if @job.apply_url.empty?
+              %a{href: "mailto:#{@job.company.email}"} Ansök nu
+            - else
+              %a{href: "http://#{@job.apply_url}"} Sök nu!
 
         .span8
           %h4 Beskrivning

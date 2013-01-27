@@ -11,7 +11,7 @@ class Job
   property :updated_at,         Date,     required: true
   property :active,             Boolean,  required: true, default: true
   property :viewcount,          Integer,  required: true, default: 0
-  property :apply_url,          String,   required: true, default: ""
+  property :apply_url,          String,   default: ""
   property :created_by,         Integer,  required: true, default: 0
   property :company_id,         Integer,  required: true
   property :starttime,          Date,     required: true, default: lambda { |r, p| Date.today }
