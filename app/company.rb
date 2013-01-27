@@ -39,9 +39,14 @@ module App
 
     # show
     get "/:id/?" do |id|
-      authorize_company_rep(id)
-      @company = Company.get(id)
-      haml :"companies/show"
+      @current_user = current_user
+      unless @current_user.nil? 
+        @company = @current_user
+        haml :"companies/show"
+      else
+        flash[:alert] = "Nope"
+        haml :"/"
+      end
     end
 
     #delete
