@@ -28,11 +28,13 @@
         Redigera
     - if @current_user.admin?
       - if job.active?
-        %a.btn.btn-warning.btn-mini{href: "/jobs/#{job.id}/delete"} 
+        %a.btn.btn-warning.btn-mini{href: "/jobs/#{job.id}/hide"} 
           %i.icon-trash.icon-white
-          Ta bort
+          Dölj
       - else
         %pan.label.label-important
           Dold
+      %a.btn.btn-warning.btn-mini{href: "/jobs/#{job.id}/delete"}
+        Ta bort
 
 

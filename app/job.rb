@@ -147,6 +147,14 @@ module App
     get "/:id/delete" do |id|
       authorize_admin
       @job = Job.get(id)
+      @job.destroy
+
+      redirect "/admin/"
+    end
+
+    get "/:id/hide" do |id|
+      authorize_admin
+      @job = Job.get(id)
       @job.active = false
 
       if @job.save
