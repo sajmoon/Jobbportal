@@ -65,9 +65,7 @@ module App
     # create
     post "/" do
       @job = Job.new(params[:job])
-      puts "Create a new job"
       authorize_company_rep
-      puts "authorized"
       @job.created_at = Time.now
       @job.updated_at = Time.now
 
