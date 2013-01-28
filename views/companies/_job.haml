@@ -23,7 +23,7 @@
     %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/" } 
       %i.icon-info-sign.icon-white 
       Mer info
-    -if Role.is_company_rep(env["warden"], job.company_id)
+    -if may_edit(job.id)
       %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/edit"} 
         %i.icon-edit.icon-white
         Redigera
