@@ -5,7 +5,9 @@ require File.dirname(__FILE__) + '/boot.rb'
 use Rack::MethodOverride
 use Rack::Session::Cookie, secret: "secretkey2.0" #TODO Change maybe? =)
 
-use Rack::GoogleAnalytics, :tracker => ENV['G_ANALYTIC']
+if Sinatra::Base.production?
+  use Rack::GoogleAnalytics, :tracker => ENV['G_ANALYTIC']
+end
 
 #require File.dirname(__FILE__) + '/lib/sinatra/authorization.rb'
 
