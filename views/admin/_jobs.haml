@@ -6,8 +6,8 @@
       %th Titel
       %th Period
       %th Antal veckor
-      %th Kategorier
-      %th
+      %th View count
+      %th Actions
   %tbody
     - jobs.each do |job|
       = haml :"admin/_job", :locals => { :job => job }

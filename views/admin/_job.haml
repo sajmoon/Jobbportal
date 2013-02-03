@@ -12,7 +12,7 @@
     - unless job.starttime.nil?
       = job.weeks
   %td
-    = job.display_categories
+    = job.viewcount
   %td 
     - unless (job.paid)
       - unless (job.has_ended rescue false)
