@@ -2,6 +2,7 @@
   .span10.offset1
     %h1
       = "Annonser från #{@company.name}"
+    %a{href: "/companies/#{@company.id}/password"} Byt lösenord
     %hr
     %h5
       Här kan du se vilka annonser ni har haft ute senaste tiden.

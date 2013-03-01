@@ -49,6 +49,45 @@ module App
       end
     end
 
+    get "/:id/password/?" do |id|
+      puts "change password"
+      @current_user = current_user
+      unless @current_user.nil?
+        @company = @current_user
+        haml :"companies/password"
+      else
+        flash[:alert] = "Logga in forst"
+        haml :"/"
+      end
+    end
+
+    post "/:id/password/?" do |id|
+      @current_user = current_user
+      puts "change pass to #{params[:company][:new_password]}"
+  
+      @current_user.password               = params[:company][:new_password]
+      @current_user.password_confirmation  = params[:company][:confirm_password]
+      
+      unless @current_user.nil?
+        if @current_user.valid_password?
+          @company = @current_user
+          @company.encryptpassword
+          @company.save
+          flash[:alert] = "Ditt losenord har blivit bytt"
+          haml :"companies/show"
+        else
+          @company = @current_user
+          puts "not valid password"
+          flash[:alert] = "Kunde inte byta losenird"
+          haml :"companies/show"
+        end
+      else
+        puts "not signed in"
+        flash[:alert] = "Du borde logga in.."
+        haml :"companies/#{id}/password"
+      end
+    end
+
     #delete
     get '/:id/delete/?' do |id|
       authorize_admin
@@ -69,6 +108,7 @@ module App
       haml :"companies/edit"
     end
 
+    # update
     put "/:id/?" do |id|
       authorize_admin
       @company = Company.get(id)

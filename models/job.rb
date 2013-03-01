@@ -31,6 +31,10 @@ class Job
     end
   end
 
+  def trimmed_short_description
+
+  end
+
   def self.desc
     all(:order => :created_at.desc )
   end

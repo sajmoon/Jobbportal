@@ -30,7 +30,10 @@ class Company
 
   def encryptpassword
     unless self.password.nil?
-      self.hashedpassword = Digest::SHA512.hexdigest("#{self.password}:#{self.salt}")
+      if self.valid_password?
+        puts "valid password"
+        self.hashedpassword = Digest::SHA512.hexdigest("#{self.password}:#{self.salt}")
+      end
     end
   end
 
@@ -40,6 +43,13 @@ class Company
     else
       false
     end
+  end
+
+  def valid_password?
+    if self.password == self.password_confirmation
+      return true
+    end
+    return false
   end
 
   def admin?
