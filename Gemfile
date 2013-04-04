@@ -10,8 +10,6 @@ gem 'thin'
 
 gem 'haml'
 
-gem 'heroku'
-
 gem 'builder'
 
 #datamapper
@@ -38,6 +36,7 @@ group :production do
 end
 
 group :development do
+  gem 'heroku'
   gem 'sqlite3'
   gem 'sinatra-contrib'
   gem 'shotgun'
