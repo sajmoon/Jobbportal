@@ -50,35 +50,31 @@ module App
     end
 
     get "/:id/password/?" do |id|
-      puts "change password"
-      @current_user = current_user
-      unless @current_user.nil?
-        @company = @current_user
+      authorize_admin
+      @company = Company.get(id)
+      unless @company.nil?
         haml :"companies/password"
       else
         flash[:alert] = "Logga in forst"
-        haml :"/"
+        redirect to("/")
       end
     end
 
     post "/:id/password/?" do |id|
-      @current_user = current_user
-      puts "change pass to #{params[:company][:new_password]}"
-  
-      @current_user.password               = params[:company][:new_password]
-      @current_user.password_confirmation  = params[:company][:confirm_password]
+      authorize_admin
+      @company = Company.get(id)
       
-      unless @current_user.nil?
-        if @current_user.valid_password?
-          @company = @current_user
+      @company.password               = params[:company][:new_password]
+      @company.password_confirmation  = params[:company][:confirm_password]
+      
+      unless @company.nil?
+        if @company.valid_password?
           @company.encryptpassword
           @company.save
           flash[:alert] = "Ditt losenord har blivit bytt"
           haml :"companies/show"
         else
-          @company = @current_user
-          puts "not valid password"
-          flash[:alert] = "Kunde inte byta losenird"
+          flash[:alert] = "Kunde inte byta losenord"
           haml :"companies/show"
         end
       else
