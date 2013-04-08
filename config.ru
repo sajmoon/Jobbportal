@@ -70,3 +70,7 @@ end
 map "/admin/" do
   run App::Admin
 end
+
+map "/subscribes/" do
+  run App::Subscribers
+end

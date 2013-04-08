@@ -34,13 +34,14 @@
 .row-fluid
   .span10.offset1
     %h3
-      Inactive companies
+      Inaktiverade företag
     %table.table.table-striped.table-bordered
       %thead
         %th
           Företag
         %th
           Antal betalda / Antal annonser
+        %th Actions
       %tbody
         - @inactiveCompanies.each do |company|
           %tr
@@ -50,5 +51,8 @@
               = company.jobs.is_paid.count
               = "/"
               = company.jobs.count
+            %td
+              %a{href: "/companies/#{company.id}/activate"}
+                aktivera
 
 

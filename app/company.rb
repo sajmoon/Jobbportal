@@ -104,6 +104,19 @@ module App
       haml :"companies/edit"
     end
 
+    get '/:id/activate' do |id|
+      authorize_admin
+      @company = Company.get(id)
+      @company.active = true
+      if @company.save
+        flash[:success] = "Aktiverat"
+        redirect "/companies/#{@company.id}/"
+      else
+        flash[:alert] = "Det gick inte"
+        redirect "/companies/"
+      end
+    end
+
     # update
     put "/:id/?" do |id|
       authorize_admin

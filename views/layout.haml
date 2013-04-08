@@ -48,8 +48,16 @@
       = yield
       %hr
         %footer
-          %p.pull-right
-            %a{href: "/jobs/rss.xml"}
-              RSS feed
-            Jobbportalen 
-            %a{href: "http://www.datasektionen.se"} KTH Datasektionen 
+          .span7.offset1
+            - unless @subscribe.nil?
+              .forms
+                Anmäl dig till nyhetsbrevet:
+                %form.form{action: "/subscribes/", method: "post"}
+                  %input.input{style: "margin-top: 7px", type: "text", id: "email", name: "subscribe[email]"}
+                  %input.btn.btn-mini.btn-primary{type: "submit", value: "Prenumerera"}
+          .span4
+            %p.pull-right
+              %a{href: "/jobs/rss.xml"}
+                RSS feed
+              Jobbportalen 
+              %a{href: "http://www.datasektionen.se"} KTH Datasektionen 
