@@ -74,3 +74,7 @@ end
 map "/subscribes/" do
   run App::Subscribers
 end
+
+map "/ddagen" do
+  run App::DDagen
+end
