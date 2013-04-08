@@ -24,16 +24,23 @@
     %script{src: "/js/application.js"}
     %script{src: "/js/jquery.timeago.js"}
   %body
-    .header
-      = haml :"header"
-    = yield
-    %hr
-      %footer
-        .span7.offset1
-          = haml :"subscribe"
-        .span4
-          %p.pull-right
-            %a{href: "/ddagen/rss.xml"}
-              RSS feed
-            D-Dagen 
-            %a{href: "http://www.datasektionen.se"} KTH Datasektionen 
+    = haml :"header"
+    - flash.each do |name, msg|
+      .alert{class: "alert-#{name}" }
+        %button.close{"data-dismiss" => "alert"}
+          x
+        .message
+          = msg
+    .container-fluid
+      .content
+        = yield
+      %hr
+        %footer
+          .span7.offset1
+            = haml :"subscribe"
+          .span4
+            %p.pull-right
+              %a{href: "/ddagen/rss.xml"}
+                RSS feed
+              D-Dagen 
+              %a{href: "http://www.datasektionen.se"} KTH Datasektionen 
