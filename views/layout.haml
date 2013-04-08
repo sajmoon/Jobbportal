@@ -24,20 +24,7 @@
     %script{src: "/js/application.js"}
     %script{src: "/js/jquery.timeago.js"}
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container-fluid
-          -# = %a.btn.btn-navbar{"data-target" =>".nav-collapse", "data-toggle" => "collapse"}
-            -# = %span.icon-bar
-            -# = %span.icon-bar
-            - # =%span.icon-bar
-          %a.hidden-phone.brand{href: "/"}
-            %img{src: "/img/datasektionen_3.png", width: "180", height: "40"}
-          %a.visible-phone.brand{href: "/"}
-            %center
-              %img{src: "/img/datasektionen_3.png", width: "180", height: "40"}
-              
-          = haml :menu
+    = haml :"header"
     - flash.each do |name, msg|
       .alert{class: "alert-#{name}" }
         %button.close{"data-dismiss" => "alert"}
@@ -49,12 +36,10 @@
       %hr
         %footer
           .span7.offset1
-            - unless @subscribe.nil?
-              .forms
-                Anmäl dig till nyhetsbrevet:
-                %form.form{action: "/subscribes/", method: "post"}
-                  %input.input{style: "margin-top: 7px", type: "text", id: "email", name: "subscribe[email]"}
-                  %input.btn.btn-mini.btn-primary{type: "submit", value: "Prenumerera"}
+            .forms
+              %form.form-inline{action: "/subscribes/", method: "post"}
+                %input.input{type: "text", id: "email", name: "subscribe[email]", placeholder: "Ange email för nyhetsbrev"}
+                %input.btn{type: "submit", value: "Prenumerera"}
           .span4
             %p.pull-right
               %a{href: "/jobs/rss.xml"}
