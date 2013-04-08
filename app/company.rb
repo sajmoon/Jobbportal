@@ -100,7 +100,6 @@ module App
         flash[:success] = "Kunde inte ta bort foretaget"
         redirect "/companies/#{id}/"
       end
-<<<<<<< HEAD
     end
 
     get '/:id/edit/?' do |id|
@@ -120,8 +119,6 @@ module App
       else
         haml :"companies/edit"
       end
-=======
->>>>>>> reset password for admin with raketask
     end
   end
 end
