@@ -36,10 +36,7 @@
       %hr
         %footer
           .span7.offset1
-            .forms
-              %form.form-inline{action: "/subscribes/", method: "post"}
-                %input.input{type: "text", id: "email", name: "subscribe[email]", placeholder: "Ange email för nyhetsbrev"}
-                %input.btn{type: "submit", value: "Prenumerera"}
+            = haml :"subscribe"
           .span4
             %p.pull-right
               %a{href: "/jobs/rss.xml"}

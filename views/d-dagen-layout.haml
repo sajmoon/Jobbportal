@@ -30,11 +30,7 @@
     %hr
       %footer
         .span7.offset1
-          .forms
-            Anmäl dig till nyhetsbrevet:
-            %form.form{action: "/subscribes/", method: "post"}
-              %input.input{style: "margin-top: 7px", type: "text", id: "email", name: "subscribe[email]"}
-              %input.btn.btn-mini.btn-primary{type: "submit", value: "Prenumerera"}
+          = haml :"subscribe"
         .span4
           %p.pull-right
             %a{href: "/ddagen/rss.xml"}
