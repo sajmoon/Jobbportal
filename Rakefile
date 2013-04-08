@@ -34,16 +34,17 @@ namespace :db do
     desc "Seed a standard admin user, admin@d.kth.se, password: admin"
     task :datasektionen do
       require_relative "boot.rb"
-
-      admin = Company.first(email: "admin@d.kth.se")
       
-      unless admin.nil?
-        puts "Ta bort Datasektionen"
-        admin.destroy!
+      admin = Company.find(email: "admin@d.kth.se")
+      if admin.nil?
+        puts "Creating admin account"
+        admin = Company.new(name: "Datasektionen", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
+      else
+        admin = admin.first
+        puts "Reseting password for #{admin.email}"
+        admin.password = "admin"
+        admin.encryptpassword
       end
-
-      puts "Skapa Datasektionen"
-      admin = Company.new(name: "Datasektionen", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
 
       admin.save
 
