@@ -25,12 +25,7 @@
     %script{src: "/js/jquery.timeago.js"}
   %body
     = haml :"header"
-    - flash.each do |name, msg|
-      .alert{class: "alert-#{name}" }
-        %button.close{"data-dismiss" => "alert"}
-          x
-        .message
-          = msg
+    = haml :"flash"
     .container-fluid
       .content
         = yield
