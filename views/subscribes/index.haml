@@ -1,5 +1,7 @@
 %h1
   Subscribers
+  %small
+    = "(#{@subscribers.count})"
 
 = @subscribers.map{ |v| v.email }.join(", ")
 
