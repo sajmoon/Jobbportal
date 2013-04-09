@@ -7,6 +7,9 @@
       -#%a.btn.btn-mini{href: "/auth/login"} Företag loggar in här..
   - else
     - if env["warden"].authenticated?
+      - if can? :list, :ddagen
+        %li.menu-push-down
+          %a{href: "/ddagen"} D-Dagen
       - if can? :create, Job
         %li.menu-push-down
           %a{href: "/jobs/new"} Lägg till en annons
