@@ -24,5 +24,21 @@ module App
         redirect "/"
       end
     end
+
+    get "/sendIntroMail" do
+      authorize! :send, Subscribe
+      @subscribes = Subscribe.all
+
+      s = @subscribes.first 
+
+      mail = Mail.deliver do
+        to s.email.to_s
+        from "noreply@djobb.se"
+        subject "dJobb - Valkommen"
+        text_part do
+            body "Hejsan! Detta aer det veckovisa nyhetsbrevet"
+        end
+      end
+    end
   end
 end

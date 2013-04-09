@@ -11,6 +11,24 @@ end
 
 #require File.dirname(__FILE__) + '/lib/sinatra/authorization.rb'
 
+require 'mail'
+
+Mail.defaults do
+  if Sinatra::Base.production?
+    delivery_method :smtp, {
+      :address => 'smtp.sendgrid.net',
+      :port => 587,
+      :domain => 'heroku.com',
+      :user_name => 'us',
+      :password => 'pass',
+      :authentication => 'plain',
+      :enable_starttls_auto => true
+    }
+  else
+    delivery_method LetterOpener::DeliveryMethod, :location => File.expand_path('../tmp/letter_opener', __FILE__)
+  end
+end
+
 use Warden::Manager do |manager|
   manager.failure_app = App::Sessions
   manager.default_strategies :password
