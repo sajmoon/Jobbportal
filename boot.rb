@@ -23,6 +23,7 @@ $LOAD_PATH.unshift 'lib'
 require 'sinatra/authorization'
 
 # require sub-apps
+require_relative "app/generic.rb"
 Dir.glob("app/*.rb").each do |app|
   require_relative app
 end
@@ -35,3 +36,5 @@ end
 DataMapper::Logger.new($stdout, :debug)
 
 DataMapper.finalize
+
+require 'sinatra/can'

@@ -6,19 +6,27 @@
         = "Logga in"
       -#%a.btn.btn-mini{href: "/auth/login"} Företag loggar in här..
   - else
+    = self.class
     - if env["warden"].authenticated?
-      %li.menu-push-down
-        %a{href: "/jobs/new"} Lägg till en annons
-      - if env["warden"].user.admin?
+      - if can? :create, Job
+        %li.menu-push-down
+          %a{href: "/jobs/new"} Lägg till en annons
+      - if can? :list, Category
         %li.hidden-phone.menu-push-down
           %a{href: "/categories/"} Kategorier
+      - if can? :list, Company
         %li.hidden-phone.menu-push-down
           %a{href: "/companies/"} Företag
-    - if env["warden"].user.admin?
+    - if can? :list, :admin
       %li.hidden-phone.menu-push-down
         %a{href: "/admin"} Admin
-    %li.menu-push-down
-      %a{href: "/companies/#{Role.get_user(env["warden"].id}/"} Mina Annonser
+    - if can? :show, current_user
+      %li.menu-push-down
+        %a{href: "/companies/#{Role.get_user(env["warden"]).id}/"} Mina Annonser
+    - if can? :edit, current_user
+      %li.menu-push-down
+        %a{href: "/companies/#{Role.get_user(env["warden"]).id}/edit"} Min profil
+
 
     %li.menu-push-down
       -#%a.hidden-phone.btn.btn-mini{href: "/auth/logout"} 

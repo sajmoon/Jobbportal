@@ -1,5 +1,5 @@
 module App
-  class Sessions < Sinatra::Base
+  class Sessions < Generic
     set :root, File.dirname(__FILE__) + "/../"
     enable :logging 
     
@@ -16,6 +16,10 @@ module App
 
     get "/login" do
       haml :"sessions/login"
+    end
+
+    get "/unauth" do
+      haml :"sessions/unauth"
     end
     
     post "/login" do

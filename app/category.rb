@@ -1,13 +1,9 @@
 module App
-  class Categories < Sinatra::Base
-    enable :logging
-    register Sinatra::Flash
-    register Sinatra::Authorization
-
+  class Categories < Generic
     set :root, File.dirname(__FILE__) + "/.."
     
     before do
-      authorize_admin
+      authorize! :manage, Category
     end
     
     get "/" do
@@ -15,7 +11,7 @@ module App
       haml :"categories/index"
     end
 
-    get "/new" do
+    get "/new/?" do
       @category = Category.new
       haml :"categories/new"
     end
@@ -48,15 +44,13 @@ module App
     end
 
     get "/:id/delete" do |id|
-      authorize_admin
       @category = Category.get(id)
-
 
       if @category.destroy
         flash[:notice] = "Kategorin borttagen"
         redirect "/categories/"
       else
-        flash[:alert] = "Kunde inte tabort"
+        flash[:alert] = "Kunde inte ta bort"
         redirect @category
       end
     end

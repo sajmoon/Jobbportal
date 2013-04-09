@@ -1,18 +1,17 @@
 module App
-  class Subscribers < Sinatra::Base
-    register Sinatra::Flash 
-    register Sinatra::Authorization
+  class Subscribers < Generic
     
     set :root, File.dirname(__FILE__) + "/.."
     
     get "/" do
-      authorize_admin
+      authorize! :list, Subscribe
       @subscribers = Subscribe.all
       
       haml :"subscribes/index"
     end
 
     post "/" do
+      authorize! :create, Subscribe
       puts params[:subscribe]
       @subscribe = Subscribe.new(params[:subscribe])
       

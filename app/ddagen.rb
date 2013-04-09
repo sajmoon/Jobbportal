@@ -1,12 +1,9 @@
 module App
-  class DDagen < Sinatra::Base
-    enable :logging
-    register Sinatra::Authorization
-    register Sinatra::Flash
-
+  class DDagen < Generic
     set :root, File.dirname(__FILE__) + "/.."
 
     get "/" do
+      authorize! :list, :ddagen
       haml :"d-dagen/index", layout: :"d-dagen-layout"
     end
   end

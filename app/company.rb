@@ -1,13 +1,9 @@
 module App
-  class Companies < Sinatra::Base
-    enable :logging
-    register Sinatra::Flash 
-    register Sinatra::Authorization
-
+  class Companies < Generic
     set :root,  File.dirname(__FILE__) + "/.."
   
     get "/" do
-      authorize_admin
+      authorize! :list, Company
       @companies = Company.active
       @inactiveCompanies = Company.inactive
       haml :"companies/index"
@@ -15,14 +11,14 @@ module App
   
     # new
     get "/new" do
-      authorize_admin
+      authorize! :create, Company
       @company = Company.new
       haml :"companies/new"
     end
 
     # create
     post "/" do
-      authorize_admin
+      authorize! :create, Company
       @company = Company.new(params[:company])
       puts "post!"
       
@@ -39,55 +35,39 @@ module App
 
     # show
     get "/:id/?" do |id|
-      @current_user = current_user
-      unless @current_user.nil? 
-        @company = @current_user
-        haml :"companies/show"
-      else
-        flash[:alert] = "Nope"
-        haml :"/"
-      end
+      @company = Company.get(id)
+      authorize! :show, @company
+      haml :"companies/show"
     end
 
     get "/:id/password/?" do |id|
-      authorize_admin
       @company = Company.get(id)
-      unless @company.nil?
-        haml :"companies/password"
-      else
-        flash[:alert] = "Logga in forst"
-        redirect to("/")
-      end
+      authorize! :edit, @company
+      haml :"companies/password"
     end
 
     post "/:id/password/?" do |id|
-      authorize_admin
       @company = Company.get(id)
+      authorize! :edit, @company
       
       @company.password               = params[:company][:new_password]
       @company.password_confirmation  = params[:company][:confirm_password]
       
-      unless @company.nil?
-        if @company.valid_password?
-          @company.encryptpassword
-          @company.save
-          flash[:alert] = "Ditt losenord har blivit bytt"
-          haml :"companies/show"
-        else
-          flash[:alert] = "Kunde inte byta losenord"
-          haml :"companies/show"
-        end
+      if @company.valid_password?
+        @company.encryptpassword
+        @company.save
+        flash[:alert] = "Ditt losenord har blivit bytt"
+        haml :"companies/show"
       else
-        puts "not signed in"
-        flash[:alert] = "Du borde logga in.."
-        haml :"companies/#{id}/password"
+        flash[:alert] = "Kunde inte byta losenord"
+        haml :"companies/show"
       end
     end
 
     #delete
     get '/:id/delete/?' do |id|
-      authorize_admin
       @company = Company.get(id)
+      authorize! :destroy, @company
       @company.active = false
       if @company.save
         flash[:success] = "Tog bort foretag"
@@ -99,13 +79,13 @@ module App
     end
 
     get '/:id/edit/?' do |id|
-      authorize_admin
       @company = Company.get(id)
+      authorize! :edit, @company
       haml :"companies/edit"
     end
 
     get '/:id/activate' do |id|
-      authorize_admin
+      authorize! :delete, Company
       @company = Company.get(id)
       @company.active = true
       if @company.save
@@ -119,12 +99,16 @@ module App
 
     # update
     put "/:id/?" do |id|
-      authorize_admin
       @company = Company.get(id)
+      authorize! :edit, @company
       
+      unless can? :change_company_role, @company
+        params[:company].reject!{ |k| k == "role"}
+      end
+
       if @company.update(params[:company])
         flash[:success] = "Updated!"
-        redirect to("/")
+        redirect to("/#{@company.id}")
       else
         haml :"companies/edit"
       end

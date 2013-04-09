@@ -1,12 +1,10 @@
 module App
-  class Jobs < Sinatra::Base
-    register Sinatra::Flash
-    register Sinatra::Authorization
-
+  class Jobs < App::Generic
     set :root, File.dirname(__FILE__) + "/.."
     
     # index
     get "/" do
+      authorize! :list, Job
       @jobs = Job.running_now
       @categories = Category.all
       @selected_categories = Category.all
@@ -51,7 +49,7 @@ module App
 
     # new
     get "/new" do
-      authorize_company_rep
+      authorize! :create, Job
       @job = Job.new
       @categories = Category.all
       @job.company = Role.get_user(env["warden"])
@@ -65,8 +63,8 @@ module App
 
     # create
     post "/" do
+      authorize! :create, Job
       @job = Job.new(params[:job])
-      authorize_company_rep
       @job.created_at = Time.now
       @job.updated_at = Time.now
 
@@ -100,17 +98,14 @@ module App
 
     # edit
     get "/:id/edit/?" do |id|
-      authorize_company_rep(id)
       @job = Job.get(id)
+      authorize! :edit, @job
       @categories = Category.all
       @companies = []
       if current_user.admin?
         @companies = Company.all
-      elsif may_edit(id)
-        @companies << Company.get(@job.company_id)
       else
-        flash[:alert] = "Du ska inte se detta"
-        redirect "/" 
+        @companies << Company.get(@job.company_id)
       end
       haml :"jobs/edit"
     end
@@ -118,6 +113,7 @@ module App
     #Update!
     put "/:id/?" do |id|
       @job = Job.get(id)
+      authorize! :edit, @job
       authorize_company_rep(id)
       categories = params[:categories][:id]
   
@@ -139,6 +135,7 @@ module App
 
     get "/:id/?" do |id|
       @job = Job.get(id)
+      authorize! :show, @job
       @job.viewcount = @job.viewcount + 1
       @job.save!
       
@@ -146,7 +143,7 @@ module App
     end
 
     get "/:id/delete" do |id|
-      authorize_admin
+      authorize! :delete, Job
       @job = Job.get(id)
       @job.categories = []
       @job.save!
@@ -156,7 +153,7 @@ module App
     end
 
     get "/:id/hide" do |id|
-      authorize_admin
+      authorize! :delete, Job
       @job = Job.get(id)
       @job.active = false
 

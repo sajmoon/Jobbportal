@@ -1,5 +1,5 @@
 module App
-  class Admin < Sinatra::Base
+  class Admin < Generic
     enable :logging
     register Sinatra::Flash
     register Sinatra::Authorization
@@ -7,7 +7,7 @@ module App
     set :root, File.dirname(__FILE__) + "/.."
 
     before do 
-      authorize_admin
+      authorize! :list, :admin
     end
 
     get "/" do
