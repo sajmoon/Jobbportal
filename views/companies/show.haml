@@ -2,8 +2,9 @@
   .span10.offset1
     %h1
       = "Annonser från #{@company.name}"
-  
-    %a{href: "/companies/#{@company.id}/password"} Byt lösenord
+
+    - if can? :edit, @company
+      %a{href: "/companies/#{@company.id}/password"} Byt lösenord
     - if can? :delete, @company
       -if @company.active?
         %a{href: "/companies/#{@company.id}/delete"} Avaktivera
