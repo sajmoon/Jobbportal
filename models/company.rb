@@ -18,7 +18,6 @@ class Company
   property :active,         Boolean,  default: true
 
   has n, :jobs
-  has n, :users
 
   before :save, :encryptpassword
 

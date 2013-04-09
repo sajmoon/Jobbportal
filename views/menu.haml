@@ -6,7 +6,6 @@
         = "Logga in"
       -#%a.btn.btn-mini{href: "/auth/login"} Företag loggar in här..
   - else
-    = self.class
     - if env["warden"].authenticated?
       - if can? :create, Job
         %li.menu-push-down
