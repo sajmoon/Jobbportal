@@ -27,7 +27,8 @@ gem 'sinatra-can'
 gem 'sinatra-contrib'
 
 gem 'RedCloth'
-
+  
+gem 'mail'
 
 group :production do
   gem 'rack-google-analytics'
@@ -40,6 +41,7 @@ group :development do
   gem 'sqlite3'
   gem 'sinatra-contrib'
   gem 'shotgun'
+  gem 'letter_opener'
 end
 
 group :test do
