@@ -9,7 +9,7 @@ module App
       #unsigned in
       can :list, Job
       can :show, Job
-      can :create, :subscribers
+      can :create, Subscribe
 
       unless user.nil?
         if user.admin?
