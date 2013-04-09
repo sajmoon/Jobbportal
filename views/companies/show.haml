@@ -2,7 +2,13 @@
   .span10.offset1
     %h1
       = "Annonser från #{@company.name}"
-    
+  
+    %a{href: "/companies/#{@company.id}/password"} Byt lösenord
+    - if can? :delete, @company
+      -if @company.active?
+        %a{href: "/companies/#{@company.id}/delete"} Avaktivera
+      - else 
+        %a{href: "/companies/#{@company.id}/activate"} Aktivera
     %hr
     %h5
       Här kan du se vilka annonser ni har haft ute senaste tiden.

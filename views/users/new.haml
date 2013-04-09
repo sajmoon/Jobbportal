@@ -1,9 +1,0 @@
-%form.form-horizontal{action: "/users", method: "post"}
-  %fieldset
-    %legend
-      Lägg till en användare.
-    
-    = haml :"users/_form", locals: {user: @user}
-  .form-actions
-    .controls
-      %input.btn.btn-primary{type: "submit", value: "Spara"} 
