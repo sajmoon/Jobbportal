@@ -21,6 +21,7 @@ require 'date'
 $LOAD_PATH.unshift 'lib'
 
 require 'sinatra/authorization'
+require_relative 'lib/sinatra/mailer_methods'
 
 require 'sinatra/can'
 

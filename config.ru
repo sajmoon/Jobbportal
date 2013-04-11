@@ -10,6 +10,7 @@ if Sinatra::Base.production?
 end
 
 #require File.dirname(__FILE__) + '/lib/sinatra/authorization.rb'
+#require File.dirname(__FILE__) + '/lib/sinatra/mailers.rb'
 
 require 'mail'
 
