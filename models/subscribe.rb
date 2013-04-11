@@ -6,4 +6,5 @@ class Subscribe
   property :email, String, required: true
 
   validates_uniqueness_of :email, :name
+  validates_format_of :email, as: :email_address
 end
