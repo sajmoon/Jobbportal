@@ -1,7 +1,24 @@
-%h1
-  Subscribers
-  %small
-    = "(#{@subscribers.count})"
+.page-header
+  %h1.center
+    Subscribers
+    %small
+      = "(#{@subscribers.count})"
 
-= @subscribers.map{ |v| v.email }.join(", ")
+.row-fluid
+  .span3.offset1
+    %h4
+      Förhandsgranska mailen som skickas ut
+    %ul
+      %li
+        %a{href: "preview_mail?what=welcome"} Välkomstmail
+  .span8
+    .accordion#accordion2
+      .accordion-group
+        .accordion-heading
+          %a.accordion-toggle{ data: {toggle: "collapse", parent: "#accordion2"}, href: "#collapseOne"}
+            Alla som har signat upp sig, komma separerat.
+        #collapseOne.accordion-body.collapse.in
+          .accordion-inner
+
+            = @subscribers.map{ |v| v.email }.join(", ")
 

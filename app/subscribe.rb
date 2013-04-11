@@ -1,6 +1,7 @@
 module App
   class Subscribers < Generic
-    
+    register Sinatra::MailerMethods
+
     set :root, File.dirname(__FILE__) + "/.."
     
     get "/" do
@@ -12,16 +13,25 @@ module App
 
     post "/" do
       authorize! :create, Subscribe
-      puts params[:subscribe]
       @subscribe = Subscribe.new(params[:subscribe])
       
-      puts @subscribe.email
       if @subscribe.save
-        flash[:success] = "Vi mailar dig."
+        welcome_mail(@subscribe.email.to_s)
+        flash[:success] = "Va bra! Vi har dig nu uppskriven i maillistan."
+
         redirect "/"
       else
-        flash[:alert] = "Det gick typ inte."
+        flash[:alert] = "Det gick inte att spara den mail adressen. Testa igen med en annan?"
         redirect "/"
+      end
+    end
+
+    get "/preview_mail" do
+      if params[:what] == "welcome"
+        haml :"mail/welcome", {layout: :"mail_layout"}
+      else
+        flash[:alert] = "Det mailet fanns inte"
+        redirect to("/")
       end
     end
 
