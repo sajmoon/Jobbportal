@@ -1,0 +1,13 @@
+%html
+  %head
+    %link{href: "http://djobb.se/css/djobb.css", rel: "stylesheet" }
+    %link{href: "http://djobb.se/css/bootstrap.min.css", rel: "stylesheet" }
+    %title
+      dJobb
+  %body
+    .container-fluid
+      .page-header
+        %h1.center
+          %img.top-logo{src: "http://djobb.se/img/datasektionen_3.png", width: "200px"}
+      .container
+        = yield
