@@ -8,7 +8,7 @@ module Sinatra
         renderedBody = (haml :"mail/welcome", {layout: :"mail_layout"} )
         mail = Mail.deliver do
           to email
-          from "updates@djobb.se"
+          from "dJobb <updates@djobb.se>"
           subject "dJobb - Valkommen till oss"
           
           content_type 'text/html'
