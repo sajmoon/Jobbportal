@@ -43,7 +43,6 @@ module App
       @subscribes = Subscribe.all
 
       if params[:what] == "welcome"
-
         welcome_mail(params[:email])
       elsif params[:what] == "weekly"
         @subscribes.each do |s|

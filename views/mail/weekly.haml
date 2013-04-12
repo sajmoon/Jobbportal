@@ -18,7 +18,8 @@
         - Job.running_now.each do |j|
           %tr
             %td
-              %img{src: j.company.img_url}
+              - unless j.company.img_url.empty?
+                %img{src: j.company.img_url, width: 200}
             %td
               %a{href: "http://djobb.se/jobs/#{j.id}"} 
                 = j.company.name
@@ -29,7 +30,6 @@
             %td
               %a{href: "http://djobb.se/jobs/#{j.id}"}
                 Mer info 
-        
     %h4
       Om dJobb
     %p
