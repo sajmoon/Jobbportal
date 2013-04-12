@@ -50,5 +50,18 @@ module App
         end
       end
     end
+
+    get "/:id/delete" do |id|
+      authorize! :delete, Subscribe
+      sub = Subscribe.get(id)
+      email = sub.email
+
+      sub.destroy!
+
+      flash[:success] = "Tog bort #{email}!"
+      redirect to("/")
+
+
+    end
   end
 end

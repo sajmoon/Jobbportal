@@ -114,7 +114,6 @@ module App
     put "/:id/?" do |id|
       @job = Job.get(id)
       authorize! :edit, @job
-      authorize_company_rep(id)
       categories = params[:categories][:id]
   
       @job.categories = []
