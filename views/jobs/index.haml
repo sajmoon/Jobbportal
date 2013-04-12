@@ -2,9 +2,18 @@
   .hidden-phone
     .span10.offset1
       .joblist
-        %h2
-          Senaste annonserna
-        %hr
+        .page-header
+          %h2.center
+            Senaste annonserna
+
+      .notice
+        .form-actions
+          %p
+            %span.strong
+              Hallå!
+            Du kan få uppdaterings email en gång i veckan med alla nya jobb erbjudanden. Helt gratis och reklam fritt! Anmäl dig här:
+          %p
+            = haml :"subscribe"
       .search
         = haml :"search", locals: {categories: @categories, selected_categories: @selected_categories }
       
