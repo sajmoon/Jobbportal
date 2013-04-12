@@ -1,0 +1,45 @@
+.info
+  %h2
+    Veckans uppdatering!
+
+  .block
+    %h4
+      Nya erbjudande
+    
+    %table.table.table-striped
+      %thead
+        %tr
+          %td
+          %td Företag
+          %td 
+          %td Kategorier
+          %td 
+      %tbody
+        - Job.running_now.each do |j|
+          %tr
+            %td
+              %img{src: j.company.img_url}
+            %td
+              %a{href: "http://djobb.se/jobs/#{j.id}"} 
+                = j.company.name
+            %td
+              = j.title
+            %td
+              = j.display_categories
+            %td
+              %a{href: "http://djobb.se/jobs/#{j.id}"}
+                Mer info 
+        
+    %h4
+      Om dJobb
+    %p
+      %a{href: "http://djobb.se"}dJobb.se
+      är Datasektionens jobbportal. Här finns allt mellan extrajobb och exjobb. 
+    %hr
+    %p.pull-right
+      Följ oss på:
+      %a{href: "https://www.facebook.com/kth.d.naringsliv"} Facebook
+      | 
+      %a{href: "http://djobb.se/jobs/rss.xml"} RSS
+      |
+      %a{href: "www.datasektionen.se"} Konglig Datasektionen, KTH

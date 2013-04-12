@@ -27,28 +27,31 @@ module App
     end
 
     get "/preview_mail" do
+
       if params[:what] == "welcome"
         haml :"mail/welcome", {layout: :"mail_layout"}
+      elsif params[:what] == "weekly"
+        haml :"mail/weekly", {layout: :"mail_layout"}
       else
         flash[:alert] = "Det mailet fanns inte"
         redirect to("/")
       end
     end
 
-    get "/sendIntroMail" do
+    get "/send_mail" do
       authorize! :send, Subscribe
       @subscribes = Subscribe.all
 
-      s = @subscribes.first 
+      if params[:what] == "welcome"
 
-      mail = Mail.deliver do
-        to s.email.to_s
-        from "noreply@djobb.se"
-        subject "dJobb - Valkommen"
-        text_part do
-            body "Hejsan! Detta aer det veckovisa nyhetsbrevet"
+        welcome_mail(params[:email])
+      elsif params[:what] == "weekly"
+        @subscribes.each do |s|
+          weekly_mail(s.email.to_s)
         end
       end
+      flash[:success] = "Mail skickat"
+      redirect "/"
     end
 
     get "/:id/delete" do |id|
