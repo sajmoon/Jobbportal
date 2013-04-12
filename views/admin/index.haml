@@ -6,6 +6,12 @@
         %small
           Because you're worth it
     %a.btn.btn-primary{href: "/subscribes/"} Nyhetsbrev & Mail
+
+    - if can? :list, Category
+      %a.btn.btn-primary{href: "/categories/"} Kategorier
+    - if can? :list, Company  
+      %a.btn.btn-primary{href: "/companies/"} Företag
+    
     %hr
     %br
 

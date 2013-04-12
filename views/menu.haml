@@ -13,12 +13,6 @@
       - if can? :create, Job
         %li.menu-push-down
           %a{href: "/jobs/new"} Lägg till en annons
-      - if can? :list, Category
-        %li.hidden-phone.menu-push-down
-          %a{href: "/categories/"} Kategorier
-      - if can? :list, Company
-        %li.hidden-phone.menu-push-down
-          %a{href: "/companies/"} Företag
     - if can? :list, :admin
       %li.hidden-phone.menu-push-down
         %a{href: "/admin"} Admin
