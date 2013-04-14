@@ -1,0 +1,50 @@
+.page_header
+  %h1.center
+    Events
+- if can? :create, Event
+  %a.btn{href: "/events/new"} Skapa
+
+%h2
+  Kommande event
+
+%table.table
+  %thead
+    %tr
+      %th Företag
+      %th Title
+      %th När?
+      %th
+  %tbody
+    - @events.each do |e|
+      %tr
+        %td= e.company.name rescue "---"
+        %td= e.title
+        %td= e.starttime
+        %td
+          - if can? :show, e
+            %a.btn.btn-mini.btn-primary{href: ""} Mer detaljer
+          - if can? :edit, e
+            %a.btn.btn-mini.btn-warning{href: ""} Ändra
+
+%hr
+
+%h2 Tidigare evnet
+%table.table
+  %thead
+    %tr
+      %th Företag
+      %th Title
+      %th När?
+      %th
+  %tbody
+    - @passed_events.each do |e|
+      %tr
+        %td= e.company.name rescue "---"
+        %td= e.title
+        %td= e.starttime
+        %td
+          - if can? :show, e
+            %a.btn.btn-mini.btn-primary{href: ""} Mer detaljer
+          - if can? :edit, e
+            %a.btn.btn-mini.btn-warning{href: ""} Ändra
+

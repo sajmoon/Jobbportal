@@ -1,0 +1,92 @@
+.page-header
+  %h1.center
+    Dashboard
+
+.row-fluid
+  .span3
+    %h3 Aktivt just nu..
+    .ads
+      %a{href: "/jobs"} Lista alla annonser
+      .jobs
+        - @jobs.each do |job|
+          .job
+            %img.img-rounded{src: job.company.img_url, width: "80"}
+            %a{href: "/jobs/#{job.id}"}
+              = job.title
+    .events  
+      %h5 Kommande event
+      %a{href: "/events"} Lista alla event
+      .events
+        - @events.each do |event|
+          .event
+            = event.title
+            = event.starttime
+  .span3
+    %h3 Marknadsföring
+    %p
+      För att synas på datasektionen finns det flera saker ni som företag kan göra.
+
+    .olika_event
+      .oneEvent
+        .title
+          %h4
+            Lunchföreläsning
+        .explain
+          %p
+            Håll ett kortare föredrag för ca 70 studenter där ni berättar om vad ert företag är, ett internship ni har, eller vilka ni är.
+      .oneEvent
+        .title
+          %h4
+            Onsdagspub
+        .explain
+          %p
+            På Onsdagar har datasektionen baren öppen. Det serveras mat, och dryck. Det är mysigt och mer avslappnat än en lunchföreläsning. Minga runt med studenter och ha kul tillsammans med oss på Data.
+      .oneEvent
+        .title
+          %h4
+            D-Dagen - Arbetsmarknadsdagen
+        .explain
+          %p 
+            Datasektionens arbetsmarknadsdag är ett av de bästa sätten att få kontakt  med dataloger. Mer information hittar ni
+            %a{href: "/ddagen"} här.
+  .span3
+    %h3 Marknadsföring
+    .olika_event
+      .oneEvent
+        .title
+          %h4
+            Mottagningen
+        .explain
+          %p
+            Vill ni träffa de nyintagna datalogerna? Mottagningen är ett perfekt tillfälle att få en första kontakt. De första intrycken är alltid viktiga.
+      .oneEvent
+        .title
+          %h4
+            QN - Spel och filmkvällar
+        .explain
+          %p
+            Tisdagar är Qulturnämndens dag. Då träffas folk och spelar brädspel, kollar film, går på bio, spelar lazer doom, går på teater eller spelar poker. Låter det roligt?
+      .oneEvent
+        .title
+          %h4
+            StuDs
+        .explain
+          %p
+            Studieresean är ett projekt där sektionsmedlemmar i slutet av utbildningen gör företagsbesök. Det är ett utmärkt tillfälle att spika exjobbare eller fast anställning precis innan examen! 
+            %a{href: "http://www.studieresan.se"} Läs mer här!
+  .span3
+    .kontakt
+      %h3 Kontakta Näringslivsgruppen
+      %p
+        Låter detta som något ni är intresserade av? 
+        Kontakta då näringslivsgruppen på 
+        %a{href: "mailto:foretag@d.kth.se"} foretag@d.kth.se
+        för prisförslag alternativt att diskutera ett helt annat typ av sammarbete.
+    .portalen
+      %h3
+        Användningen av denna portal
+      %p Detta är datasektionens företags portal. Det är vårat sätt att hålla er informerade av vad som händer på sektionen. Här samlas information om vad som händer på sektionen. Nyhetsbrev och andra mailutskick är helt frivilliga.
+
+
+
+    

@@ -26,12 +26,32 @@ html, body {
   margin-right: auto;
 }
 
-%img.top-logo{
-  width:200px;
-  margin-left: 100px;
-}
-
 .strong {
   font-weight: 900;
   font-size: 20px;
 }
+
+.pull-right {
+  float: right;
+}
+
+.topbar {
+  float: right;
+  list-style-type: none;
+  position: fixed;
+}
+.topbar-item {
+  width: 300px;
+  padding: 10px;
+  margin: 10px;
+  text-decoration:none;
+  display: inline;
+  color: black;
+}
+
+a:hover { 
+  color: red;
+  text-decoration: underline;
+
+}
+

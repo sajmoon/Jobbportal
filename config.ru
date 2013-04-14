@@ -97,3 +97,7 @@ end
 map "/ddagen" do
   run App::DDagen
 end
+
+map "/events/" do
+  run App::Events
+end

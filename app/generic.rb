@@ -10,9 +10,13 @@ module App
       can :list, Job
       can :show, Job
       can :create, Subscribe
-
+      can :list, Event
+      can :show, Event
+      
       unless user.nil?
         if user.admin?
+          can :show, :dashboard
+          
           #admin
           can :list, :admin
           can :manage, Job
@@ -21,6 +25,8 @@ module App
           can :manage, Company
           can :change_company_role, Company
           can :list, :ddagen
+          can :create, Event
+          can :manage, Event
         else
           # Not admin
           can :create, Job

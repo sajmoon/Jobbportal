@@ -8,7 +8,6 @@ module App
       @jobs = Job.running_now
       @categories = Category.all
       @selected_categories = Category.all
-      @subscribe = Subscribe.new
 
       if defined?(params[:filter][:id])
         @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id }).running_now

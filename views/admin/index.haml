@@ -11,6 +11,10 @@
       %a.btn.btn-primary{href: "/categories/"} Kategorier
     - if can? :list, Company  
       %a.btn.btn-primary{href: "/companies/"} Företag
+    - if can? :create, Event  
+      %a.btn.btn-primary{href: "/events/new"} Nytt Event
+    - if can? :list, Event  
+      %a.btn.btn-primary{href: "/events/"} Evenemang
     
     %hr
     %br

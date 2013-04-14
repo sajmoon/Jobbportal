@@ -1,0 +1,20 @@
+.event
+  %h2.center
+    = @event.title
+
+  .row-fluid
+    .span4
+      %h5
+        Fakta:
+      %dl
+        %dt Tid:
+        %dd= @event.starttime
+        %dt Företag:
+        %dd= @event.company.name rescue "--"
+
+    .span8
+      %h4
+        Mer information:
+
+      %p
+        = @event.description
