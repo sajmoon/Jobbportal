@@ -29,7 +29,7 @@ module App
         redirect to("/login")
       else
         env["warden"].set_user(company)
-        flash[:success] = "Loggat in som #{company.role}"
+        flash[:success] = "Inloggning lyckades! Hej #{company.name}."
         #redirect params["url"]
       end
       redirect "/"
