@@ -24,7 +24,10 @@
     %script{src: "/js/application.js"}
     %script{src: "/js/jquery.timeago.js"}
   %body
-    = haml :"header"
+    - if can? :view, :header
+      = haml :"header"
+    - else
+      = haml :"new_header"
     = haml :"flash"
     .container-fluid
       .content

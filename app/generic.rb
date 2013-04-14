@@ -14,6 +14,7 @@ module App
       can :show, Event
       
       unless user.nil?
+        can :view, :header
         if user.admin?
           can :show, :dashboard
           
