@@ -26,19 +26,20 @@
         .controls
           %input.input-xlarge{type: "text", id: 'email', name: "company[email]", value: @company.email}
 
-      .control-group
-        %label.control-label{for: 'role'} Roll
-        .controls
-          %select.input-xlarge{id: 'role', name: 'company[role'}
-            %option{value: ""} Välj ett
+      -if can? :change_company_role, Company
+        .control-group
+          %label.control-label{for: 'role'} Roll
+          .controls
+            %select.input-xlarge{id: 'role', name: 'company[role'}
+              %option{value: ""} Välj ett
 
-            - Role.get_hash_of_roles(@company).each do |r|
-              - if r[:selected] == true
-                %option{value: r[:n], selected: "true" }
-                  = r[:n]
-              -else
-                %option{value: r[:n]}
-                  = r[:n]
+              - Role.get_hash_of_roles(@company).each do |r|
+                - if r[:selected] == true
+                  %option{value: r[:n], selected: "true" }
+                    = r[:n]
+                -else
+                  %option{value: r[:n]}
+                    = r[:n]
 
       .control-group
         %label.control-label{for: "company_img_url"} Url logo
