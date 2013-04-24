@@ -54,4 +54,8 @@ a:hover {
   text-decoration: underline;
 
 }
-
+ 
+.company_logo
+{
+  max-height:42px;
+}
