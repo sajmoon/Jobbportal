@@ -43,6 +43,7 @@ namespace :db do
         admin = admin.first
         puts "Reseting password for #{admin.email}"
         admin.password = "admin"
+        admin.password_confirmation = "admin"
         admin.encryptpassword
       end
 
