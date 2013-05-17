@@ -5,6 +5,9 @@ $(document).ready(function() {
     $("#filter_toggle").toggle('slow', function() {
     });
   });
+
+  $("#job_description_show_preview").show();
+  $("#previewSpan").show();
   
   function toggleLoading() {
     $("#loading-preview").toggle();

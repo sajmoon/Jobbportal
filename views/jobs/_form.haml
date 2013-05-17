@@ -40,7 +40,7 @@
             %span
               %small
                 = @job.errors[:description][0]
-          %button#job_description_show_preview
+          %button#job_description_show_preview.hide
             Visa förhandsgranskning
 
     .control-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
@@ -116,7 +116,7 @@
                 = @job.errors[:endtime][0]
 
   .span4
-    .preview
+    .preview.hide#previewSpan
       %h5
         En förhandsvisning av hur den stora beskrivningen kommer att se ut.
       #loading-preview.hide
