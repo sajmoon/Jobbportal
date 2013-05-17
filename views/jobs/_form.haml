@@ -80,32 +80,37 @@
               %small
                 = @job.errors[:apply_url][0]
 
-    .control-group{ class: ( "error" if @job.errors.has_key?(:starttime) ) }
-      %label.control-label{for: "job_starttime"} Tid då annonsen ska börja visas.
-      .controls
-        %input.input-xlarge{type: "text", class: "timeselector", id: "job_starttime", name: "job[starttime]", value: @job.starttime}
-        %p.help-block
-          Klicka i textfältet för en kalender.
-          - if @job.errors.has_key?(:starttime)
-            %br
-            %span
-              %small
-                = @job.errors[:startime][0]
+    - if !@job.has_started?
+      .control-group{ class: ( "error" if @job.errors.has_key?(:starttime) ) }
+        %label.control-label{for: "job_starttime"} Tid då annonsen ska börja visas.
+        .controls
+          %input.input-xlarge{type: "text", class: "timeselector", id: "job_starttime", name: "job[starttime]", value: @job.starttime}
+          %p.help-block
+            Klicka i textfältet för en kalender.
+            - if @job.errors.has_key?(:starttime)
+              %br
+              %span
+                %small
+                  = @job.errors[:startime][0]
+    - else
+      %h5
+        = "Annonsen visas mellan #{@job.starttime} och #{@job.endtime} ( Den visas under #{@job.weeks} veckor)"
     
     .control-group{ class: ( "error" if @job.errors.has_key?(:weeks) ) }
       %label.control-label{for: "job_endtime"} Hur många veckor ska annonsen visas.
       .controls
         %select{id: "job_number_of_weeks", name: "job[weeks]"}
-          %option{value: "1", selected: ( "selected" if @job.weeks == 1)} En vecka
-          %option{value: "2", selected: ( "selected" if @job.weeks == 2)} Två veckor
-          %option{value: "3", selected: ( "selected" if @job.weeks == 3)} Tre veckor
-          %option{value: "3", selected: ( "selected" if @job.weeks == 4)} Fyra veckor
+          - ((@job.weeks_passed)..(@job.weeks_passed + 5)).each do |w|
+            - unless w == 0
+              %option{value: w, selected: ( "selected" if @job.weeks == w)} 
+                = "#{w} vecka"
         %p.help-block
           - if @job.errors.has_key?(:weeks)
             %br
             %span
               %small
                 = @job.errors[:endtime][0]
+
   .span4
     %h3
       Instruktioner

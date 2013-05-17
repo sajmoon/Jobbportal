@@ -50,6 +50,7 @@ module App
     get "/new" do
       authorize! :create, Job
       @job = Job.new
+      @job.weeks = 3
       @categories = Category.all
       @job.company = Role.get_user(env["warden"])
       if env["warden"].user.admin?

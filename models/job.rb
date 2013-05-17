@@ -88,4 +88,12 @@ class Job
 	def number_of_days
 		(endtime - starttime).to_i
 	end
+
+  def has_started?
+    self.starttime < Date.today
+  end
+
+  def weeks_passed
+    ((Date.today - starttime)/7).to_i
+  end
 end
