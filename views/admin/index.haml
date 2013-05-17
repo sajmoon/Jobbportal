@@ -23,6 +23,15 @@
       %p
         - @errors.each do |msg|
           = msg.to_s
+    %br
+
+    %h4
+      Alla annonser som inte är färdiga
+    
+    =haml :"admin/_jobs", locals: { jobs: @jobs.not_ended }
+
+    %br
+
     %h4
       Alla annonser som är färdiga
     
@@ -34,10 +43,3 @@
       Alla annonser som är färdiga och betalade
     
     = haml :"admin/_jobs", locals: { jobs: @jobs.has_ended.is_paid}
-    
-    %br
-    
-    %h4
-      Alla annonser som inte är färdiga
-    
-    =haml :"admin/_jobs", locals: { jobs: @jobs.not_ended }
