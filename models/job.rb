@@ -38,9 +38,17 @@ class Job
   def display_categories
     self.categories.map(&:name).join(", ")
   end
+  
+  def self.safe_textilize( s )
+    if s && s.respond_to?(:to_s)
+      doc = RedCloth.new( s.to_s  )
+      doc.filter_html = true
+      doc.to_html
+    end
+  end
 
   def formated_description
-    RedCloth.new(self.description).to_html
+    Job.safe_textilize( self.description )
   end
 
   def self.has_started

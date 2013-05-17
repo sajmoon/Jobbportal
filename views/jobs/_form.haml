@@ -1,5 +1,5 @@
 .row
-  .span6#job_form
+  .span8#job_form
     -unless @job.nil?  
       = haml :"errors", locals: { errors: @job.errors }  
     .control-group{ class: ( "error" if @job.errors.has_key?(:title) ) }
@@ -29,15 +29,19 @@
     .control-group{ class: ( "error" if @job.errors.has_key?(:description) ) }
       %label.control-label{for: "job_description"} Lång Beskrivning
       .controls
-        %textarea.input-xlarge{type: "textarea", id: "job_description", name: "job[description]", rows: 10}
+        %textarea.input-xlarge{style: "width: 600px", type: "textarea", id: "job_description", name: "job[description]", rows: 10}
           = @job.description
         %p.help-block
-          Längre och mycket detaljerad beskrivning av tjänsten.
+          Längre och mycket detaljerad beskrivning av tjänsten. Använd markups, se 
+          %a{href: "http://redcloth.org/textile"} Länk till referens
+
           - if @job.errors.has_key?(:description)
             %br
             %span
               %small
                 = @job.errors[:description][0]
+          %button#job_description_show_preview
+            Visa förhandsgranskning
 
     .control-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
       %label.control-label{for: "job_category"} Kategorier
@@ -112,20 +116,10 @@
                 = @job.errors[:endtime][0]
 
   .span4
-    %h3
-      Instruktioner
+    .preview
+      %h5
+        En förhandsvisning av hur den stora beskrivningen kommer att se ut.
+      #loading-preview.hide
+        Loading..
+      #descPreview
 
-    %P
-      För att formatera din text kan du använda ett mark-up språk som heter Textile. Se länken nedan för referens samt kolla exemplet nedan.
-
-    %a{href: "http://redcloth.org/textile"} Länk till referens
-
-    .example
-      %textarea.span8{class: "exampleinput", name: "exampleinput", rows: 10, col: 150}
-        h1. Give RedCloth a try!
-
-        A *simple* paragraph with
-        a line break, some _emphasis_ and a "link":http://redcloth.org
-
-        * an item
-        * and another

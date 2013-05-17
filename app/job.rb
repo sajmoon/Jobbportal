@@ -162,5 +162,10 @@ module App
         redirect "/jobs/#{id}"
       end
     end
+
+    post "/preview" do
+      data = params[:text]
+      Job.safe_textilize(data)
+    end
   end
 end

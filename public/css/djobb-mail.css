@@ -1,0 +1,17 @@
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.container {
+}
+
+.bottom-border {
+  border-bottom: 1px solid #eee;
+  margin: 20px 0px 30px;
+  padding-bottom: 10px
+}
+
+h2 {
+  font-size: 30px;
+}
+
