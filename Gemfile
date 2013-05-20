@@ -34,6 +34,7 @@ group :production do
   gem 'rack-google-analytics'
   gem 'pg', '0.10.0'
   gem 'dm-postgres-adapter'
+  gem 'newrelic_rpm'
 end
 
 group :development do

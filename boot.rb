@@ -25,6 +25,10 @@ require_relative 'lib/sinatra/mailer_methods'
 
 require 'sinatra/can'
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
 # require sub-apps
 require_relative "app/generic.rb"
 Dir.glob("app/*.rb").each do |app|
