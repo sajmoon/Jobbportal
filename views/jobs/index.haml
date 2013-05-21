@@ -6,7 +6,7 @@
           %p
             %span.strong
               Hallå!
-            Du kan få uppdateringsemail en gång i veckan med alla nya jobberbjudanden. Helt gratis och reklamfritt! Anmäl dig här:
+            Du kan få uppdateringsemail med nya jobberbjudanden. Helt gratis och reklamfritt! Anmäl dig här:
           %p
             = haml :"subscribe"
       .row-fluid
@@ -19,11 +19,12 @@
   .visible-phone
     .span12
       .joblist
-        %h2
-          Senaste annonserna
+        %h2.center
+          Lediga tjänster
         %hr
       .search
-        = haml :"search", locals: {categories: @categories, selected_categories: @selected_categories }
+        .hidden-phone
+          = haml :"search", locals: {categories: @categories, selected_categories: @selected_categories }
       
   
         = haml :"jobs/_jobs", locals: {jobs: @jobs }

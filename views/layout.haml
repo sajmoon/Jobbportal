@@ -33,10 +33,13 @@
       .content
         = yield
       %hr
-        %footer.center
+        .row-fluid
           .span12
-            = haml :"subscribe"
-            %p.pull-right.hidden-phone
+            %footer.center
+              = haml :"subscribe"
+        .row-fluid
+          .span12
+            %p.center
               %a{href: "/jobs/rss.xml"}
                 RSS feed
               Jobbportalen 
