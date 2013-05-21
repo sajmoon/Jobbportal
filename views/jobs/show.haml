@@ -3,7 +3,6 @@
     .top
       %h1
         = @job.title
-
       %hr
       .row-fluid
         .span3.shift
@@ -38,12 +37,12 @@
 
   .span12.visible-phone
     .top
-      %h1
-        = @job.title
-
-      %hr
       .row-fluid
-        .span3.shift
+        .span12.center
+          %h1
+            = @job.title
+
+          %hr
           %h4
             Företag
           = @job.company.name
@@ -62,13 +61,8 @@
 
           %h4
             Intresserad? 
-            %a{href: "http://#{@job.apply_url}"} Sök nu!
+          %a.btn.btn-primary{href: "http://#{@job.apply_url}"} Sök nu!
         
-        .span8
           %h4 Beskrivning
           %p
             = @job.formated_description
-
-         
-    %hr
-

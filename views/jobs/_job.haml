@@ -3,17 +3,17 @@
     %a{href: "jobs/#{job.id}/" }
       %img.company_logo{src: job.company.img_url, alt: job.company.name}
   %td
-    = job.title
+    %a{href: "/jobs/#{job.id}"}= job.title
     - if job.is_new
       %span.label.label-success
         Ny!
-  %td
+  %td.hidden-phone
     = job.display_categories
-  %td 
-    %a.btn.btn-primary.btn-mini{href: "/jobs/#{job.id}/" } 
-      %i.icon-info-sign.icon-white 
-      Mer info
-    - if can? :edit, job
-      %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/edit"} 
-        %i.icon-edit.icon-white
-        Redigera
+    .pull-right.hidden-phone 
+      %a.btn.btn-primary.btn-mini{href: "/jobs/#{job.id}/" } 
+        %i.icon-info-sign.icon-white 
+        Mer info
+      - if can? :edit, job
+        %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/edit"} 
+          %i.icon-edit.icon-white
+          Redigera

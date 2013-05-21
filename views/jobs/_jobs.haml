@@ -3,8 +3,7 @@
     %tr
       %th Företag
       %th Titel
-      %th Kategorier
-      %th
+      %th.hidden-phone Kategorier
   %tbody
     - jobs.each do |job|
       = haml :"jobs/_job", :locals => { :job => job }
