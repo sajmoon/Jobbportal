@@ -114,12 +114,14 @@ module App
     put "/:id/?" do |id|
       @job = Job.get(id)
       authorize! :edit, @job
-      categories = params[:categories][:id]
+      unless params[:categories].blank?
+        categories = params[:categories][:id]
   
-      @job.categories = []
-      categories.each do |c|
-        cat = Category.get(c)
-        @job.categories << cat
+        @job.categories = []
+        categories.each do |c|
+          cat = Category.get(c)
+          @job.categories << cat
+        end
       end
       @job.save
       
