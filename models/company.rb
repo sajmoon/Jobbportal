@@ -76,4 +76,12 @@ class Company
   def self.inactive
     all(active: false)
   end
+
+  def logo_url
+    if self.img_url.blank?
+      return "http://careers.queensu.ca/employers/hireastudent/postajob/jobs.png"
+    else
+      return self.img_url
+    end
+  end
 end

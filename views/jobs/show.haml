@@ -9,9 +9,9 @@
           %h4
             Företag
           = @job.company.name
-          - unless @job.company.img_url.nil?
+          - unless @job.company.logo_url.nil?
             %br
-            %img{src: "#{@job.company.img_url}", width: "150", height: "30",  alt: "#{@job.company.name}"}
+            %img{src: "#{@job.company.logo_url}", width: "150", height: "30",  alt: "#{@job.company.name}"}
 
           %h4
             Kategorier
@@ -46,9 +46,9 @@
           %h4
             Företag
           = @job.company.name
-          -unless @job.company.img_url.nil?
+          -unless @job.company.logo_url.nil?
             %br
-            %img{src: "#{@job.company.img_url}", width: "100", height: "30", vspace: "10", hspace: "10",  alt: "#{@job.company.name}"}
+            %img{src: "#{@job.company.logo_url}", width: "100", height: "30", vspace: "10", hspace: "10",  alt: "#{@job.company.name}"}
 
           %p
             = @job.display_categories

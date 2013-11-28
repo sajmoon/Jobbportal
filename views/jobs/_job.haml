@@ -1,7 +1,7 @@
 %tr
   %td
     %a{href: "jobs/#{job.id}/" }
-      %img.company_logo{src: job.company.img_url, alt: job.company.name}
+      %img.company_logo{src: job.company.logo_url, alt: job.company.name}
   %td
     %a{href: "/jobs/#{job.id}"}= job.title
     - if job.is_new
