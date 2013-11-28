@@ -77,7 +77,7 @@
       .controls
         %input.input-xlarge{type: "text", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
         %p.help-block
-          Lämnas fältet tomt, så visas den registrerade mailadressen.
+          Lämnas fältet tomt, så visas den registrerade mailadressen. Skriv inte http:// först.
           - if @job.errors.has_key?(:apply_url)
             %br
             %span
