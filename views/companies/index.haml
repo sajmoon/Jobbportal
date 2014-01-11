@@ -17,6 +17,7 @@
         - @companies.each do |company|
           %tr
             %td
+              %img.company_logo{src: company.logo_url, alt: company.name}
               %a{href: "/companies/#{company.id}/"}
                 = company.name
             %td
