@@ -59,3 +59,7 @@ a:hover {
 {
   max-height:42px;
 }
+
+h1 {
+  font-size: 42px !important;
+}
