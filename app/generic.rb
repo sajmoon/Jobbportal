@@ -16,8 +16,6 @@ module App
       unless user.nil?
         can :view, :header
         if user.admin?
-          can :show, :dashboard
-          
           #admin
           can :list, :admin
           can :manage, Job

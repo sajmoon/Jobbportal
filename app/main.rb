@@ -11,12 +11,5 @@ module App
         redirect "/jobs"
       end
     end
-
-    get '/dashboard' do
-      authorize! :show, :dashboard
-      @jobs = Job.running_now
-      @events = Event.not_passed
-      haml :"dashboard"
-    end
   end
 end
