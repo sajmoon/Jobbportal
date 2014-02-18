@@ -3,7 +3,8 @@
     - unless job.company.nil?
       = job.company.name
   %td
-    = job.title
+    %a{href: "/jobs/#{job.id}/" }
+      = job.title
   %td
     = job.starttime.strftime("%Y-%m-%d") rescue "No starttime"
     till
@@ -19,13 +20,9 @@
         %a.btn.btn-warning.btn-mini{href: "/admin/pay/#{job.id}" }
           %i.icon-bell.icon-white
           Betald
-    %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/" } 
-      %i.icon-info-sign.icon-white
-      Mer info
-    -if Role.is_company_rep(env["warden"], job.company_id)
-      %a.btn.btn-info-btn-mini{href: "/jobs/#{job.id}/edit"} 
-        %i.icon-edit.icon-white
-        Redigera
+    %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/edit"}
+      %i.icon-edit.icon-white
+      Redigera
     - if @current_user.admin?
       - if job.active?
         %a.btn.btn-warning.btn-mini{href: "/jobs/#{job.id}/hide"} 
