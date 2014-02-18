@@ -156,10 +156,10 @@ module App
     get "/:id/hide" do |id|
       authorize! :delete, Job
       @job = Job.get(id)
-      @job.active = false
+      @job.active = !@job.active
 
       if @job.save
-        redirect "/"
+        redirect "/admin"
       else
         redirect "/jobs/#{id}"
       end

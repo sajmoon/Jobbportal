@@ -32,7 +32,8 @@
           %i.icon-trash.icon-white
           Dölj
       - else
-        %pan.label.label-important
+        %a.btn.btn-danger.btn-mini{href: "/jobs/#{job.id}/hide"}
+          %i.icon-trash.icon-white
           Dold
       %a.btn.btn-warning.btn-mini{href: "/jobs/#{job.id}/delete"}
         Ta bort
