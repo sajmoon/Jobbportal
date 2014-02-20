@@ -40,7 +40,6 @@ end
 group :development do
   gem 'heroku'
   gem 'sqlite3'
-  gem 'sinatra-contrib'
   gem 'shotgun'
   gem 'letter_opener'
 end
