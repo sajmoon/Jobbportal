@@ -37,11 +37,14 @@ group :production do
   gem 'newrelic_rpm'
 end
 
+group :development, :test do
+  gem 'letter_opener'
+end
+
 group :development do
   gem 'heroku'
   gem 'sqlite3'
   gem 'shotgun'
-  gem 'letter_opener'
 end
 
 group :test do
