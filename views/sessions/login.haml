@@ -1,8 +1,9 @@
-.row-fluid
-  .span10.offset1
+.row
+  .col-lg-10.col-lg-offset-1.col-md-12.col-xs-12
     .loginform
       %h1
-        Lägg till eller ändra annonser
+        %strong
+          Lägg till eller ändra annonser
       %p
         Som företag kan du få ett konto här för att kunna lägga upp och administrera era egna jobberbjudanden.
       %p
@@ -10,25 +11,21 @@
         %a{href: "mailto:foretag@d.kth.se"}
           foretag@d.kth.se
         för att få hjälp med att skapa ett konto och för information om priser.
-      %form.form-horizontal{acition: "/auth", method: "post"}
+      %form.form-horizontal{acition: "/auth", method: "post", role: "form"}
         %fieldset
           %legend
             Logga in
   
-          .control-group
-            %label.control-label{for: 'email'} Email
-            .controls
-              .input-prepend
-                %span.add-on
-                  @
-                %input.input-xlarge{id: 'email', name: "company[email]", type: "text", size: "16" }
-              %p.help-block
-  
-          .control-group
-            %label.control-label{for: 'password'} Lösenord
-            .controls
-              %input{type: 'password', id: 'password', name: "company[password]"}
-              %p.help-block
-          .form-actions
-            %input.btn.btn-primary{type: "submit", value: "Logga in"}
+          .form-group
+            %label.col-sm-2.control-label{for: 'email'} Email
+            .col-sm-10
+              %input.form-control#email{type: "password", name: "company[email]", type: "text"}
+            
+          .form-group
+            %label.col-sm-2.control-label{for: 'password'} Lösenord
+            .col-sm-10
+              %input.form-control{type: 'password', id: 'password', name: "company[password]"}
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              %input.btn.btn-primary{type: "submit", value: "Logga in"}
   

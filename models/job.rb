@@ -104,4 +104,12 @@ class Job
   def weeks_passed
     ((Date.today - starttime)/7).to_i
   end
+
+  def apply_link
+    url = "mailto:#{company.email}"
+    if !apply_url.empty?
+      url = "http://#{apply_url}"
+    end
+    url
+  end
 end

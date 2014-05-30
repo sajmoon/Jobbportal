@@ -1,8 +1,8 @@
 .row
-  .span8#job_form
+  .col-lg-offset-1.col-lg-7#job_form
     -unless @job.nil?  
       = haml :"errors", locals: { errors: @job.errors }  
-    .control-group{ class: ( "error" if @job.errors.has_key?(:title) ) }
+    .form-group{ class: ( "error" if @job.errors.has_key?(:title) ) }
       %label.control-label{for: "job_title"} Titel
       .controls
         %input.input-xlarge{type: "text", id: "job_title", name: "job[title]", value: @job.title}
@@ -14,7 +14,7 @@
               %small
                 = @job.errors[:title][0]
 
-    .control-group{ class: ( "error" if @job.errors.has_key?(:short_description) ) }
+    .form-group{ class: ( "error" if @job.errors.has_key?(:short_description) ) }
       %label.control-label{for: "job_short_description"} Kort beskrivning
       .controls
         %input.input-xlarge{type: "text", id: "job_short_description", name: "job[short_description]", value: @job.short_description}
@@ -26,7 +26,7 @@
               %small
                 = @job.errors[:short_description][0]
 
-    .control-group{ class: ( "error" if @job.errors.has_key?(:description) ) }
+    .form-group{ class: ( "error" if @job.errors.has_key?(:description) ) }
       %label.control-label{for: "job_description"} Lång Beskrivning
       .controls
         %textarea.input-xlarge{style: "width: 600px", type: "textarea", id: "job_description", name: "job[description]", rows: 10}
@@ -40,10 +40,10 @@
             %span
               %small
                 = @job.errors[:description][0]
-          %button#job_description_show_preview.hide
+          %button#job_description_show_preview
             Visa förhandsgranskning
 
-    .control-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
+    .form-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
       %label.control-label{for: "job_category"} Kategorier
       .controls
         - @categories.each do |category|
@@ -58,7 +58,7 @@
               %small
                 = @job.errors[:categories][0]
 
-    .control-group{ class: ( "error" if @job.errors.has_key?(:company) ) }
+    .form-group{ class: ( "error" if @job.errors.has_key?(:company) ) }
       %label.control-label{for: "job_company_id"} Företag
       .controls
         %p
@@ -72,7 +72,7 @@
               %small
                 = @job.errors[:company][0]
 
-    .control-group{ class: ( "error" if @job.errors.has_key?(:apply_url) ) }
+    .form-group{ class: ( "error" if @job.errors.has_key?(:apply_url) ) }
       %label.control-label{for: "job_apply_url"}Webbadress till externt anmälningsformulär
       .controls
         %input.input-xlarge{type: "text", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
@@ -85,7 +85,7 @@
                 = @job.errors[:apply_url][0]
 
     - if !@job.has_started?
-      .control-group{ class: ( "error" if @job.errors.has_key?(:starttime) ) }
+      .form-group{ class: ( "error" if @job.errors.has_key?(:starttime) ) }
         %label.control-label{for: "job_starttime"} Tid då annonsen ska börja visas.
         .controls
           %input.input-xlarge{type: "text", class: "timeselector", id: "job_starttime", name: "job[starttime]", value: @job.starttime}
@@ -100,7 +100,7 @@
       %h5
         = "Annonsen visas mellan #{@job.starttime} och #{@job.endtime} ( Den visas under #{@job.weeks} veckor)"
     
-    .control-group{ class: ( "error" if @job.errors.has_key?(:weeks) ) }
+    .form-group{ class: ( "error" if @job.errors.has_key?(:weeks) ) }
       %label.control-label{for: "job_endtime"} Hur många veckor ska annonsen visas.
       .controls
         %select{id: "job_number_of_weeks", name: "job[weeks]"}
@@ -115,7 +115,7 @@
               %small
                 = @job.errors[:endtime][0]
 
-  .span4
+  .col-lg-4
     .preview.hide#previewSpan
       %h5
         En förhandsvisning av hur den stora beskrivningen kommer att se ut.

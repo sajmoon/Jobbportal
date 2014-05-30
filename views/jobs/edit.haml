@@ -1,12 +1,14 @@
-%h1 Ändra din annons
+.row
+  .col-lg-offset-1.col-lg-10
+    %h1 Ändra din annons
 
-%form.form-horizontal{action: "/jobs/#{@job.id}", method: "post"}
-  %input{type: "hidden", name: "_method", :value => "put"}
-  %fieldset
-    %legend
-      Ändra
-  
-    = haml :"jobs/_form"
+    %form.form-horizontal{action: "/jobs/#{@job.id}", method: "post"}
+      %input{type: "hidden", name: "_method", :value => "put"}
+      %fieldset
+        %legend
+          Ändra
+      
+        = haml :"jobs/_form"
 
-  .form-actions
-    %input.btn.btn-primary{type: "submit", value: "Spara ändringarna"}
+      .form-actions
+        %input.btn.btn-primary{type: "submit", value: "Spara ändringarna"}

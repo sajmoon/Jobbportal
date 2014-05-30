@@ -1,16 +1,5 @@
-.row-fluid
-  .span10.offset1.hidden-phone
-    %form.form-horizontal{action: "/jobs", method: "post"}
-      %fieldset
-        %legend
-          Skapa en ny annons
-    
-        = haml :"jobs/_form"
-    
-      .form-actions
-        %input.btn.btn-primary{type: "submit", value: "Spara"} 
-
-  .span12.visible-phone
+.row
+  .col-lg-12
     %form.form-horizontal{action: "/jobs", method: "post"}
       %fieldset
         %legend

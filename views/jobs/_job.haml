@@ -11,9 +11,9 @@
     = job.display_categories
     .pull-right.hidden-phone 
       %a.btn.btn-primary.btn-mini{href: "/jobs/#{job.id}/" } 
-        %i.icon-info-sign.icon-white 
+        %span.glyphicon.glyphicon-info-sign
         Mer info
       - if can? :edit, job
         %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/edit"} 
-          %i.icon-edit.icon-white
+          %span.glyphicon.glyphicon-edit
           Redigera

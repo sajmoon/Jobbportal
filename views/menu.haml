@@ -1,29 +1,25 @@
-%ul.nav.pull-right
+%ul.nav.navbar-nav.navbar-right
   - if env["warden"].user.nil?
-    %li.menu-push-down
-      %a.hidden-phone{href: "/auth/login"} 
-        %i.icon-off
+    %li
+      %a{href: "/auth/login"} 
+        %span.glyphicon.glyphicon-log-out
         = "Logga in"
   - else
     - if env["warden"].authenticated?
       - if can? :create, Job
-        %li.menu-push-down
+        %li
           %a{href: "/jobs/new"} Lägg till en annons
     - if can? :list, :admin
-      %li.hidden-phone.menu-push-down
+      %li
         %a{href: "/admin"} Admin
     - if can? :show, current_user
-      %li.menu-push-down
+      %li
         %a{href: "/companies/#{Role.get_user(env["warden"]).id}/"} Mina Annonser
     - if can? :edit, current_user
-      %li.menu-push-down
+      %li
         %a{href: "/companies/#{Role.get_user(env["warden"]).id}/edit"} Min profil
 
-    %li.menu-push-down
-      %a.hidden-tablet.hidden-phone{href: "/auth/logout"} 
+    %li
+      %a{href: "/auth/logout"} 
         %i.icon-off 
         = "Logga ut #{Role.get_user(env["warden"]).name}"
-      %a.visible-tablet.visible-phone{href: "/auth/logout"} 
-        %i.icon-off 
-        = "Logga ut"
- 

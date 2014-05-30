@@ -15,7 +15,6 @@ module Sinatra
 
       def authorize_company_rep(id = 0)
         @current_user = current_user
-        puts "current_user: #{@current_user.id} id: #{id}"
         unless may_edit(id)
           flash[:warning] = "Du ska inte se detta"
           redirect "/"

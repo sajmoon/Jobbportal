@@ -1,13 +1,21 @@
-.menu-push-down{
-	margin-top: 10px;
-}
-
 .center {
   text-align: center;
 }
 
 html, body {
   height: 100%;
+}
+
+.header {
+  padding-top: 50px;
+}
+
+.navbar {
+  padding-top: 15px;
+}
+
+.btn, .label {
+  border-radius: 1px;
 }
 
 .content {
@@ -35,24 +43,9 @@ html, body {
   float: right;
 }
 
-.topbar {
-  float: right;
-  list-style-type: none;
-  position: fixed;
-}
-.topbar-item {
-  width: 300px;
-  padding: 10px;
-  margin: 10px;
-  text-decoration:none;
-  display: inline;
-  color: black;
-}
-
 a:hover { 
   color: red;
   text-decoration: underline;
-
 }
  
 .company_logo

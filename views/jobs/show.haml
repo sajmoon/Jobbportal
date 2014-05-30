@@ -1,41 +1,49 @@
-.row-fluid
-  .span10.offset1.hidden-phone
+.row
+  .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1.col-xs-12
     .top
       %h1
         = @job.title
       %hr
-      .row-fluid
-        .span3.shift
+      .row
+        .col-lg-3
           %h4
-            Företag
+            %strong
+              Företag
           = @job.company.name
           - unless @job.company.logo_url.nil?
             %br
             %img{src: "#{@job.company.logo_url}", width: "150", height: "30",  alt: "#{@job.company.name}"}
 
           %h4
-            Kategorier
+            %strong
+              Kategorier
           %p
             = @job.display_categories
           
           %h4
-            Ansökningsstopp
+            %strong
+              Ansökningsstopp
           = @job.endtime.strftime("%Y-%m-%d") rescue "No endtime"
 
           %h4
-            Intresserad?
-            - if @job.apply_url.empty?
-              %a{href: "mailto:#{@job.company.email}"} Ansök nu
-            - else
-              %a{href: "http://#{@job.apply_url}"} Sök nu!
+            %strong
+              Intresserad?
+            %a.btn.btn-primary{href: "#{@job.apply_link}"}
+              Ansök nu
+              %span.glyphicon.glyphicon-ok-sign
 
-        .span8
+        .col-lg-8
           %p
             = @job.formated_description 
-    %hr
+
+          %p
+            Låter detta som något för dig?
+            %a.btn.btn-primary.btn-lg.btn-block{href: "#{@job.apply_link}"} 
+              %span.glyphicon.glyphicon-ok-sign
+              Ansök nu!
 
 
-  .span12.visible-phone
+  .span12.hide
     .top
       .row-fluid
         .span12.center
@@ -59,7 +67,9 @@
 
           %h4
             Intresserad? 
-          %a.btn.btn-primary{href: "http://#{@job.apply_url}"} Sök nu!
+          %a.btn.btn-primary.btn-lg.btn-block{href: "http://#{@job.apply_url}"}
+            %span.glyphicon.glyphicon-ok-sign
+            Sök nu!
         
           %h4 Beskrivning
           %p
