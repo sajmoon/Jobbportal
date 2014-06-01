@@ -3,10 +3,10 @@
     -unless @job.nil?  
       = haml :"errors", locals: { errors: @job.errors }  
     .form-group{ class: ( "error" if @job.errors.has_key?(:title) ) }
-      %label.control-label{for: "job_title"} Titel
-      .controls
-        %input.input-xlarge{type: "text", id: "job_title", name: "job[title]", value: @job.title}
-        %p.help-block
+      %label.control-label.col-sm-2{for: "job_title"} Titel
+      .col-sm-10
+        %input.form-control.input-lg{type: "text", id: "job_title", name: "job[title]", value: @job.title}
+        %span.help-block
           Titeln på annonsen
           - if @job.errors.has_key?(:title)
             %br
@@ -15,10 +15,10 @@
                 = @job.errors[:title][0]
 
     .form-group{ class: ( "error" if @job.errors.has_key?(:short_description) ) }
-      %label.control-label{for: "job_short_description"} Kort beskrivning
-      .controls
-        %input.input-xlarge{type: "text", id: "job_short_description", name: "job[short_description]", value: @job.short_description}
-        %p.help-block
+      %label.control-label.col-sm-2{for: "job_short_description"} Kort beskrivning
+      .col-sm-10
+        %input.form-control.input-lg{type: "text", id: "job_short_description", name: "job[short_description]", value: @job.short_description}
+        %span.help-block
           En kort beskrivning
           - if @job.errors.has_key?(:short_description)
             %br
@@ -27,11 +27,11 @@
                 = @job.errors[:short_description][0]
 
     .form-group{ class: ( "error" if @job.errors.has_key?(:description) ) }
-      %label.control-label{for: "job_description"} Lång Beskrivning
-      .controls
-        %textarea.input-xlarge{style: "width: 600px", type: "textarea", id: "job_description", name: "job[description]", rows: 10}
+      %label.control-label.col-sm-2{for: "job_description"} Lång Beskrivning
+      .col-sm-10
+        %textarea.form-control.input-lg{style: "width: 600px", type: "textarea", id: "job_description", name: "job[description]", rows: 10}
           = @job.description
-        %p.help-block
+        %span.help-block
           Längre och mycket detaljerad beskrivning av tjänsten. Använd markups, se 
           %a{href: "http://redcloth.org/textile"} Länk till referens
 
@@ -44,8 +44,8 @@
             Visa förhandsgranskning
 
     .form-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
-      %label.control-label{for: "job_category"} Kategorier
-      .controls
+      %label.col-sm-2.control-label{for: "job_category"} Kategorier
+      .col-sm-10
         - @categories.each do |category|
           %label.checkbox
             %input{type: "checkbox", name: "categories[id][]", value: category.id, checked: @job.categories.include?(category)}
@@ -59,11 +59,11 @@
                 = @job.errors[:categories][0]
 
     .form-group{ class: ( "error" if @job.errors.has_key?(:company) ) }
-      %label.control-label{for: "job_company_id"} Företag
-      .controls
+      %label.control-label.col-sm-2{for: "job_company_id"} Företag
+      .col-sm-10
         %p
           = @job.company.name rescue "no company"
-        %input.input-xlarge{type: "hidden", id: "job_company_id", name: "job[company_id]", value: @job.company_id}
+        %input.form-control.input-lg{type: "hidden", id: "job_company_id", name: "job[company_id]", value: @job.company_id}
         %p.help-block
           Det företag som annonsen tillhör
           - if @job.errors.has_key?(:company)
@@ -73,9 +73,9 @@
                 = @job.errors[:company][0]
 
     .form-group{ class: ( "error" if @job.errors.has_key?(:apply_url) ) }
-      %label.control-label{for: "job_apply_url"}Webbadress till externt anmälningsformulär
-      .controls
-        %input.input-xlarge{type: "text", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
+      %label.control-label.col-sm-2{for: "job_apply_url"}Webbadress till externt formulär
+      .col-sm-10
+        %input.form-control.input-lg{type: "text", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
         %p.help-block
           Lämnas fältet tomt, så visas den registrerade mailadressen. Skriv inte http:// först.
           - if @job.errors.has_key?(:apply_url)
@@ -86,9 +86,9 @@
 
     - if !@job.has_started?
       .form-group{ class: ( "error" if @job.errors.has_key?(:starttime) ) }
-        %label.control-label{for: "job_starttime"} Tid då annonsen ska börja visas.
-        .controls
-          %input.input-xlarge{type: "text", class: "timeselector", id: "job_starttime", name: "job[starttime]", value: @job.starttime}
+        %label.control-label.col-sm-2{for: "job_starttime"} Tid då annonsen ska börja visas.
+        .col-sm-10
+          %input.form-control.input-lg{type: "text", class: "timeselector", id: "job_starttime", name: "job[starttime]", value: @job.starttime}
           %p.help-block
             Klicka i textfältet för en kalender.
             - if @job.errors.has_key?(:starttime)
@@ -101,14 +101,14 @@
         = "Annonsen visas mellan #{@job.starttime} och #{@job.endtime} ( Den visas under #{@job.weeks} veckor)"
     
     .form-group{ class: ( "error" if @job.errors.has_key?(:weeks) ) }
-      %label.control-label{for: "job_endtime"} Hur många veckor ska annonsen visas.
-      .controls
-        %select{id: "job_number_of_weeks", name: "job[weeks]"}
+      %label.control-label.col-sm-2{for: "job_endtime"} Hur många veckor ska annonsen visas.
+      .col-sm-10
+        %select.form-control{id: "job_number_of_weeks", name: "job[weeks]"}
           - ((@job.weeks_passed)..(@job.weeks_passed + 5)).each do |w|
             - unless w == 0
               %option{value: w, selected: ( "selected" if @job.weeks == w)} 
                 = "#{w} vecka"
-        %p.help-block
+        %span.help-block
           - if @job.errors.has_key?(:weeks)
             %br
             %span
