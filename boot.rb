@@ -25,7 +25,9 @@ require_relative 'lib/sinatra/mailer_methods'
 
 require 'sinatra/can'
 
-require 'newrelic_rpm'
+if SINATRA_ENV == 'production'
+  require 'newrelic_rpm'  
+end
 
 # require sub-apps
 require_relative "app/generic.rb"
