@@ -12,7 +12,7 @@
           = @job.company.name
           - unless @job.company.logo_url.nil?
             %br
-            %img{src: "#{@job.company.logo_url}", width: "150", height: "30",  alt: "#{@job.company.name}"}
+            %img.company_logo_big{src: "#{@job.company.logo_url}",  alt: "#{@job.company.name}"}
 
           %h4
             %strong

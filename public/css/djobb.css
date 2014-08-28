@@ -53,6 +53,12 @@ a:hover {
   max-height:42px;
 }
 
+.company_logo_big
+{
+  max-width: 150px;
+  max-height: 150px;
+}
+
 h1 {
   font-size: 42px !important;
 }
