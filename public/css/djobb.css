@@ -19,8 +19,7 @@ html, body {
 }
 
 .content {
-  min-height: 500px;
-  
+  min-height: 350px;
 }
 
 %footer {
@@ -47,7 +46,7 @@ a:hover {
   color: red;
   text-decoration: underline;
 }
- 
+
 .company_logo
 {
   max-height:42px;

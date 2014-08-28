@@ -1,5 +1,12 @@
-%form.form-inline{action: "/subscribes/", method: "post", role: "form"}
-  .form-groups
-    %label.sr-only{ for: "email"} Email
-    %input.form-control{type: "text", id: "email", name: "subscribe[email]", placeholder: "Ange email för nyhetsbrev"}
-    %input.btn.btn-success{type: "submit", value: "Prenumerera"}
+%form{action: "/subscribes/", method: "post", role: "form"}
+  .form-group
+    .row.hidden-xs
+      .col-lg-10
+        %label.sr-only{ for: "email"} Email
+        %input.form-control{type: "text", id: "email", name: "subscribe[email]", placeholder: "Ange email för nyhetsbrev"}
+      .col-lg-2.col-xs-12
+        %input.btn.btn-success{type: "submit", value: "Prenumerera"}
+    .visible-xs
+      %input.form-control{type: "text", id: "email", name: "subscribe[email]", placeholder: "Ange email för nyhetsbrev"}
+      %input.btn.btn-success{type: "submit", value: "Prenumerera"}
+      

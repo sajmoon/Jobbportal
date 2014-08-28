@@ -11,10 +11,5 @@
           Du kan få uppdateringsmail med nya jobberbjudanden. Helt gratis och reklamfritt! Anmäl dig här:
         %p
           = haml :"subscribe"
-      .row.hide
-        .col-lg-12
-          .search
-            = haml :"search", locals: {categories: @categories, selected_categories: @selected_categories }
-      
   
     = haml :"jobs/_jobs", locals: {jobs: @jobs }
