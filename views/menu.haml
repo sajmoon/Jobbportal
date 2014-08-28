@@ -2,7 +2,7 @@
   - if env["warden"].user.nil?
     %li
       %a{href: "/auth/login"} 
-        %span.glyphicon.glyphicon-log-out
+        %span.glyphicon.glyphicon-log-in
         = "Logga in"
   - else
     - if env["warden"].authenticated?
