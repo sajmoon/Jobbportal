@@ -7,6 +7,7 @@ require 'bundler/setup'
 Bundler.setup
 Bundler.require(:default, SINATRA_ENV)
 
+DataMapper::Logger.new($stdout, :debug)
 # setup database
 require_relative "config/database.rb"
 
@@ -40,7 +41,4 @@ Dir.glob("models/*.rb").each do |model|
     require_relative model
 end
 
-DataMapper::Logger.new($stdout, :debug)
-
 DataMapper.finalize
-
