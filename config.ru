@@ -9,9 +9,6 @@ if Sinatra::Base.production?
   use Rack::GoogleAnalytics, :tracker => ENV['G_ANALYTIC']
 end
 
-#require File.dirname(__FILE__) + '/lib/sinatra/authorization.rb'
-#require File.dirname(__FILE__) + '/lib/sinatra/mailers.rb'
-
 require 'mail'
 
 Mail.defaults do
