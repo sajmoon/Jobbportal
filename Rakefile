@@ -34,11 +34,11 @@ namespace :db do
     desc "Seed a standard admin user, admin@d.kth.se, password: admin"
     task :datasektionen do
       require_relative "boot.rb"
-      
-      admin = Company.find(email: "admin@d.kth.se")
+
+      admin = Company.get(:email => "admin@d.kth.se")
       if admin.nil?
         puts "Creating admin account"
-        admin = Company.new(name: "Datasektionen", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin")
+        admin = Company.new(name: "Datasektionen", email: "admin@d.kth.se", role: Role.admin, salt: "adminsaltish", password: "admin", password_confirmation: "admin")
       else
         admin = admin.first
         puts "Reseting password for #{admin.email}"
@@ -67,7 +67,7 @@ namespace :db do
     desc "Seed a set of standard companies"
     task :companies do
       require_relative "boot.rb"
-      ["Fristaende", "Datasektionen"].each do |i|
+      ["Fristaende", "Datasektionen", "Bosses bildoktor"].each do |i|
         puts "Creating company: #{i}"
         c = Company.new(name: i, created_at: Time.now)
         c.save!
