@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.0.0'
+
 gem 'rake'
 
 gem 'sinatra', require: "sinatra/base"
