@@ -20,6 +20,6 @@
         %a{href: "/companies/#{Role.get_user(env["warden"]).id}/edit"} Min profil
 
     %li
-      %a{href: "/auth/logout"} 
-        %i.icon-off 
+      %a{href: "/auth/logout"}
+        %span.glyphicon.glyphicon-log-out
         = "Logga ut #{Role.get_user(env["warden"]).name}"
