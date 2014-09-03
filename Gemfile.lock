@@ -54,6 +54,12 @@ GEM
     dm-postgres-adapter (1.2.0)
       dm-do-adapter (~> 1.2.0)
       do_postgres (~> 0.10.6)
+    dm-serializer (1.2.2)
+      dm-core (~> 1.2.0)
+      fastercsv (~> 1.5)
+      json (~> 1.6)
+      json_pure (~> 1.6)
+      multi_json (~> 1.0)
     dm-sqlite-adapter (1.2.0)
       dm-do-adapter (~> 1.2.0)
       do_sqlite3 (~> 0.10.6)
@@ -88,6 +94,7 @@ GEM
       tilt
     i18n (0.6.11)
     json (1.8.1)
+    json_pure (1.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
     letter_opener (1.2.0)
@@ -162,6 +169,7 @@ DEPENDENCIES
   dm-core
   dm-migrations
   dm-postgres-adapter
+  dm-serializer
   dm-sqlite-adapter
   dm-timestamps
   dm-types
@@ -170,6 +178,7 @@ DEPENDENCIES
   fabrication
   faker
   haml
+  json
   letter_opener
   mail
   minitest

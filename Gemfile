@@ -13,6 +13,7 @@ gem 'thin'
 gem 'haml'
 
 gem 'builder'
+gem 'json'
 
 #datamapper
 gem 'dm-validations'
@@ -22,6 +23,7 @@ gem 'dm-aggregates'
 gem 'dm-types'
 gem 'dm-core'
 gem 'dm-timestamps'
+gem 'dm-serializer'
 
 #user auth
 gem 'warden'

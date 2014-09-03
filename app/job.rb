@@ -17,6 +17,14 @@ module App
       haml :"jobs/index"
     end
 
+    get "/jobs.json" do
+      content_type :json
+      authorize! :list, Job
+      @jobs = Job.running_now
+
+      @jobs.to_json
+    end
+
     get '/rss.xml' do
       @jobs = Job.running_now
       builder do |xml|

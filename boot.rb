@@ -18,6 +18,8 @@ require 'yaml'
 require 'sinatra/flash'
 require 'date'
 
+require 'json'
+
 # add lib to load path
 $LOAD_PATH.unshift 'lib'
 
