@@ -37,6 +37,8 @@ GEM
     capybara_minitest_spec (1.0.3)
       capybara (>= 2)
       minitest (>= 2)
+    celluloid (0.15.2)
+      timers (~> 1.1.0)
     daemons (1.1.9)
     data_objects (0.10.14)
       addressable (~> 2.1)
@@ -143,12 +145,15 @@ GEM
     sqlite3 (1.3.9)
     sqlite3 (1.3.9-x86-mingw32)
     stringex (1.5.1)
+    sucker_punch (1.1)
+      celluloid (~> 0.15.2)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     thread_safe (0.3.4)
     tilt (1.4.1)
+    timers (1.1.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicorn (4.8.3)
@@ -199,6 +204,7 @@ DEPENDENCIES
   sinatra-contrib
   sinatra-flash
   sqlite3
+  sucker_punch
   thin
   unicorn
   warden

@@ -18,6 +18,9 @@ gem 'json'
 # Unicorn
 gem 'unicorn'
 
+# Background worker
+gem 'sucker_punch'
+
 #datamapper
 gem 'dm-validations'
 gem 'dm-constraints'
