@@ -11,3 +11,6 @@ db/*.db
 log/*
 *.swo
 .env
+:memory
+*.sublime-project
+*.sublime-workspace
