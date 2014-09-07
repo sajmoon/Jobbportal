@@ -15,6 +15,9 @@ gem 'haml'
 gem 'builder'
 gem 'json'
 
+# Unicorn
+gem 'unicorn'
+
 #datamapper
 gem 'dm-validations'
 gem 'dm-constraints'
