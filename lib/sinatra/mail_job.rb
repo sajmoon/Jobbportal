@@ -6,10 +6,9 @@ module App
     set :public_folder, SINATRA_ROOT + "/public"
 
     def perform()
-      #@subscribes = Subscribe.all
-      #emails = @subscribes.map(&:email).join(", ")
+      @subscribes = Subscribe.all
+      emails = @subscribes.map(&:email).join(", ")
       #puts emails
-      emails = ["simon.strom@gmail.com", "simstr@kth.se", "eksajm@gmail.com"]
       
       rendered_body = (haml :"mail/weekly", {layout: :"mail_layout"} )
 
@@ -23,9 +22,9 @@ module App
       rendered_body = premailer.to_inline_css
 
       mail = Mail.deliver do
-        to "simon.strom@gmail.com"
+        to "naringsliv@d.kth.se"
         from "dJobb <updates@djobb.se>"
-        subject "dJobb - Veckovis uppdatering"
+        subject "dJobb - Hitta ditt jobb"
         bcc emails
         content_type 'text/html'
         body rendered_body
