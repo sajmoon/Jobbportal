@@ -21,7 +21,7 @@ module App
 
         redirect "/"
       else
-        flash[:alert] = "Det gick inte att spara den mail adressen. Testa igen med en annan?"
+        flash[:warning] = "Det gick inte att spara den mail adressen. Testa igen med en annan?"
         redirect "/"
       end
     end
@@ -33,23 +33,20 @@ module App
       elsif params[:what] == "weekly"
         haml :"mail/weekly", {layout: :"mail_layout"}
       else
-        flash[:alert] = "Det mailet fanns inte"
+        flash[:warning] = "Det mailet fanns inte"
         redirect to("/")
       end
     end
 
     get "/send_mail" do
       authorize! :send, Subscribe
-      @subscribes = Subscribe.all
-
+      
       if params[:what] == "welcome"
         welcome_mail(params[:email])
       elsif params[:what] == "weekly"
-        @subscribes.each do |s|
-          weekly_mail(s.email.to_s)
-        end
+        WeeklyMailJob.new.perform()
       end
-      flash[:success] = "Mail skickat"
+      flash[:success] = "Mail skickas"
       redirect "/"
     end
 

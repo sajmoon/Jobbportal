@@ -7,6 +7,15 @@ Rake::TestTask.new(:spec) do |t|
   t.test_files = FileList['spec/**/*_spec.rb']
 end
 
+namespace :mail do
+  desc "Send update mail to all subscribers"
+  task :weekly do
+    require_relative "boot.rb"
+    require_relative "config/mail_config.rb"
+    App::WeeklyMailJob.new.perform()
+  end
+end
+
 namespace :db do
   desc "Rebuild database (destructive migrations)"
   task :auto_migrate do
@@ -23,7 +32,6 @@ namespace :db do
   end
 
   namespace :seed do
-
     desc "Clear all data"
     task :clear do
       puts "Clear all companies"

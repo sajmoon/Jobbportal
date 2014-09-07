@@ -17,14 +17,18 @@ require_relative "models/sinatra_before_filter.rb"
 require 'yaml'
 require 'sinatra/flash'
 require 'date'
+require 'haml'
 
 require 'json'
+
+# Background process
+require 'sucker_punch'
 
 # add lib to load path
 $LOAD_PATH.unshift 'lib'
 
 require 'sinatra/authorization'
-require_relative 'lib/sinatra/mailer_methods'
+require 'sinatra/mailer_methods'
 
 require 'sinatra/can'
 
@@ -42,5 +46,7 @@ end
 Dir.glob("models/*.rb").each do |model|
     require_relative model
 end
+
+require_relative 'lib/sinatra/mail_job'
 
 DataMapper.finalize

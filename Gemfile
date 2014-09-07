@@ -39,6 +39,7 @@ gem 'sinatra-contrib'
 gem 'RedCloth'
   
 gem 'mail'
+gem 'premailer'
 
 group :production do
   gem 'rack-google-analytics'

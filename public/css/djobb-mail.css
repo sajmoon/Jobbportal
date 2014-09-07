@@ -1,8 +1,18 @@
 body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #616161;
 }
 
 .container {
+}
+
+a:link {
+  text-decoration: none;
+}
+
+img.top-logo {
+  width: 400px;
+  padding-bottom: 40px;
 }
 
 .bottom-border {
@@ -11,7 +21,12 @@ body {
   padding-bottom: 10px
 }
 
+td {
+  padding-left:12px;
+}
+
 h2 {
   font-size: 30px;
+
 }
 
