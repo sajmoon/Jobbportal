@@ -40,6 +40,7 @@ gem 'RedCloth'
   
 gem 'mail'
 gem 'premailer'
+gem 'hpricot'
 
 group :production do
   gem 'rack-google-analytics'
