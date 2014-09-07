@@ -7,7 +7,7 @@ module App
 
     def perform()
       @subscribes = Subscribe.all
-      emails = @subscribes.map(&:email).join(", ")
+      emails = @subscribes.map(&:email)
       #puts emails
       
       rendered_body = (haml :"mail/weekly", {layout: :"mail_layout"} )
@@ -21,13 +21,14 @@ module App
 
       rendered_body = premailer.to_inline_css
 
-      mail = Mail.deliver do
-        to "naringsliv@d.kth.se"
-        from "dJobb <updates@djobb.se>"
-        subject "dJobb - Hitta ditt jobb"
-        bcc emails
-        content_type 'text/html'
-        body rendered_body
+      emails.each do |email|
+        mail = Mail.deliver do
+          to email
+          from "dJobb <updates@djobb.se>"
+          subject "dJobb - Hitta ditt jobb"
+          content_type 'text/html'
+          body rendered_body
+        end
       end
     end
   end
