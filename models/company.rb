@@ -79,7 +79,7 @@ class Company
 
   def logo_url
     if self.img_url.blank?
-      return "http://careers.queensu.ca/employers/hireastudent/postajob/jobs.png"
+      return "/img/missing-image-640x360.png"
     else
       return self.img_url
     end
