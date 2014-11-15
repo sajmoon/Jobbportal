@@ -19,7 +19,7 @@
               Kategorier
           %p
             = @job.display_categories
-          
+
           %h4
             %strong
               Ansökningsstopp
@@ -34,43 +34,10 @@
 
         .col-lg-8
           %p
-            = @job.formated_description 
+            = @job.formated_description
 
           %p
             Låter detta som något för dig?
-            %a.btn.btn-primary.btn-lg.btn-block{href: "#{@job.apply_link}"} 
+            %a.applybutton.btn.btn-primary.btn-lg.btn-block{href: "#{@job.apply_link}"} 
               %span.glyphicon.glyphicon-ok-sign
               Ansök nu!
-
-
-  .span12.hide
-    .top
-      .row-fluid
-        .span12.center
-          %h1
-            = @job.title
-
-          %hr
-          %h4
-            Företag
-          = @job.company.name
-          -unless @job.company.logo_url.nil?
-            %br
-            %img{src: "#{@job.company.logo_url}", width: "100", height: "30", vspace: "10", hspace: "10",  alt: "#{@job.company.name}"}
-
-          %p
-            = @job.display_categories
-          
-          %h4
-            Ansökningsstopp
-          = @job.endtime.strftime("%Y-%m-%d") rescue "No endtime"
-
-          %h4
-            Intresserad? 
-          %a.btn.btn-primary.btn-lg.btn-block{href: "http://#{@job.apply_url}"}
-            %span.glyphicon.glyphicon-ok-sign
-            Sök nu!
-        
-          %h4 Beskrivning
-          %p
-            = @job.formated_description
