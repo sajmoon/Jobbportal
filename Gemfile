@@ -7,7 +7,7 @@ gem 'rake'
 gem 'sinatra', require: "sinatra/base"
 gem 'sinatra-flash'
 
-gem 'eventmachine', '1.0.0.rc.4'
+gem 'eventmachine'
 gem 'thin'
 
 gem 'haml'
@@ -44,7 +44,7 @@ gem 'hpricot'
 
 group :production do
   gem 'rack-google-analytics'
-  gem 'pg', '0.10.0'
+  gem 'pg'
   gem 'dm-postgres-adapter'
   gem 'newrelic_rpm'
 end
