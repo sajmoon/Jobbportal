@@ -137,7 +137,7 @@ module App
     end
 
     get "/:id/" do |id|
-      redirect "/#{id}", 301
+      redirect "/jobs/#{id}", 301
     end
 
     get "/:id" do |id|
