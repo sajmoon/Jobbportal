@@ -138,6 +138,9 @@ module App
 
     get "/:id/?" do |id|
       @job = Job.get(id)
+      if @job == nil
+        redirect '/', 404
+      end
       authorize! :show, @job
       @job.viewcount = @job.viewcount + 1
       @job.save!

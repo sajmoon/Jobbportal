@@ -46,6 +46,11 @@ module App
       env["warden"].user
     end
 
+    not_found do
+      status 404
+      haml :oops
+    end
+
     error 403 do
       throw(:warden, message: "Nu har du kommit fel!")
     end
