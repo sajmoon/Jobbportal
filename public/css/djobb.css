@@ -2,6 +2,12 @@
   text-align: center;
 }
 
+.footer {
+  max-height: 50px;
+  border-top: #eee;
+  font-size: 12px;
+}
+
 html, body {
   height: 100%;
   font-size: 16px;
@@ -18,6 +24,10 @@ html, body {
   display: block;
 }
 
+.icon {
+  height: 20px;
+}
+
 .navbar {
   padding-top: 15px;
 }
@@ -28,10 +38,6 @@ html, body {
 
 .content {
   min-height: 350px;
-}
-
-%footer {
-  max-height: 50px;
 }
 
 .alert {
