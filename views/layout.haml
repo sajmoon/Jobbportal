@@ -8,7 +8,7 @@
     %meta{name: "keywords", content: "kth,jobb,data,programmering,students,ths"}
     %meta{name: "author", content: "Simon Ström"}
     %meta{name: "description", content: "Job placements for computer science students. Find soon to graduate students."}
-    
+
     %link{rel: "alternate", type: "application/atom+xml", href: "/jobs/rss.xml"}
     /[if lt IE 9]
       %script{src: "http://html5shim.googlecode.com/svn/trunk/html5.js"}
@@ -17,9 +17,9 @@
 
     <!-- Bootstrap -->
     %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"}
-    
+
     %link{href: "/css/djobb.css", rel: "stylesheet" }
-    
+
 
   %body
     - if can? :view, :header
@@ -32,10 +32,10 @@
         = yield
       .footer
         .row
-          .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1.col-xs-12
+          .col-md-10.col-md-offset-1.col-lg-10.col-lg-offset-1
             = haml :"subscribe"
         .row
-          .col-md-4.col-lg-4.col-lg-offset-2.col-xs-12.center
+          .col-md-4.col-lg-4.col-lg-offset-2.center
             %p
               %a{href: "/jobs/rss.xml"}
                 %img{src: "https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/rss.png", class: "icon rss-feed"}
