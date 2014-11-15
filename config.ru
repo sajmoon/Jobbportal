@@ -52,7 +52,7 @@ map "/auth" do
 end
 
 map "/" do
-  run App::Main
+  run App::Jobs
 end
 
 map "/jobs/" do
