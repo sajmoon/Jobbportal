@@ -14,3 +14,5 @@ log/*
 :memory
 *.sublime-project
 *.sublime-workspace
+vendor/
+config/tmp
