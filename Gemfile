@@ -36,8 +36,8 @@ gem 'warden'
 gem 'sinatra-can'
 gem 'sinatra-contrib'
 
-gem 'RedCloth'
-  
+gem 'redcarpet'
+
 gem 'mail'
 gem 'premailer'
 gem 'hpricot'
@@ -62,7 +62,7 @@ group :test do
   gem 'rack-test', require: "rack/test"
 
   gem 'minitest'
- 
+
   gem 'fabrication'
   gem 'faker'
   gem 'capybara'

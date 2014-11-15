@@ -1,7 +1,7 @@
 .row
-  .col-lg-offset-1.col-lg-7#job_form
-    -unless @job.nil?  
-      = haml :"errors", locals: { errors: @job.errors }  
+  .col-lg-offset-1.col-lg-10#job_form
+    -unless @job.nil?
+      = haml :"errors", locals: { errors: @job.errors }
     .form-group{ class: ( "error" if @job.errors.has_key?(:title) ) }
       %label.control-label.col-sm-2{for: "job_title"} Titel
       .col-sm-10
@@ -29,19 +29,18 @@
     .form-group{ class: ( "error" if @job.errors.has_key?(:description) ) }
       %label.control-label.col-sm-2{for: "job_description"} Lång Beskrivning
       .col-sm-10
-        %textarea.form-control.input-lg{style: "width: 600px", type: "textarea", id: "job_description", name: "job[description]", rows: 10}
-          = @job.description
+
+        %textarea.form-control.input-lg{style: "width: 600px", type: "textarea", id: "job_description", name: "job[description]", rows: 10}~ @job.description
         %span.help-block
-          Längre och mycket detaljerad beskrivning av tjänsten. Använd markups, se 
-          %a{href: "http://redcloth.org/textile"} Länk till referens
+          Längre och mycket detaljerad beskrivning av tjänsten. Använd markups!
+          %a{href: "http://nestacms.com/docs/creating-content/markdown-cheat-sheet"} Här
+          finns mer information.
 
           - if @job.errors.has_key?(:description)
             %br
             %span
               %small
                 = @job.errors[:description][0]
-          %button#job_description_show_preview
-            Visa förhandsgranskning
 
     .form-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
       %label.col-sm-2.control-label{for: "job_category"} Kategorier
@@ -50,7 +49,7 @@
           %label.checkbox
             %input{type: "checkbox", name: "categories[id][]", value: category.id, checked: @job.categories.include?(category)}
             = category.name
-        %p.help-block 
+        %p.help-block
           Vilka kategorier bör annonsen vara associerad med
           - if @job.errors.has_key?(:categories)
             %br
@@ -99,14 +98,14 @@
     - else
       %h5
         = "Annonsen visas mellan #{@job.starttime} och #{@job.endtime} ( Den visas under #{@job.weeks} veckor)"
-    
+
     .form-group{ class: ( "error" if @job.errors.has_key?(:weeks) ) }
       %label.control-label.col-sm-2{for: "job_endtime"} Hur många veckor ska annonsen visas.
       .col-sm-10
         %select.form-control{id: "job_number_of_weeks", name: "job[weeks]"}
           - ((@job.weeks_passed)..(@job.weeks_passed + 5)).each do |w|
             - unless w == 0
-              %option{value: w, selected: ( "selected" if @job.weeks == w)} 
+              %option{value: w, selected: ( "selected" if @job.weeks == w)}
                 = "#{w} vecka"
         %span.help-block
           - if @job.errors.has_key?(:weeks)
@@ -114,12 +113,3 @@
             %span
               %small
                 = @job.errors[:endtime][0]
-
-  .col-lg-4
-    .preview.hide#previewSpan
-      %h5
-        En förhandsvisning av hur den stora beskrivningen kommer att se ut.
-      #loading-preview.hide
-        Loading..
-      #descPreview
-

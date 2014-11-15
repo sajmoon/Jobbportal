@@ -38,12 +38,12 @@ class Job
   def display_categories
     self.categories.map(&:name).join(", ")
   end
-  
+
   def self.safe_textilize( s )
     if s && s.respond_to?(:to_s)
-      doc = RedCloth.new( s.to_s  )
-      doc.filter_html = true
-      doc.to_html
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+
+      markdown.render(s.to_s)
     end
   end
 
@@ -66,7 +66,7 @@ class Job
   def self.has_ended
     all(:endtime.lt => Date.today)
   end
-  
+
   def self.is_paid
     all(paid: true)
   end
@@ -74,9 +74,9 @@ class Job
   def self.not_paid
     all(paid: false)
   end
-  
+
   def self.is_active
-    all(active: true) 
+    all(active: true)
   end
 
   def self.running_now
