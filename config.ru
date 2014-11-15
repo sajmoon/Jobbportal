@@ -4,6 +4,7 @@ require File.dirname(__FILE__) + '/boot.rb'
 
 use Rack::MethodOverride
 use Rack::Session::Cookie, secret: ENV["SESSION_SECRET"]
+use Rack::Deflater
 
 if Sinatra::Base.production?
   use Rack::GoogleAnalytics, :tracker => ENV['G_ANALYTIC']
