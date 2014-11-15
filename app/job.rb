@@ -136,7 +136,11 @@ module App
       end
     end
 
-    get "/:id/?" do |id|
+    get "/:id/" do |id|
+      redirect "/#{id}", 301
+    end
+
+    get "/:id" do |id|
       @job = Job.get(id)
       if @job == nil
         redirect '/', 404
