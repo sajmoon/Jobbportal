@@ -1,6 +1,8 @@
 module App
   class Jobs < App::Generic
     set :root, File.dirname(__FILE__) + "/.."
+    # Use caching
+    set :static_cache_control, [:public, :max_age => 300]
     
     # index
     get "/" do
