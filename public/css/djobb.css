@@ -11,6 +11,12 @@ html, body {
   margin-bottom: 60px;
 }
 
+.center_img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 .navbar {
   padding-top: 15px;
 }
