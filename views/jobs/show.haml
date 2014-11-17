@@ -1,7 +1,7 @@
-.row
+.row{itemscope: true, itemtype: "http://schema.org/JobPosting"}
   .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1.col-xs-12
     .top
-      %h1
+      %h1{itemprop: "title"}
         = @job.title
       %hr
       .row
@@ -9,7 +9,7 @@
           %h4
             %strong
               Företag
-          = @job.company.name
+          %span{itemprop: "hiringOrganization", itemscope: true, itemtype: "http://schema.org/Organization" }= @job.company.name
           - unless @job.company.logo_url.nil?
             %br
             %img.company_logo_big{src: "#{@job.company.logo_url}",  alt: "#{@job.company.name}"}
@@ -17,7 +17,7 @@
           %h4
             %strong
               Kategorier
-          %p
+          %p{itemprop: "skills"}
             = @job.display_categories
 
           %h4
@@ -33,7 +33,7 @@
               %span.glyphicon.glyphicon-ok-sign
 
         .col-lg-8
-          %p
+          %span{itemprop: "description"}
             = @job.formated_description
 
           %p
