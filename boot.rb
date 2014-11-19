@@ -49,4 +49,14 @@ end
 
 require_relative 'lib/sinatra/mail_job'
 
+## Helpers
+def cycle
+  %w{even odd}[@_cycle = ((@_cycle || -1) + 1) % 2]
+end
+
+CYCLE = %w{even odd}
+def cycle_fully_sick
+  CYCLE[@_cycle = ((@_cycle || -1) + 1) % 2]
+end
+
 DataMapper.finalize
