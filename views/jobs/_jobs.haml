@@ -1,9 +1,3 @@
-%table.table.table-striped
-  %thead
-    %tr
-      %th Företag
-      %th Titel
-      %th.hidden-phone Kategorier
-  %tbody
-    - jobs.each do |job|
-      = haml :"jobs/_job", :locals => { :job => job }
+.jobs
+  - jobs.each do |job|
+    = haml :"jobs/_job", :locals => { :job => job }

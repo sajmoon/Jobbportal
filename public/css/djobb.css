@@ -69,6 +69,26 @@ a:hover {
 .company_logo
 {
   max-height:42px;
+  max-width: 75px;
+}
+
+.job {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-top: 1px solid #ddd;
+}
+
+.job > .categories {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 75%;
+}
+
+.job.even {
+  background-color: #f9f9f9;
+}
+
+.job > .actions {
 }
 
 .company_logo_big

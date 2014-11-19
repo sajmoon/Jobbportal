@@ -1,19 +1,19 @@
-%tr
-  %td
+.row.job{:class => "#{cycle_fully_sick}"}
+  .col-xs-3.col-md-1
     %a{href: "/jobs/#{job.id}/" }
       %img.company_logo{src: job.company.logo_url, alt: job.company.name}
-  %td
+  .col-xs-9.col-md-5
     %a{href: "/jobs/#{job.id}"}= job.title
     - if job.is_new
       %span.label.label-success
         Ny!
-  %td.hidden-phone
+  .col-xs-12.col-md-3.center.categories
     = job.display_categories
-    .pull-right.hidden-phone 
-      %a.btn.btn-primary.btn-mini{href: "/jobs/#{job.id}/" } 
-        %span.glyphicon.glyphicon-info-sign
-        Mer info
-      - if can? :edit, job
-        %a.btn.btn-info.btn-mini{href: "/jobs/#{job.id}/edit"} 
-          %span.glyphicon.glyphicon-edit
-          Redigera
+  .col-xs-12.col-md-3.center.actions
+    %a.btn.btn-primary.btn-lg{href: "/jobs/#{job.id}/" } 
+      %span.glyphicon.glyphicon-info-sign
+      Mer info
+    - if can? :edit, job
+      %a.btn.btn-info.btn-lg{href: "/jobs/#{job.id}/edit"} 
+        %span.glyphicon.glyphicon-edit
+        Redigera
