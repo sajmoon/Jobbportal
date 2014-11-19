@@ -1,13 +1,8 @@
-%form.hidden-xs{action: "/subscribes/", method: "post", role: "form"}
-  .form-group
-    .row.hidden-xs
-      .col-lg-10
+.row.subscribe
+  %form{action: "/subscribes/", method: "post", role: "form"}
+    .form-group
+      .col-xs-12.col-sm-8.col-sm-offset-1
         %label.sr-only{ for: "email"} Email
         %input.form-control{type: "text", id: "email", name: "subscribe[email]", placeholder: "Ange email för nyhetsbrev"}
-      .col-lg-2.col-xs-12
-        %input.btn.btn-success{type: "submit", value: "Prenumerera"}
-%form.visible-xs{action: "/subscribes/", method: "post", role: "form"}
-  .form-group
-    %input.form-control{type: "text", id: "email", name: "subscribe[email]", placeholder: "Ange email för nyhetsbrev"}
-    %input.btn.btn-success{type: "submit", value: "Prenumerera"}
-      
+      .col-xs-6.col-xs-offset-6.col-sm-2.center
+        %input.btn.btn-success.btn-block{type: "submit", value: "Prenumerera"}

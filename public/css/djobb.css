@@ -44,6 +44,10 @@ html, body {
   padding-top: 15px;
 }
 
+.subscribe {
+  padding-bottom: 1em;
+}
+
 .btn, .label {
   border-radius: 1px;
 }
