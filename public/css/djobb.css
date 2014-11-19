@@ -48,6 +48,10 @@ html, body {
   padding-bottom: 1em;
 }
 
+.subscribe-email {
+  border-radius: 1px;
+}
+
 .btn, .label {
   border-radius: 1px;
 }
