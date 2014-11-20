@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.1.2'
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.1.5'
 
 gem 'rake'
 
