@@ -8,6 +8,7 @@ use Rack::Deflater
 
 if Sinatra::Base.production?
   use Rack::GoogleAnalytics, :tracker => ENV['G_ANALYTIC']
+
 end
 
 require File.dirname(__FILE__) + '/config/mail_config.rb'
@@ -74,8 +75,4 @@ end
 
 map "/subscribes/" do
   run App::Subscribers
-end
-
-map "/events/" do
-  run App::Events
 end
