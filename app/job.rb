@@ -5,20 +5,19 @@ module App
     set :static_cache_control, [:public, :max_age => 300]
     
     # index
+    get "/index" do
+      redirect to("/")
+    end
+
+    # index
     get "/" do
       authorize! :list, Job
       @jobs = Job.running_now
-      @categories = Category.all
-      @selected_categories = Category.all
-
-      if defined?(params[:filter][:id])
-        @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id }).running_now
-        @selected_categories = Category.all(:id => params[:filter][:id].map{ |id| id })
-      end
       
       haml :"jobs/index"
     end
 
+    # RSS
     get '/rss.xml' do
       @jobs = Job.running_now
       builder do |xml|
@@ -27,15 +26,15 @@ module App
           xml.channel do
             xml.title "Datasektionens Jobbportal"
             xml.description "Htta ett jobb som passar dig."
-            xml.link "http://djobb.heroku.com"
+            xml.link "http://wwww.djobb.se"
 
             @jobs.each do |job|
               xml.item do
                 xml.title job.title
-                xml.link "http://djobb.heroku.com/jobs/#{job.id}"
+                xml.link "http://www.djobb.se/jobs/#{job.id}"
                 xml.description job.short_description
                 xml.pubDate Time.parse(job.starttime.to_s).rfc822()
-                xml.guid "http://djobb.heroku.com/jobs/#{job.id}"
+                xml.guid "http://www.djobb.se/jobs/#{job.id}"
               end
             end
           end
@@ -43,11 +42,6 @@ module App
       end
     end
  
-    # index
-    get "/index" do
-      redirect to("/")
-    end
-
     # new
     get "/new" do
       authorize! :create, Job
