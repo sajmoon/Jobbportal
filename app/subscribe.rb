@@ -27,7 +27,7 @@ module App
     end
 
     get "/preview_mail" do
-
+      authorize! :send, Subscribe
       if params[:what] == "welcome"
         haml :"mail/welcome", {layout: :"mail_layout"}
       elsif params[:what] == "weekly"
