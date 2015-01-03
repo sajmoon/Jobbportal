@@ -5,14 +5,9 @@ bin/*
 vendor/gems/*
 !vendor/gems/cache/
 .sass-cache/*
-*.swp
-config/ldap.yml
 db/*.db
 log/*
-*.swo
 .env
-:memory
-*.sublime-project
-*.sublime-workspace
+
 vendor/
 config/tmp
