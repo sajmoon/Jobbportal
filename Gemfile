@@ -52,6 +52,7 @@ end
 
 group :development, :test do
   gem 'letter_opener'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -71,4 +72,5 @@ group :test do
   gem 'capybara_minitest_spec'
 
   gem 'dm-sqlite-adapter'
+  gem 'simplecov', require: false
 end

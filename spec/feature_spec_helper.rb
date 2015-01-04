@@ -11,11 +11,15 @@ class MiniTest::Spec
   include Capybara::DSL
   include Warden::Test::Helpers
 
+  Capybara.register_driver :selenium do |app|
+      Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  end
+
   before do
     Capybara.default_driver = :selenium
     logout
   end
-  
+
   after do
     Warden.test_reset!
   end

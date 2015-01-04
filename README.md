@@ -1,5 +1,7 @@
 Jobbportal
 ==========
+[![Circle
+CI](https://circleci.com/gh/sajmoon/Jobbportal/tree/master.svg?style=svg)](https://circleci.com/gh/sajmoon/Jobbportal/tree/master)
 
 Datasektionens jobbportal
 

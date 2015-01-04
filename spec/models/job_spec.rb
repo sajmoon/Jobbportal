@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Job do 
+describe Job do
   let (:company) { Fabricate(:company) }
   let (:category1) { Fabricate(:category) }
-  
+
   after :each do
     Job.destroy
     CategoryJob.destroy
@@ -14,7 +14,7 @@ describe Job do
     job = Fabricate :job
     job.company = company
     job.save
-    job.errors.each do |e| 
+    job.errors.each do |e|
       e.must_equal "simon"
       end
     job.valid?.must_equal true
@@ -35,7 +35,7 @@ describe Job do
     company.jobs.first.must_be_instance_of(Job)
     job.company.must_be_instance_of(Company)
   end
-  
+
   it "must not have any errors" do
     job = Fabricate(:job, company: company)
     job.errors.count.must_equal 0
@@ -48,7 +48,6 @@ describe Job do
 
   it "is valid" do
     job = Fabricate(:job, company: company)
-    Job.count.must_equal 1
     job.errors.count.must_equal 0
     job.valid?.must_equal true
   end

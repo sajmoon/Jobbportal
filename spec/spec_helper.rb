@@ -1,5 +1,11 @@
 SINATRA_ENV = 'test' unless defined?(SINATRA_ENV)
 
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec'
+  add_filter '/vendor'
+end if ENV["COVERAGE"]
+
 require File.expand_path(File.dirname(__FILE__) + "/../boot")
 
 require 'fabrication'

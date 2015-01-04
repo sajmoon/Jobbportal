@@ -4,6 +4,7 @@ describe "home screen" do
   it "should render home screen" do
     visit "/"
 
-    page.must_have_content "Senaste jobben"
+    page.must_have_content "Inga lediga tjänster"
+
   end
 end

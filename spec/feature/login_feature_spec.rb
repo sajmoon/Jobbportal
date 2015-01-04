@@ -10,7 +10,7 @@ describe "not requiring sign in" do
 
   it "redners root url" do
     visit "/"
-    page.must_have_content "Senaste jobben"
+    page.must_have_content "Inga lediga tjänster"
   end
 
   it "renders show for job" do
@@ -45,36 +45,27 @@ describe "if signed in as company1" do
   it "is signed in" do
     visit "/jobs"
 
-    page.must_have_content "Din profil"
-  end
-
-  it "validates that test suite is setup ok" do
-    Company.count.must_equal 2
-    Job.count.must_equal 3
-    @company1.jobs.count.must_equal 1
-    @company2.jobs.count.must_equal 2
+    page.must_have_content "Min profil"
   end
 
   it "can see all jobs in index page" do
     visit "/jobs/"
 
-    page.must_have_content "Senaste jobben"
-
     [@job1, @job2, @job3].each do |job|
       page.must_have_content job.title
     end
   end
-  
+
   it "may edit its own offers" do
     visit "/jobs/#{@job1.id}/edit"
-    page.must_have_content "Webadress till extern sida"
+    page.must_have_content "Ändra din annons"
   end
 
   it "may not edit others" do
     visit "/jobs/#{@job2.id}/edit"
-    page.must_have_content "Du ska inte se detta"
+    page.must_have_content "Nu har du kommit fel"
     visit "/jobs/#{@job3.id}/edit"
-    page.must_have_content "Du ska inte se detta"
+    page.must_have_content "Nu har du kommit fel"
   end
 
 end
@@ -82,22 +73,21 @@ end
 describe "fails if not signed in" do
   it "admin" do
     visit "/admin"
-    page.must_have_content "Du ska inte se detta"  
+    page.must_have_content "Nu har du kommit fel!"
   end
 
   describe "/jobs action" do
     before do
       Job.destroy
     end
-    
+
     it "/edit" do
       @company = Fabricate :company
       @job = Fabricate :job, company: @company
       visit "/jobs/#{@job.id}/edit"
 
-      page.must_have_content "Du ska inte se detta"  
+      page.must_have_content "Nu har du kommit fel!"
     end
-
   end
 
   describe "/companies actions" do
@@ -109,19 +99,19 @@ describe "fails if not signed in" do
     it "/index" do
       visit "/companies"
 
-      page.must_have_content "Du ska inte se detta"
+      page.must_have_content "Nu har du kommit fel"
     end
 
     it "/show" do
       visit "/companies/#{@company.id}"
 
-      page.must_have_content "Du ska inte se detta"
+      page.must_have_content "Nu har du kommit fel!"
     end
 
     it "/edit" do
       visit "/companies/#{@company.id}/edit"
 
-      page.must_have_content "Du ska inte se detta"
+      page.must_have_content "Nu har du kommit fel!"
     end
   end
 
@@ -133,7 +123,7 @@ describe "fails if not signed in" do
 
     it "/index" do
       visit "/categories/"
-      page.must_have_content "Du ska inte se detta"
+      page.must_have_content "Nu har du kommit fel"
     end
 
     it "/show" do
@@ -141,7 +131,7 @@ describe "fails if not signed in" do
 
     it "/edit" do
       visit "/categories/#{@category.id}/edit"
-      page.must_have_content "Du ska inte se detta"
+      page.must_have_content "Nu har du kommit fel"
     end
   end
 end

@@ -33,7 +33,7 @@ require 'sinatra/mailer_methods'
 require 'sinatra/can'
 
 if SINATRA_ENV == 'production'
-  require 'newrelic_rpm'  
+  require 'newrelic_rpm'
 end
 
 # require sub-apps

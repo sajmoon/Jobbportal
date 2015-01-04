@@ -21,10 +21,10 @@ describe Job do
 
     visit "/jobs/new"
 
-    page.must_have_content "Din profil"
+    page.must_have_content "Min profil"
 
     page.must_have_content "Skapa en ny annons"
-    
+
     job = Fabricate.attributes_for :job
 
     fill_in("Titel", with: :title)
@@ -39,7 +39,7 @@ describe Job do
   it "we can go to /edit" do
     @company = Fabricate :company
     login_as @company
-    
+
     job = Fabricate :job, company: @company
     visit "/jobs/#{job.id}/edit"
 

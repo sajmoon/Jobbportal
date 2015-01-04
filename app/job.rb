@@ -3,7 +3,7 @@ module App
     set :root, File.dirname(__FILE__) + "/.."
     # Use caching
     set :static_cache_control, [:public, :max_age => 300]
-    
+
     # index
     get "/index" do
       redirect to("/")
@@ -13,7 +13,7 @@ module App
     get "/" do
       authorize! :list, Job
       @jobs = Job.running_now
-      
+
       haml :"jobs/index"
     end
 
@@ -41,7 +41,7 @@ module App
         end
       end
     end
- 
+
     # new
     get "/new" do
       authorize! :create, Job
@@ -52,7 +52,7 @@ module App
       if env["warden"].user.admin?
         @companies = Company.all
       end
-      
+
       @job.created_by = Role.get_user(env["warden"]).id
       haml :"jobs/new"
     end
@@ -65,9 +65,9 @@ module App
       @job.updated_at = Time.now
 
       @job.company = Company.get(@job.company_id)
-      
+
       @job.endtime = @job.starttime + @job.weeks*7
-      
+
       unless params[:categories].nil?
         categories = params[:categories][:id]
         @job.categories = []
@@ -76,16 +76,16 @@ module App
           @job.categories << cat
         end
       end
-      
+
       @companies = []
       if @job.save
-	      redirect to("/")
+      redirect to("/")
       else
         @categories = Category.all
         puts "company id: #{@job.company_id}"
         if Role.is_admin(env["warden"])
           @companies = Company.all
-        else 
+        else
           @companies << Company.get(@job.company_id)
         end
         haml :"jobs/new"
@@ -112,7 +112,7 @@ module App
       authorize! :edit, @job
       unless params[:categories].blank?
         categories = params[:categories][:id]
-  
+
         @job.categories = []
         categories.each do |c|
           cat = Category.get(c)
@@ -120,7 +120,7 @@ module App
         end
       end
       @job.save
-      
+
       if @job.update(params[:job])
         redirect to("/")
       else
@@ -142,7 +142,7 @@ module App
       authorize! :show, @job
       @job.viewcount = @job.viewcount + 1
       @job.save!
-      
+
       haml :"jobs/show"
     end
 
