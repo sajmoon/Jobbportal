@@ -1,6 +1,6 @@
-SINATRA_ENV = 'test' unless defined?(SINATRA_ENV)
+SINATRA_ENV = "test" unless defined?(SINATRA_ENV)
 
-require 'coveralls'
+require "coveralls"
 Coveralls.wear!
 
 require_relative File.join("..", "boot")
