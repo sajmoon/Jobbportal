@@ -139,8 +139,6 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    shotgun (0.9)
-      rack (>= 1.0)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -225,7 +223,6 @@ DEPENDENCIES
   rake
   redcarpet
   selenium-webdriver
-  shotgun
   simplecov
   sinatra
   sinatra-can
