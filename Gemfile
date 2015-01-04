@@ -31,6 +31,7 @@ gem 'dm-types'
 gem 'dm-core'
 gem 'dm-timestamps'
 gem 'dm-serializer'
+gem 'dm-transactions'
 
 #user auth
 gem 'warden'
@@ -72,4 +73,5 @@ group :test do
 
   gem 'dm-sqlite-adapter'
   gem 'simplecov', require: false
+  gem 'database_cleaner'
 end
