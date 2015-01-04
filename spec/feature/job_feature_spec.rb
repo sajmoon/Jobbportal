@@ -47,8 +47,8 @@ describe Job do
   end
 
   it "i can retry when validations fail" do
-    @company = Fabricate :company
-    login_as @company
+    company = Fabricate :company
+    login_as company
     job = Job.new
     visit "/jobs/new"
 
@@ -61,6 +61,13 @@ describe Job do
     expect(page).to have_content "Det behövs en kort beskrivning"
     expect(page).to have_content "Det behövs en beskrivning"
 
+    job = Fabricate :job, company: company
+
+    fill_in_job_form(job)
+
+    click_button "Spara"
+
+    expect(page).not_to have_content "Annonsen kunde inte"
   end
 
   def fill_in_job_form(job)
