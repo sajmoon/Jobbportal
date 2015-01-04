@@ -38,7 +38,7 @@ describe Job do
 
   it "has endtime" do
     job = Fabricate(:job, company: company)
-    expect(job.endtime).to eq ( job.starttime + 7*job.weeks )
+    expect(job.endtime).to eq (job.starttime + 7 * job.weeks)
   end
 
   it "is valid" do

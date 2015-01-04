@@ -3,7 +3,7 @@ SINATRA_ENV  = ENV['SINATRA_ENV'] ||= ENV['RACK_ENV'] ||= 'development'  unless 
 SINATRA_ROOT = File.expand_path('..', __FILE__) unless defined?(SINATRA_ROOT)
 
 # load Gem dependencies
-require 'bundler'
+require "bundler"
 Bundler.require(:default, SINATRA_ENV)
 
 DataMapper::Logger.new($stdout, :debug)

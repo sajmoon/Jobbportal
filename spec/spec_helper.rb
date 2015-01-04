@@ -6,7 +6,7 @@ SimpleCov.start do
   add_filter "/vendor"
 end if ENV["COVERAGE"]
 
-require_relative File.join('..', 'boot')
+require_relative File.join("..", "boot")
 
 DataMapper.finalize.auto_upgrade!
 

@@ -18,9 +18,9 @@ describe "not requiring sign in" do
   end
 end
 
-def login_as_company comp
+def login_as_company(company)
   visit "/auth/login"
-  fill_in "company[email]", with: @company1.email
+  fill_in "company[email]", with: company.email
   fill_in "company[password]", with: "password"
   click_button "Logga in"
 end
