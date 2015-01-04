@@ -42,12 +42,12 @@
               %small
                 = @job.errors[:description][0]
 
-    .form-group{ class: ( "has-error" if @job.errors.has_key?(:categories) ) }
+    .form-group#categories{ class: ( "has-error" if @job.errors.has_key?(:categories) ) }
       %label.col-sm-2.control-label{for: "job_category"} Kategorier
       .col-sm-10
         - @categories.each do |category|
           %label.checkbox
-            %input{type: "checkbox", name: "categories[id][]", value: category.id, checked: @job.categories.include?(category)}
+            %input{type: "checkbox", name: "categories[id][]", id: "category_#{category.id}", value: category.id, checked: @job.categories.include?(category)}
             = category.name
         %p.help-block
           Vilka kategorier bör annonsen vara associerad med

@@ -70,6 +70,62 @@ describe Job do
     expect(page).not_to have_content "Annonsen kunde inte"
   end
 
+  it "working with categories" do
+    company = Fabricate :company
+    category1 = Fabricate :category
+    category2 = Fabricate :category
+    Fabricate :category
+
+    job = Fabricate.build :job
+
+    expect(Category.all.count).to eq 3
+
+    login_as company
+
+    visit "/jobs/new"
+    fill_in_job_form job
+
+    within "#categories" do
+      expect(all('input[type="checkbox"]').count).to eq(3)
+    end
+
+    check "category_#{category1.id}"
+
+    click_button "Spara"
+    expect(page).to have_content "skapades"
+
+    job = Job.first
+    expect(job.categories.count).to eq 1
+
+    visit "/"
+
+    click_link "Redigera"
+    expect(page).to have_content "Ändra din annons"
+
+    within "#categories" do
+      expect(all('input[type="checkbox"]').count).to eq 3
+    end
+
+    check "category_#{category2.id}"
+    click_on "Spara"
+
+    job = Job.first
+    expect(job.categories.count).to eql 2
+    click_on "Redigera"
+
+    within "#categories" do
+      expect(all('input[type="checkbox"]').count).to eq 3
+    end
+
+    uncheck "category_#{category2.id}"
+
+    click_on "Spara"
+
+    job = Job.first
+    expect(job.categories.count).to eq 1
+    expect(job.categories).to include category1
+  end
+
   def fill_in_job_form(job)
     fill_in("job_title", with: job.title)
     fill_in("Kort beskrivning", with: job.short_description)
