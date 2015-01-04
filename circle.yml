@@ -1,0 +1,5 @@
+machine:
+  environment:
+    CIRCLE_ENV: test
+    SINATRA_ENV: test
+    COVERAGE: true
