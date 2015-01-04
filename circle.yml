@@ -3,3 +3,6 @@ machine:
     CIRCLE_ENV: test
     SINATRA_ENV: test
     COVERAGE: true
+test:
+  override:
+    - rake spec
