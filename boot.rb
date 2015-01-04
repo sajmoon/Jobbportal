@@ -44,7 +44,7 @@ end
 
 # require models
 Dir.glob("models/*.rb").each do |model|
-    require_relative model
+  require_relative model
 end
 
 require_relative "lib/sinatra/mail_job"
