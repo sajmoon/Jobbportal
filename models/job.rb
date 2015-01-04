@@ -48,10 +48,10 @@ class Job
     self.categories.map(&:name).join(", ")
   end
 
-  def set_categories input
+  def set_categories(input)
     unless input.nil?
       self.categories = []
-      input[:id].map { |id| self.categories <<  Category.get(id) }
+      input[:id].map { |id| categories <<  Category.get(id) }
     end
   end
 
