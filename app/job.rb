@@ -1,4 +1,3 @@
-require 'builder'
 module App
   class Jobs < App::Generic
     set :root, File.dirname(__FILE__) + "/.."
