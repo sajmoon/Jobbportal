@@ -60,14 +60,7 @@ module App
       @job = Job.new(params[:job])
       @job.company = Company.get(@job.company_id)
 
-      unless params[:categories].nil?
-        categories = params[:categories][:id]
-        @job.categories = []
-       categories.each do |c|
-          cat = Category.get(c)
-          @job.categories << cat
-        end
-      end
+      @job.set_categories(params[:categories])
 
       if @job.save
         flash[:success] = "Annons skapades"
@@ -97,15 +90,8 @@ module App
     put "/:id/?" do |id|
       @job = Job.get(id)
       authorize! :edit, @job
-      unless params[:categories].blank?
-        categories = params[:categories][:id]
 
-        @job.categories = []
-        categories.each do |c|
-          cat = Category.get(c)
-          @job.categories << cat
-        end
-      end
+      @job.set_categories(params[:categories])
       @job.save
 
       if @job.update(params[:job])

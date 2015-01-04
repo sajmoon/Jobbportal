@@ -47,8 +47,8 @@ describe Job do
   end
 
   it "i can retry when validations fail" do
-    @company = Fabricate :company
-    login_as @company
+    company = Fabricate :company
+    login_as company
     job = Job.new
     visit "/jobs/new"
 
@@ -61,6 +61,69 @@ describe Job do
     expect(page).to have_content "Det behövs en kort beskrivning"
     expect(page).to have_content "Det behövs en beskrivning"
 
+    job = Fabricate :job, company: company
+
+    fill_in_job_form(job)
+
+    click_button "Spara"
+
+    expect(page).not_to have_content "Annonsen kunde inte"
+  end
+
+  it "working with categories" do
+    company = Fabricate :company
+    category1 = Fabricate :category
+    category2 = Fabricate :category
+    Fabricate :category
+
+    job = Fabricate.build :job
+
+    expect(Category.all.count).to eq 3
+
+    login_as company
+
+    visit "/jobs/new"
+    fill_in_job_form job
+
+    within "#categories" do
+      expect(all('input[type="checkbox"]').count).to eq(3)
+    end
+
+    check "category_#{category1.id}"
+
+    click_button "Spara"
+    expect(page).to have_content "skapades"
+
+    job = Job.first
+    expect(job.categories.count).to eq 1
+
+    visit "/"
+
+    click_link "Redigera"
+    expect(page).to have_content "Ändra din annons"
+
+    within "#categories" do
+      expect(all('input[type="checkbox"]').count).to eq 3
+    end
+
+    check "category_#{category2.id}"
+    click_on "Spara"
+
+    job = Job.first
+    expect(job.categories.count).to eql 2
+    click_on "Redigera"
+
+    within "#categories" do
+      expect(all('input[type="checkbox"]').count).to eq 3
+    end
+
+    uncheck "category_#{category2.id}"
+
+    click_on "Spara"
+
+    job = Job.first
+    expect(job.categories.count).to eq 1
+    expect(job.categories).to include category1
   end
 
   def fill_in_job_form(job)

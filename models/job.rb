@@ -48,6 +48,13 @@ class Job
     self.categories.map(&:name).join(", ")
   end
 
+  def set_categories(input)
+    unless input.nil?
+      self.categories = []
+      input[:id].map { |id| categories <<  Category.get(id) }
+    end
+  end
+
   def self.safe_textilize( s )
     if s && s.respond_to?(:to_s)
       markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
