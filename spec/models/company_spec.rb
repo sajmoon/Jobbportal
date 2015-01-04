@@ -7,12 +7,6 @@ describe Company do
     Job.destroy
   end
 
-  describe "with empty db" do
-    it "has not companies" do
-      Company.all.count.must_equal 0
-    end
-  end
-
   describe "basic" do
     let(:company) { Fabricate :company }
 
