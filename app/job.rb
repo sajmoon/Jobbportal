@@ -79,7 +79,7 @@ module App
 
       @companies = []
       if @job.save
-      redirect to("/")
+        redirect to("/")
       else
         @categories = Category.all
         puts "company id: #{@job.company_id}"

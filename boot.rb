@@ -14,26 +14,26 @@ require_relative "config/database.rb"
 #helpers
 require_relative "models/sinatra_before_filter.rb"
 
-require 'yaml'
-require 'sinatra/flash'
-require 'date'
-require 'haml'
+require "yaml"
+require "sinatra/flash"
+require "date"
+require "haml"
 
-require 'json'
+require "json"
 
 # Background process
-require 'sucker_punch'
+require "sucker_punch"
 
 # add lib to load path
-$LOAD_PATH.unshift 'lib'
+$LOAD_PATH.unshift "lib"
 
-require 'sinatra/authorization'
-require 'sinatra/mailer_methods'
+require "sinatra/authorization"
+require "sinatra/mailer_methods"
 
-require 'sinatra/can'
+require "sinatra/can"
 
-if SINATRA_ENV == 'production'
-  require 'newrelic_rpm'
+if SINATRA_ENV == "production"
+  require "newrelic_rpm"
 end
 
 # require sub-apps
@@ -47,7 +47,7 @@ Dir.glob("models/*.rb").each do |model|
     require_relative model
 end
 
-require_relative 'lib/sinatra/mail_job'
+require_relative "lib/sinatra/mail_job"
 
 ## Helpers
 def cycle

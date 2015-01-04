@@ -1,18 +1,17 @@
 require_relative "spec_helper.rb"
 
-require 'capybara'
-require 'capybara/dsl'
-require 'capybara_minitest_spec'
+require "capybara"
+require "capybara/dsl"
+require "capybara_minitest_spec"
 
 Capybara.app = eval "Rack::Builder.new {(" + File.read(File.dirname(__FILE__) + "/../config.ru") + "\n )}"
-#Capybara.default_driver = :webkit
 
 class MiniTest::Spec
   include Capybara::DSL
   include Warden::Test::Helpers
 
   Capybara.register_driver :selenium do |app|
-      Capybara::Selenium::Driver.new(app, :browser => :chrome)
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
   end
 
   before do

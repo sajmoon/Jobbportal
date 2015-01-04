@@ -1,20 +1,20 @@
 SINATRA_ENV = 'test' unless defined?(SINATRA_ENV)
 
-require 'simplecov'
+require "simplecov"
 SimpleCov.start do
-  add_filter '/spec'
-  add_filter '/vendor'
+  add_filter "/spec"
+  add_filter "/vendor"
 end if ENV["COVERAGE"]
 
 require File.expand_path(File.dirname(__FILE__) + "/../boot")
 
-require 'fabrication'
-require 'faker'
+require "fabrication"
+require "faker"
 
-require 'minitest/autorun'
-require 'minitest/spec'
-require 'minitest/pride'
-require 'rack/test'
+require "minitest/autorun"
+require "minitest/spec"
+require "minitest/pride"
+require "rack/test"
 
 class MiniTest::Spec
     include Rack::Test::Methods
