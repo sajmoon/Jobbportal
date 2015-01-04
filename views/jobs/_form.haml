@@ -2,7 +2,7 @@
   .col-lg-offset-1.col-lg-10#job_form
     -unless @job.nil?
       = haml :"errors", locals: { errors: @job.errors }
-    .form-group{ class: ( "error" if @job.errors.has_key?(:title) ) }
+    .form-group{ class: ( "has-error" if @job.errors.has_key?(:title) ) }
       %label.control-label.col-sm-2{for: "job_title"} Titel
       .col-sm-10
         %input.form-control.input-lg{type: "text", id: "job_title", name: "job[title]", value: @job.title}
@@ -14,7 +14,7 @@
               %small
                 = @job.errors[:title][0]
 
-    .form-group{ class: ( "error" if @job.errors.has_key?(:short_description) ) }
+    .form-group{ class: ( "has-error" if @job.errors.has_key?(:short_description) ) }
       %label.control-label.col-sm-2{for: "job_short_description"} Kort beskrivning
       .col-sm-10
         %input.form-control.input-lg{type: "text", id: "job_short_description", name: "job[short_description]", value: @job.short_description}
@@ -26,7 +26,7 @@
               %small
                 = @job.errors[:short_description][0]
 
-    .form-group{ class: ( "error" if @job.errors.has_key?(:description) ) }
+    .form-group{ class: ( "has-error" if @job.errors.has_key?(:description) ) }
       %label.control-label.col-sm-2{for: "job_description"} Lång Beskrivning
       .col-sm-10
 
@@ -42,7 +42,7 @@
               %small
                 = @job.errors[:description][0]
 
-    .form-group{ class: ( "error" if @job.errors.has_key?(:categories) ) }
+    .form-group{ class: ( "has-error" if @job.errors.has_key?(:categories) ) }
       %label.col-sm-2.control-label{for: "job_category"} Kategorier
       .col-sm-10
         - @categories.each do |category|
@@ -57,7 +57,7 @@
               %small
                 = @job.errors[:categories][0]
 
-    .form-group{ class: ( "error" if @job.errors.has_key?(:company) ) }
+    .form-group{ class: ( "has-error" if @job.errors.has_key?(:company) ) }
       %label.control-label.col-sm-2{for: "job_company_id"} Företag
       .col-sm-10
         %p
@@ -71,7 +71,7 @@
               %small
                 = @job.errors[:company][0]
 
-    .form-group{ class: ( "error" if @job.errors.has_key?(:apply_url) ) }
+    .form-group{ class: ( "has-error" if @job.errors.has_key?(:apply_url) ) }
       %label.control-label.col-sm-2{for: "job_apply_url"}Webbadress till externt formulär
       .col-sm-10
         %input.form-control.input-lg{type: "text", id: "job_apply_url", name: "job[apply_url]", value: @job.apply_url}
@@ -84,7 +84,7 @@
                 = @job.errors[:apply_url][0]
 
     - if !@job.has_started?
-      .form-group{ class: ( "error" if @job.errors.has_key?(:starttime) ) }
+      .form-group{ class: ( "has-error" if @job.errors.has_key?(:starttime) ) }
         %label.control-label.col-sm-2{for: "job_starttime"} Tid då annonsen ska börja visas.
         .col-sm-10
           %input.form-control.input-lg{type: "text", class: "timeselector", id: "job_starttime", name: "job[starttime]", value: @job.starttime}
@@ -99,7 +99,7 @@
       %h5
         = "Annonsen visas mellan #{@job.starttime} och #{@job.endtime} ( Den visas under #{@job.weeks} veckor)"
 
-    .form-group{ class: ( "error" if @job.errors.has_key?(:weeks) ) }
+    .form-group{ class: ( "has-error" if @job.errors.has_key?(:weeks) ) }
       %label.control-label.col-sm-2{for: "job_endtime"} Hur många veckor ska annonsen visas.
       .col-sm-10
         %select.form-control{id: "job_number_of_weeks", name: "job[weeks]"}

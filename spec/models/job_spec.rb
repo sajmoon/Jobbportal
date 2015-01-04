@@ -46,4 +46,17 @@ describe Job do
     expect(job.errors.count).to eq 0
     expect(job.valid?).to equal true
   end
+
+  describe "has dates" do
+    it "when created" do
+      job = Fabricate :job, company: company
+      job.save!
+
+      expect(job.errors.count).to eq 0
+      expect(job.errors.keys).not_to include :created_at
+      expect(job.errors.keys).not_to include :updated_at
+
+      expect(job.endtime).not_to be_nil
+    end
+  end
 end

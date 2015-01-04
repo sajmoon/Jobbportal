@@ -49,9 +49,6 @@ module App
       @job.weeks = 3
       @categories = Category.all
       @job.company = Role.get_user(env["warden"])
-      if env["warden"].user.admin?
-        @companies = Company.all
-      end
 
       @job.created_by = Role.get_user(env["warden"]).id
       haml :"jobs/new"
@@ -61,12 +58,7 @@ module App
     post "/" do
       authorize! :create, Job
       @job = Job.new(params[:job])
-      @job.created_at = Time.now
-      @job.updated_at = Time.now
-
       @job.company = Company.get(@job.company_id)
-
-      @job.endtime = @job.starttime + @job.weeks*7
 
       unless params[:categories].nil?
         categories = params[:categories][:id]
@@ -77,17 +69,12 @@ module App
         end
       end
 
-      @companies = []
       if @job.save
+        flash[:success] = "Annons skapades"
         redirect to("/")
       else
         @categories = Category.all
         puts "company id: #{@job.company_id}"
-        if Role.is_admin(env["warden"])
-          @companies = Company.all
-        else
-          @companies << Company.get(@job.company_id)
-        end
         haml :"jobs/new"
       end
     end
@@ -122,6 +109,7 @@ module App
       @job.save
 
       if @job.update(params[:job])
+        flash[:success] = "Annonsen uppdaterades"
         redirect to("/")
       else
         @categories = Category.all

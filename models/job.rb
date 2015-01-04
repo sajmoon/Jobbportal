@@ -4,9 +4,9 @@ class Job
   include Sinatra::Authorization
 
   property :id,                 Serial
-  property :title,              String,   required: true
-  property :short_description,  Text,     required: true
-  property :description,        Text,     required: true
+  property :title,              String,   required: true, message: "Det behövs en titel"
+  property :short_description,  Text,     required: true, message: "Det behövs en kort beskrivning"
+  property :description,        Text,     required: true, message: "Det behövs en beskrivning"
   property :created_at,         Date,     required: true
   property :updated_at,         Date,     required: true
   property :active,             Boolean,  required: true, default: true
@@ -25,9 +25,18 @@ class Job
 
   belongs_to :company
 
+  before :valid? do
+    self.created_at = Date.today if self.created_at.blank?
+    self.updated_at = Time.now
+  end
+
   before :save do
+    update_end_time
+  end
+
+  def update_end_time
     unless self.weeks.nil?
-      self.endtime = self.starttime + self.weeks*7
+      self.endtime = self.starttime + self.weeks * 7
     end
   end
 
@@ -93,9 +102,9 @@ class Job
     end
   end
 
-	def number_of_days
-		(endtime - starttime).to_i
-	end
+  def number_of_days
+    (endtime - starttime).to_i
+  end
 
   def has_started?
     self.starttime < Date.today
@@ -106,7 +115,7 @@ class Job
   end
 
   def apply_link
-    url = "mailto:#{company.email}"
+    url = "mailto:#{company.email}" unless company.nil?
     if !apply_url.empty?
       if apply_url.match('^http://|https://')
         url = apply_url

@@ -1,11 +1,9 @@
 - unless errors.empty?
-  .alert
-    %button.close{ data: { dismiss: "alert" } }
-      x
+  .alert.alert-warning
     .errors
       %strong
-        Valideringsfel!
-      %ul
+        Annonsen kunde inte sparas!
+      %ul.list-unstyled
         - errors.each do |e, msg|
           %li
             = e

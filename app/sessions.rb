@@ -3,8 +3,7 @@ module App
     set :root, File.dirname(__FILE__) + "/../"
     # Use caching
     set :static_cache_control, [:public, :max_age => 300]
-    enable :logging 
-    
+
     register Sinatra::Flash
 
     get "/unauthenticated" do
@@ -23,7 +22,7 @@ module App
     get "/unauth" do
       haml :"sessions/unauth"
     end
-    
+
     post "/login" do
       company = Company.first(:email => params[:company][:email])
       if company.nil? || !company.checkpassword(params[:company][:password])
