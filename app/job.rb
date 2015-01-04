@@ -1,3 +1,4 @@
+require 'builder'
 module App
   class Jobs < App::Generic
     set :root, File.dirname(__FILE__) + "/.."
@@ -20,26 +21,7 @@ module App
     # RSS
     get '/rss.xml' do
       @jobs = Job.running_now
-      builder do |xml|
-        xml.instruct! :xml, :version => '1.0'
-        xml.rss :version => "2.0" do
-          xml.channel do
-            xml.title "Datasektionens Jobbportal"
-            xml.description "Htta ett jobb som passar dig."
-            xml.link "http://wwww.djobb.se"
-
-            @jobs.each do |job|
-              xml.item do
-                xml.title job.title
-                xml.link "http://www.djobb.se/jobs/#{job.id}"
-                xml.description job.short_description
-                xml.pubDate Time.parse(job.starttime.to_s).rfc822()
-                xml.guid "http://www.djobb.se/jobs/#{job.id}"
-              end
-            end
-          end
-        end
-      end
+      builder :"jobs/rss"
     end
 
     # new
