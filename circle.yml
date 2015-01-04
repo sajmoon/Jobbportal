@@ -1,0 +1,11 @@
+machine:
+  environment:
+    CIRCLE_ENV: test
+    SINATRA_ENV: test
+    COVERAGE: true
+test:
+  override:
+    - bundle exec rake spec
+database:
+  override:
+    - bundle exec rake db:auto_migrate

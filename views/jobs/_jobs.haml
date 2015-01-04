@@ -1,3 +1,5 @@
 .jobs
+  - if jobs.count == 0
+    %p Inga lediga tjänster
   - jobs.each do |job|
     = haml :"jobs/_job", :locals => { :job => job }

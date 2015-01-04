@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.1.5'
 
 gem 'rake'
+gem 'tux'
 
 gem 'sinatra', require: "sinatra/base"
 gem 'sinatra-flash'
@@ -30,6 +31,7 @@ gem 'dm-types'
 gem 'dm-core'
 gem 'dm-timestamps'
 gem 'dm-serializer'
+gem 'dm-transactions'
 
 #user auth
 gem 'warden'
@@ -51,11 +53,12 @@ end
 
 group :development, :test do
   gem 'letter_opener'
+  gem 'selenium-webdriver'
+  gem 'rspec'
 end
 
 group :development do
   gem 'sqlite3'
-  gem 'shotgun'
 end
 
 group :test do
@@ -70,4 +73,6 @@ group :test do
   gem 'capybara_minitest_spec'
 
   gem 'dm-sqlite-adapter'
+  gem 'coveralls', require: false
+  gem 'database_cleaner'
 end

@@ -1,20 +1,25 @@
-SINATRA_ENV = 'test' unless defined?(SINATRA_ENV)
+SINATRA_ENV = "test" unless defined?(SINATRA_ENV)
 
-require File.expand_path(File.dirname(__FILE__) + "/../boot")
+require "coveralls"
+Coveralls.wear!
 
-require 'fabrication'
-require 'faker'
+require_relative File.join("..", "boot")
 
-require 'minitest/autorun'
-require 'minitest/spec'
-require 'minitest/pride'
-require 'rack/test'
+DataMapper.finalize.auto_upgrade!
 
-class MiniTest::Spec
-    include Rack::Test::Methods
+RSpec.configure do |config|
+  config.include Rack::Test::Methods
+
+  config.before :each do
+    DatabaseCleaner.start
+  end
+  config.after :each do
+    DatabaseCleaner.clean
+  end
 end
 
-#clean the database
-Job.auto_migrate!
-Company.auto_migrate!
-Category.auto_migrate!
+def app
+  described_class
+end
+
+DatabaseCleaner[:data_mapper].strategy = :transaction

@@ -8,6 +8,7 @@ use Rack::Deflater
 
 if Sinatra::Base.production?
   use Rack::GoogleAnalytics, :tracker => ENV['G_ANALYTIC']
+
 end
 
 require File.dirname(__FILE__) + '/config/mail_config.rb'
@@ -17,7 +18,7 @@ use Warden::Manager do |manager|
   manager.default_strategies :password
 
   manager.scope_defaults :company,  :strategies => [:password]
-  
+
   manager.serialize_into_session { |user| user.id }
   manager.serialize_from_session { |id| Company.get(id) }
 end
@@ -74,8 +75,4 @@ end
 
 map "/subscribes/" do
   run App::Subscribers
-end
-
-map "/events/" do
-  run App::Events
 end

@@ -3,8 +3,7 @@ SINATRA_ENV  = ENV['SINATRA_ENV'] ||= ENV['RACK_ENV'] ||= 'development'  unless 
 SINATRA_ROOT = File.expand_path('..', __FILE__) unless defined?(SINATRA_ROOT)
 
 # load Gem dependencies
-require 'bundler/setup'
-Bundler.setup
+require "bundler"
 Bundler.require(:default, SINATRA_ENV)
 
 DataMapper::Logger.new($stdout, :debug)
@@ -14,26 +13,18 @@ require_relative "config/database.rb"
 #helpers
 require_relative "models/sinatra_before_filter.rb"
 
-require 'yaml'
-require 'sinatra/flash'
-require 'date'
-require 'haml'
-
-require 'json'
-
-# Background process
-require 'sucker_punch'
+# require "date"
 
 # add lib to load path
-$LOAD_PATH.unshift 'lib'
+$LOAD_PATH.unshift "lib"
 
-require 'sinatra/authorization'
-require 'sinatra/mailer_methods'
+require "sinatra/authorization"
+require "sinatra/mailer_methods"
 
-require 'sinatra/can'
+require "sinatra/can"
 
-if SINATRA_ENV == 'production'
-  require 'newrelic_rpm'  
+if SINATRA_ENV == "production"
+  require "newrelic_rpm"
 end
 
 # require sub-apps
@@ -44,10 +35,10 @@ end
 
 # require models
 Dir.glob("models/*.rb").each do |model|
-    require_relative model
+  require_relative model
 end
 
-require_relative 'lib/sinatra/mail_job'
+require_relative "lib/sinatra/mail_job"
 
 ## Helpers
 def cycle

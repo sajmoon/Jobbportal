@@ -3,22 +3,21 @@ module App
     set :root, File.dirname(__FILE__) + "/.."
     # Use caching
     set :static_cache_control, [:public, :max_age => 300]
-    
+
+    # index
+    get "/index" do
+      redirect to("/")
+    end
+
     # index
     get "/" do
       authorize! :list, Job
       @jobs = Job.running_now
-      @categories = Category.all
-      @selected_categories = Category.all
 
-      if defined?(params[:filter][:id])
-        @jobs = Job.all(Job.categories.id => params[:filter][:id].map{ |id| id }).running_now
-        @selected_categories = Category.all(:id => params[:filter][:id].map{ |id| id })
-      end
-      
       haml :"jobs/index"
     end
 
+    # RSS
     get '/rss.xml' do
       @jobs = Job.running_now
       builder do |xml|
@@ -27,25 +26,20 @@ module App
           xml.channel do
             xml.title "Datasektionens Jobbportal"
             xml.description "Htta ett jobb som passar dig."
-            xml.link "http://djobb.heroku.com"
+            xml.link "http://wwww.djobb.se"
 
             @jobs.each do |job|
               xml.item do
                 xml.title job.title
-                xml.link "http://djobb.heroku.com/jobs/#{job.id}"
+                xml.link "http://www.djobb.se/jobs/#{job.id}"
                 xml.description job.short_description
                 xml.pubDate Time.parse(job.starttime.to_s).rfc822()
-                xml.guid "http://djobb.heroku.com/jobs/#{job.id}"
+                xml.guid "http://www.djobb.se/jobs/#{job.id}"
               end
             end
           end
         end
       end
-    end
- 
-    # index
-    get "/index" do
-      redirect to("/")
     end
 
     # new
@@ -58,7 +52,7 @@ module App
       if env["warden"].user.admin?
         @companies = Company.all
       end
-      
+
       @job.created_by = Role.get_user(env["warden"]).id
       haml :"jobs/new"
     end
@@ -71,9 +65,9 @@ module App
       @job.updated_at = Time.now
 
       @job.company = Company.get(@job.company_id)
-      
+
       @job.endtime = @job.starttime + @job.weeks*7
-      
+
       unless params[:categories].nil?
         categories = params[:categories][:id]
         @job.categories = []
@@ -82,16 +76,16 @@ module App
           @job.categories << cat
         end
       end
-      
+
       @companies = []
       if @job.save
-	      redirect to("/")
+        redirect to("/")
       else
         @categories = Category.all
         puts "company id: #{@job.company_id}"
         if Role.is_admin(env["warden"])
           @companies = Company.all
-        else 
+        else
           @companies << Company.get(@job.company_id)
         end
         haml :"jobs/new"
@@ -118,7 +112,7 @@ module App
       authorize! :edit, @job
       unless params[:categories].blank?
         categories = params[:categories][:id]
-  
+
         @job.categories = []
         categories.each do |c|
           cat = Category.get(c)
@@ -126,7 +120,7 @@ module App
         end
       end
       @job.save
-      
+
       if @job.update(params[:job])
         redirect to("/")
       else
@@ -148,7 +142,7 @@ module App
       authorize! :show, @job
       @job.viewcount = @job.viewcount + 1
       @job.save!
-      
+
       haml :"jobs/show"
     end
 
