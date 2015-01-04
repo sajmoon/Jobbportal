@@ -4,7 +4,7 @@ class Company
   include DataMapper::Validate
 
   attr_accessor :password, :password_confirmation
-  
+
   property :id,             Serial
   property :name,           String,   required: true
   property :img_url,        String

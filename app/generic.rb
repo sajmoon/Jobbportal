@@ -1,6 +1,9 @@
 module App
   class Generic < Sinatra::Base
-    enable :logging
+    configure :production, :development do
+      enable :logging
+    end
+
     register Sinatra::Flash
     register Sinatra::Can
     register Sinatra::Authorization
@@ -10,7 +13,7 @@ module App
       can :list, Job
       can :show, Job
       can :create, Subscribe
-      
+
       unless user.nil?
         can :view, :header
         if user.admin?

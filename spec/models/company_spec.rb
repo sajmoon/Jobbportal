@@ -10,17 +10,14 @@ describe Company do
   describe "basic" do
     let(:company) { Fabricate :company }
 
-    it { company.must_be_instance_of(Company) }
+    it { expect(company).to be_instance_of(Company) }
 
     it "should not have any errors" do
-      company.errors.each do |e|
-        e.must_equal "simon"
-      end
-      company.errors.count.must_equal 0
+      expect(company.errors.count).to eq 0
     end
 
     it "is valid" do
-      company.valid?.must_equal true
+      expect(company.valid?).to eq true
     end
   end
 end

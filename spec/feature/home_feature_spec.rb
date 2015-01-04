@@ -4,7 +4,7 @@ describe "home screen" do
   it "should render home screen" do
     visit "/"
 
-    page.must_have_content "Inga lediga tjänster"
-
+    expect(Company.all.count).to eq 0
+    expect(page).to have_content "Inga lediga tjänster"
   end
 end

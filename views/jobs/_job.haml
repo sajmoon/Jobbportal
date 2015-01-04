@@ -10,10 +10,10 @@
   .col-xs-12.col-md-3.center.categories
     = job.display_categories
   .col-xs-12.col-md-3.center.actions
-    %a.btn.btn-primary.btn-lg{href: "/jobs/#{job.id}/" } 
+    %a.btn.btn-primary.btn-lg{href: "/jobs/#{job.id}/" }
       %span.glyphicon.glyphicon-info-sign
       Mer info
     - if can? :edit, job
-      %a.btn.btn-info.btn-lg{href: "/jobs/#{job.id}/edit"} 
+      %a.btn.btn-info.btn-lg{href: "/jobs/#{job.id}/edit"}
         %span.glyphicon.glyphicon-edit
         Redigera
