@@ -17,7 +17,7 @@ require "minitest/pride"
 require "rack/test"
 
 class MiniTest::Spec
-    include Rack::Test::Methods
+  include Rack::Test::Methods
 end
 
 #clean the database
