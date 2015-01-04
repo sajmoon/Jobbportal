@@ -73,6 +73,6 @@ group :test do
   gem 'capybara_minitest_spec'
 
   gem 'dm-sqlite-adapter'
-  gem 'simplecov', require: false
+  gem 'coveralls', require: false
   gem 'database_cleaner'
 end

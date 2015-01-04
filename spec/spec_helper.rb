@@ -1,10 +1,7 @@
 SINATRA_ENV = 'test' unless defined?(SINATRA_ENV)
 
-require "simplecov"
-SimpleCov.start do
-  add_filter "/spec"
-  add_filter "/vendor"
-end if ENV["COVERAGE"]
+require 'coveralls'
+Coveralls.wear!
 
 require_relative File.join("..", "boot")
 
