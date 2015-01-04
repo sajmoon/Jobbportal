@@ -5,4 +5,4 @@ machine:
     COVERAGE: true
 test:
   override:
-    - rake spec
+    - bundle exec rake spec
