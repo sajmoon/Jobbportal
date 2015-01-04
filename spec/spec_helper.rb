@@ -1,5 +1,4 @@
 SINATRA_ENV = 'test' unless defined?(SINATRA_ENV)
-ENV['RACK_ENV'] = 'test'
 
 require "simplecov"
 SimpleCov.start do
@@ -8,16 +7,6 @@ SimpleCov.start do
 end if ENV["COVERAGE"]
 
 require_relative File.join('..', 'boot')
-
-# require 'dm-transactions'
-# require 'database_cleaner'
-
-# require "fabrication"
-# require "faker"
-
-require "minitest/autorun"
-require "minitest/spec"
-require "rack/test"
 
 DataMapper.finalize.auto_upgrade!
 
@@ -36,24 +25,4 @@ def app
   described_class
 end
 
-class MiniTest::Spec
-  include Rack::Test::Methods
-  before do
-    DatabaseCleaner.clean
-  end
-
-  before :each do
-    DatabaseCleaner.start
-  end
-
-  after :each do
-    DatabaseCleaner.clean
-  end
-end
-
 DatabaseCleaner[:data_mapper].strategy = :transaction
-
-#clean the database
-# Job.auto_migrate!
-# Company.auto_migrate!
-# Category.auto_migrate!

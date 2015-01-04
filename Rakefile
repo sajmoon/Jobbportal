@@ -1,11 +1,11 @@
+require 'rspec/core'
+require 'rspec/core/rake_task'
+
 %w[bundler rake/testtask].each { |lib| require lib }
 
 task :default => :spec
 
-Rake::TestTask.new(:spec) do |t|
-  t.libs << "spec"
-  t.test_files = FileList['spec/**/*_spec.rb']
-end
+RSpec::Core::RakeTask.new(:spec)
 
 namespace :mail do
   desc "Send update mail to all subscribers"
