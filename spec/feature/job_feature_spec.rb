@@ -130,6 +130,6 @@ describe Job do
     fill_in("job_title", with: job.title)
     fill_in("Kort beskrivning", with: job.short_description)
     fill_in("job_description", with: job.description)
-    fill_in("job_apply_url", with: job.apply_link)
+    fill_in("job_apply_url", with: job.apply_url)
   end
 end
