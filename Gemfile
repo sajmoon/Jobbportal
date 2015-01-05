@@ -8,9 +8,6 @@ gem 'tux'
 gem 'sinatra', require: "sinatra/base"
 gem 'sinatra-flash'
 
-gem 'eventmachine'
-gem 'thin'
-
 gem 'haml'
 
 gem 'builder'
