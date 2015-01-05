@@ -13,13 +13,12 @@ require_relative "config/database.rb"
 #helpers
 require_relative "models/sinatra_before_filter.rb"
 
-# require "date"
-
 # add lib to load path
 $LOAD_PATH.unshift "lib"
 
 require "sinatra/authorization"
 require "sinatra/mailer_methods"
+require "textile"
 
 require "sinatra/can"
 

@@ -6,4 +6,5 @@ Fabricator(:job) do
   apply_url         { Faker::Internet.url }
   starttime         { Date.today - 1 }
   weeks             { 2 }
+  company
 end
