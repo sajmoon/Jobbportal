@@ -1,8 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "JobPresenter" do
-  let(:company) { Fabricate :company }
-  let(:job) { Fabricate(:job, apply_url: "", company: company).extend(JobPresenter) }
+  before do
+    company = Fabricate :company
+    job = Fabricate :job, apply_url: "", company: company
+    @jobpresenter = job.extend(JobPresenter)
+  end
 
-  it { expect(job.apply_link).to include "mailto:" }
+  it { expect(@jobpresenter.apply_link).to include "mailto:" }
 end
