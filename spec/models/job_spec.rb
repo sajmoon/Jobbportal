@@ -59,4 +59,12 @@ describe Job do
       expect(job.endtime).not_to be_nil
     end
   end
+
+  describe "textile support" do
+    describe "simple example" do
+      let(:job) { Fabricate :job }
+
+      it { expect(job.formated_description).to include "<p>" }
+    end
+  end
 end

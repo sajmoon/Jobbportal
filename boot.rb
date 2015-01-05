@@ -20,6 +20,7 @@ $LOAD_PATH.unshift "lib"
 
 require "sinatra/authorization"
 require "sinatra/mailer_methods"
+require "textile"
 
 require "sinatra/can"
 

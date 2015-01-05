@@ -55,16 +55,8 @@ class Job
     end
   end
 
-  def self.safe_textilize( s )
-    if s && s.respond_to?(:to_s)
-      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-
-      markdown.render(s.to_s)
-    end
-  end
-
   def formated_description
-    Job.safe_textilize( self.description )
+    Textile.to_html( self.description )
   end
 
   def self.has_started
