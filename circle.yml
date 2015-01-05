@@ -9,3 +9,8 @@ test:
 database:
   override:
     - bundle exec rake db:auto_migrate
+deployment:
+  production:
+    branch: master
+    heroku:
+      appname: djobb
