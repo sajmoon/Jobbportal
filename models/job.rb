@@ -56,7 +56,7 @@ class Job
   end
 
   def formated_description
-    Textile.to_html( self.description )
+    Textile.to_html(description)
   end
 
   def self.has_started
