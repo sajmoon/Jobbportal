@@ -1,7 +1,7 @@
 module App
   class Sessions < Generic
     set :root, File.dirname(__FILE__) + "/../"
-    # Use caching
+
     set :static_cache_control, [:public, :max_age => 300]
 
     register Sinatra::Flash
@@ -31,7 +31,6 @@ module App
       else
         env["warden"].set_user(company)
         flash[:success] = "Inloggning lyckades! Hej #{company.name}."
-        #redirect params["url"]
       end
       redirect "/"
     end

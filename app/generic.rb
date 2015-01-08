@@ -9,7 +9,6 @@ module App
     register Sinatra::Authorization
 
     ability do |user|
-      #unsigned in
       can :list, Job
       can :show, Job
       can :create, Subscribe
@@ -17,7 +16,6 @@ module App
       unless user.nil?
         can :view, :header
         if user.admin?
-          #admin
           can :list, :admin
           can :manage, Job
           can :manage, Subscribe
@@ -26,7 +24,6 @@ module App
           can :change_company_role, Company
           can :list, :ddagen
         else
-          # Not admin
           can :create, Job
           can :edit, Job do |j|
             j.company_id == user.id

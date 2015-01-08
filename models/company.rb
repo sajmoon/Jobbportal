@@ -24,7 +24,7 @@ class Company
   validates_uniqueness_of :email, :name
 
   def new_salt
-    salt = (0..16).to_a.map{|a| rand(16).to_s(16)}.join
+    self.salt = (0..16).to_a.map { |a| rand(16).to_s(16) }.join
   end
 
   def encryptpassword

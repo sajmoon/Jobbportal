@@ -1,27 +1,24 @@
 module App
   class Companies < Generic
     set :root,  File.dirname(__FILE__) + "/.."
-  
+
     get "/" do
       authorize! :list, Company
       @companies = Company.active
       @inactiveCompanies = Company.inactive
       haml :"companies/index"
     end
-  
-    # new
+
     get "/new" do
       authorize! :create, Company
       @company = Company.new
       haml :"companies/new"
     end
 
-    # create
     post "/" do
       authorize! :create, Company
       @company = Company.new(params[:company])
-      puts "post!"
-      
+
       unless params[:company][:password].nil?
         @company.salt = @company.new_salt
       end
@@ -33,7 +30,6 @@ module App
       end
     end
 
-    # show
     get "/:id/?" do |id|
       @company = Company.get(id)
       authorize! :show, @company
@@ -49,10 +45,10 @@ module App
     post "/:id/password/?" do |id|
       @company = Company.get(id)
       authorize! :edit, @company
-      
+
       @company.password               = params[:company][:new_password]
       @company.password_confirmation  = params[:company][:confirm_password]
-      
+
       if @company.valid_password?
         @company.encryptpassword
         @company.save
@@ -64,7 +60,6 @@ module App
       end
     end
 
-    #delete
     get '/:id/delete/?' do |id|
       @company = Company.get(id)
       authorize! :destroy, @company
@@ -97,11 +92,10 @@ module App
       end
     end
 
-    # update
     put "/:id/?" do |id|
       @company = Company.get(id)
       authorize! :edit, @company
-      
+
       unless can? :change_company_role, @company
         params[:company].reject!{ |k| k == "role"}
       end

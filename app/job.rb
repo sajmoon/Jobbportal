@@ -1,15 +1,13 @@
 module App
   class Jobs < App::Generic
     set :root, File.dirname(__FILE__) + "/.."
-    # Use caching
+
     set :static_cache_control, [:public, :max_age => 300]
 
-    # index
     get "/index" do
       redirect to("/")
     end
 
-    # index
     get "/" do
       authorize! :list, Job
       @jobs = Job.running_now
@@ -17,13 +15,11 @@ module App
       haml :"jobs/index"
     end
 
-    # RSS
     get '/rss.xml' do
       @jobs = Job.running_now
       builder :"jobs/rss"
     end
 
-    # new
     get "/new" do
       authorize! :create, Job
       @job = Job.new
@@ -35,7 +31,6 @@ module App
       haml :"jobs/new"
     end
 
-    # create
     post "/" do
       authorize! :create, Job
       @job = Job.new(params[:job])
@@ -53,7 +48,6 @@ module App
       end
     end
 
-    # edit
     get "/:id/edit/?" do |id|
       @job = Job.get(id)
       authorize! :edit, @job
@@ -67,7 +61,6 @@ module App
       haml :"jobs/edit"
     end
 
-    #Update!
     put "/:id/?" do |id|
       @job = Job.get(id)
       authorize! :edit, @job

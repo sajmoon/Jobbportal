@@ -1,11 +1,11 @@
 module App
   class Categories < Generic
     set :root, File.dirname(__FILE__) + "/.."
-    
+
     before do
       authorize! :manage, Category
     end
-    
+
     get "/" do
       @categories = Category.all
       haml :"categories/index"
@@ -35,7 +35,7 @@ module App
     put "/:id/?" do |id|
       @category = Category.get(id)
       if @category.update(params[:category])
-        flash[:success] = "Updaterade kategorin"    
+        flash[:success] = "Updaterade kategorin"
         redirect "/categories/"
       else
         flash[:alert] = "Misslyckades"

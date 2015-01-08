@@ -3,7 +3,7 @@
 # I'm currently using this with async_sinatra; haven't tested it without (sorry!)
 #
 # Example method usage:
-# 
+#
 #    before_filter [[:apost, "/users/?"] do
 #        require_login
 #    end
@@ -26,22 +26,22 @@ module Sinatra
         # end
         #
 
-     def self.before_filter(path_with_http_method = nil, options = {}, &block)    
-       path_with_http_method.each do |p|
-         opts = options.merge({:request_method => p[0]})
-         add_filter(:before, p[1], options, &block)
-       end
-     end
+    def self.before_filter(path_with_http_method = nil, options = {}, &block)
+      path_with_http_method.each do |p|
+        opts = options.merge({:request_method => p[0]})
+        add_filter(:before, p[1], options, &block)
+      end
+    end
 
-     private
-        
+    private
+
         # Sinatra::Base#request_method
         # Credit: http://jeremy.cowgar.com/2011/04/07/a-method-condition-for-sinatra/
         #
         # execute a filter based on the HTTP request method
-        # 
+        #
         # Example:
-        # 
+        #
         # before :request_method => [:put] do
         #   require_login
         # end
