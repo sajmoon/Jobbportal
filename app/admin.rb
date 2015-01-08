@@ -6,7 +6,7 @@ module App
 
     set :root, File.dirname(__FILE__) + "/.."
 
-    before do 
+    before do
       authorize! :list, :admin
     end
 
@@ -17,7 +17,7 @@ module App
 
     get "/pay/:id/?" do
       @jobs = Job.all(order: :company_id)
-      
+
       @job = Job.get(params[:id])
       @job.paid = true
       if @job.save

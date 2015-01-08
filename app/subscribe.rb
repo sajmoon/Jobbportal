@@ -3,18 +3,18 @@ module App
     register Sinatra::MailerMethods
 
     set :root, File.dirname(__FILE__) + "/.."
-    
+
     get "/" do
       authorize! :list, Subscribe
       @subscribers = Subscribe.all
-      
+
       haml :"subscribes/index"
     end
 
     post "/" do
       authorize! :create, Subscribe
       @subscribe = Subscribe.new(params[:subscribe])
-      
+
       if @subscribe.save
         welcome_mail(@subscribe.email.to_s)
         flash[:success] = "Va bra! Vi har dig nu uppskriven i maillistan."
@@ -40,7 +40,7 @@ module App
 
     get "/send_mail" do
       authorize! :send, Subscribe
-      
+
       if params[:what] == "welcome"
         welcome_mail(params[:email])
       elsif params[:what] == "weekly"
@@ -59,8 +59,6 @@ module App
 
       flash[:success] = "Tog bort #{email}!"
       redirect to("/")
-
-
     end
   end
 end
