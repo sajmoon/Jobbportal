@@ -26,14 +26,14 @@ module Sinatra
         # end
         #
 
-     def self.before_filter(path_with_http_method = nil, options = {}, &block)
-       path_with_http_method.each do |p|
-         opts = options.merge({:request_method => p[0]})
-         add_filter(:before, p[1], options, &block)
-       end
-     end
+    def self.before_filter(path_with_http_method = nil, options = {}, &block)
+      path_with_http_method.each do |p|
+        opts = options.merge({:request_method => p[0]})
+        add_filter(:before, p[1], options, &block)
+      end
+    end
 
-     private
+    private
 
         # Sinatra::Base#request_method
         # Credit: http://jeremy.cowgar.com/2011/04/07/a-method-condition-for-sinatra/
