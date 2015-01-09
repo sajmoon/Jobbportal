@@ -39,7 +39,7 @@ class Company
   end
 
   def generate_new_salt
-    (0..16).to_a.map { |a| rand(16).to_s(16) }.join
+    (0..16).to_a.map { rand(16).to_s(16) }.join
   end
 
   def encryptpassword
@@ -47,7 +47,7 @@ class Company
     if should_update_password?
       if new_passwords_match?
         self.salt = generate_new_salt
-        self.hashedpassword = digest_password(password, self.salt)
+        self.hashedpassword = digest_password(password, salt)
       end
     end
   end
@@ -76,7 +76,7 @@ class Company
     if admin?
       true
     elsif self.role == Role.rep
-      if id == nil
+      if id.nil?
         true
       elsif self.id == id
         true
