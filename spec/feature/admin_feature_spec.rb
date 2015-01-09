@@ -1,5 +1,4 @@
 require "feature_spec_helper"
-require "support/features/session_helpers"
 
 describe "Siging in as admin" do
 
