@@ -2,6 +2,9 @@
   .span10.offset1
     %h1
       = "Annonser från #{@company.name}"
+    %a.btn.btn-info.btn-mini{href: "/companies/#{@company.id}/edit"}
+      %i.icon-remove.icon-white
+      Ändra
 
     %hr
     %h5
@@ -16,10 +19,9 @@
       %h4
         Kommande annonser
       = haml :"companies/_jobs", locals: {jobs: @company.jobs.not_started}
-    
+
     %hr
     .previous_ads
       %h4
         Tidigare Annonser
       = haml :"companies/_jobs", locals: {jobs: @company.jobs.has_ended}
-    

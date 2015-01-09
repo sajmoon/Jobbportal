@@ -19,13 +19,11 @@ module App
       authorize! :create, Company
       @company = Company.new(params[:company])
 
-      unless params[:company][:password].nil?
-        @company.salt = @company.new_salt
-      end
-
       if @company.save
-        redirect to("/")
+        flash[:success] = "Nytt företag skapat!"
+        redirect to("/#{@company.id}")
       else
+        flash[:error] = "Något gick fel"
         haml :"companies/new"
       end
     end

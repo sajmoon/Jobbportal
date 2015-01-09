@@ -1,5 +1,5 @@
 -unless @company.nil?
-  = haml :"errors", locals: { errors: @company.errors }  
+  = haml :"errors", locals: { errors: @company.errors }
 .control-group
   %label.control-label{for: 'name'} Namn:
   .controls
@@ -14,21 +14,6 @@
   %label.control-label{for: 'password'} Password:
   .controls
     %input.input-xlarge{type: 'password', id: 'password', name: "company[password]"}
-
--if can? :change_company_role, Company
-  .control-group
-    %label.control-label{for: 'role'} Roll
-    .controls
-      %select.input-xlarge{id: 'role', name: 'company[role'}
-        %option{value: ""} Välj ett
-
-        - Role.get_hash_of_roles(@company).each do |r|
-          - if r[:selected] == true
-            %option{value: r[:n], selected: "true" }
-              = r[:n]
-          -else
-            %option{value: r[:n]}
-              = r[:n]
 
 .control-group
   %label.control-label{for: "company_img_url"} Url logo
