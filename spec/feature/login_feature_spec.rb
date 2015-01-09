@@ -62,15 +62,6 @@ describe "if signed in as company" do
   end
 end
 
-describe "unactive account" do
-  it "shows an error message" do
-    @company = Fabricate(:company, active: false)
-    login_as_company @company
-
-    expect(page).to have_content "Du har ett inaktiverat konto!"
-  end
-end
-
 describe "wrong password" do
   let(:company) { Fabricate(:company) }
 
