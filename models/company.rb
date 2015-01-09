@@ -37,28 +37,28 @@ class Company
     ensure_salt
     if should_update_password?
       generate_new_salt
-      self.hashedpassword = Digest::SHA512.hexdigest("#{self.password}:#{self.salt}")
+      self.hashedpassword = digest_password(password, salt)
     end
   end
 
-  def checkpassword(password)
-    if Digest::SHA512.hexdigest("#{password}:#{self.salt}") == self.hashedpassword
-      true
-    else
-      false
-    end
+  def checkpassword(pwd)
+    digest_password(pwd, self.salt) == self.hashedpassword
+  end
+
+  def digest_password pwd, in_salt
+    Digest::SHA512.hexdigest("#{pwd}:#{in_salt}")
   end
 
   def should_update_password?
-    !self.password.blank?
+    !password.blank?
   end
 
   def new_password_should_match
-    self.password == self.password_confirmation
+    self.password == password_confirmation
   end
 
   def admin?
-    role == "admin"
+    role == Role.admin
   end
 
   def company_rep?(id = 0)

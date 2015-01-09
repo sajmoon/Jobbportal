@@ -27,10 +27,10 @@ describe Company do
     end
 
     describe "updateing password" do
-      before {
+      before do
         company.password = "newpassword"
         company.password_confirmation = "newpassword"
-      }
+      end
 
       it { expect(company.should_update_password?).to be_truthy }
       it { expect(company.new_password_should_match).to be_truthy }
@@ -60,6 +60,11 @@ describe Company do
 
       expect(company1.salt).not_to eq(company2.salt)
       expect(company1.hashedpassword).not_to eq(company2.hashedpassword)
+    end
+
+    describe "validate" do
+      it { expect(company.checkpassword("wrong password")).to be_falsey }
+      it { expect(company.checkpassword("password")).to be_truthy }
     end
   end
 end
