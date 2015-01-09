@@ -63,15 +63,14 @@ class Company
 
   def company_rep?(id = nil)
     if admin?
-      return true
+      true
     elsif self.role == Role.rep
       if id == nil
-        return true
+        true
       elsif self.id == id
-        return true
+        true
       end
     end
-    return false
   end
 
   def self.active
