@@ -11,7 +11,7 @@ module App
     end
 
     post "/unauthenticated" do
-      flash[:alert] = env["warden.options"][:message]
+      flash[:alert] = "Du kunde inte logga in"
       redirect "/"
     end
 
@@ -24,14 +24,11 @@ module App
     end
 
     post "/login" do
-      company = Company.first(:email => params[:company][:email])
-      if company.nil? || !company.checkpassword(params[:company][:password])
-        flash[:warning] = "Inloggning misslyckades"
-        redirect to("/login")
-      else
-        env["warden"].set_user(company)
-        flash[:success] = "Inloggning lyckades! Hej #{company.name}."
-      end
+      p "post login"
+      env["warden"].authenticate!
+
+      flash[:success] = "Du har loggats in"
+
       redirect "/"
     end
 

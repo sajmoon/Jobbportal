@@ -18,7 +18,7 @@ use Warden::Manager do |manager|
 
   manager.scope_defaults :company,  :strategies => [:password]
 
-  manager.serialize_into_session { |user| user.id }
+  manager.serialize_into_session { |company| company.id }
   manager.serialize_from_session { |id| Company.get(id) }
 end
 
@@ -28,12 +28,19 @@ end
 
 Warden::Strategies.add(:password) do
   def valid?
-    params[:username] || params[:password]
+    params["company"]["username"] && params["company"]["password"]
   end
 
   def authenticate!
-    u = Company.authenticate(params[:username], params[:password])
-    u.nil? ? fail!("Inloggning misslyckades") : success!(u)
+    company = Company.first(email: params["company"]["email"])
+
+    if company.nil?
+      fail!("Inloggning misslyckades")
+    elsif company.checkpassword(params["company"]["password"])
+      success!(company)
+    else
+      fail!("Inloggning misslyckades")
+    end
   end
 end
 
