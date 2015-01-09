@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 %html{lang: "se"}
   %head
-    %title= @title || "Jobbportal | Datasektionen KTH - Jobb för dataloger"
+    %title= @title || "Jobbportal | Datasektionen KTH - Jobb för dataloger"
     %meta{charset: "utf-8" }
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport" }
 
@@ -15,12 +15,9 @@
       %script{src: "http://html5shim.googlecode.com/svn/trunk/html5.js"}
     %link{href: "/img/icon_small.png", rel: "shortcut icon" }
 
-
     <!-- Bootstrap -->
     %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"}
-
     %link{href: "/css/djobb.css", rel: "stylesheet" }
-
 
   %body
     - if can? :view, :header
