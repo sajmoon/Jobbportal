@@ -47,7 +47,7 @@ end
 Warden::Manager.after_set_user do |user, auth, opts|
   unless user.active?
     auth.logout
-    throw(:warden, :message => "Du har ett inaktiverat konto!")
+    throw(:warden, message: "Du har ett inaktiverat konto!")
   end
 end
 

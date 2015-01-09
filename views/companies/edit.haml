@@ -9,13 +9,13 @@
     - if can? :delete, @company
       -if @company.active?
         %a.btn.btn-xs{href: "/companies/#{@company.id}/delete"} Avaktivera
-      - else 
+      - else
         %a.btn.btn-xs{href: "/companies/#{@company.id}/activate"} Aktivera
 
     %form.form-horizontal{action: "/companies/#{@company.id}", method: "post"}
       %input{type: "hidden", name: "_method", :value => "put"}
       -unless @company.nil?
-        = haml :"errors", locals: { errors: @company.errors }  
+        = haml :"errors", locals: { errors: @company.errors }
       .form-group
         %label.control-label.col-sm-2{for: 'name'} Namn:
         .col-sm-10
@@ -25,21 +25,6 @@
         %label.control-label.col-sm-2{for: 'email'} Email:
         .col-sm-10
           %input.form-control.input-lg{type: "text", id: 'email', name: "company[email]", value: @company.email}
-
-      -if can? :change_company_role, Company
-        .form-group
-          %label.control-label.col-sm-2{for: 'role'} Roll
-          .col-sm-10
-            %select.input-lg.form-control{id: 'role', name: 'company[role'}
-              %option{value: ""} Välj ett
-
-              - Role.get_hash_of_roles(@company).each do |r|
-                - if r[:selected] == true
-                  %option{value: r[:n], selected: "true" }
-                    = r[:n]
-                -else
-                  %option{value: r[:n]}
-                    = r[:n]
 
       .form-group
         %label.control-label.col-sm-2{for: "company_img_url"} Url logo

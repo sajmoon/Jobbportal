@@ -33,14 +33,15 @@ describe Company do
       end
 
       it { expect(company.should_update_password?).to be_truthy }
-      it { expect(company.new_password_should_match).to be_truthy }
+      it { expect(company.new_passwords_match?).to be_truthy }
     end
 
     describe "need both password and confirmation" do
       let(:company) { Fabricate :company, password_confirmation: "" }
 
       it { expect(company.should_update_password?).to be_truthy }
-      it { expect(company.new_password_should_match).to be_falsey }
+      it { expect(company.new_passwords_match?).to be_falsey }
+      it { expect(company.valid?).to be_falsey }
     end
 
     it "salt changes when we set a new password" do
