@@ -80,8 +80,16 @@ describe Company do
       let(:company) { Fabricate(:company) }
       let(:second_company) { Fabricate(:company) }
 
+      it { expect(company.admin?).to be_falsey }
       it { expect(company.company_rep?).to be_truthy }
       it { expect(company.company_rep?(second_company.id)).to be_falsey }
+    end
+
+    describe "no role" do
+      let(:company) { Fabricate(:company, role: "") }
+
+      it { expect(company.admin?).to be_falsey }
+      it { expect(company.company_rep?).to be_falsey }
     end
   end
 end
