@@ -61,18 +61,17 @@ class Company
     role == Role.admin
   end
 
-  def company_rep?(id = 0)
-    rep = false
-    if self.role == Role.rep
-      if id.to_i == 0
-        rep = true
-      elsif self.id == id.to_i
-        rep = true
+  def company_rep?(id = nil)
+    if admin?
+      return true
+    elsif self.role == Role.rep
+      if id == nil
+        return true
+      elsif self.id == id
+        return true
       end
-    elsif self.role == Role.admin
-      rep = true
     end
-    rep
+    return false
   end
 
   def self.active

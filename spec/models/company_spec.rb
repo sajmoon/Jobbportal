@@ -67,4 +67,21 @@ describe Company do
       it { expect(company.checkpassword("password")).to be_truthy }
     end
   end
+
+  describe "role" do
+    describe "admin" do
+      let(:company) { Fabricate(:company, role: Role.admin) }
+
+      it { expect(company.admin?).to be_truthy }
+      it { expect(company.company_rep?).to be_truthy }
+    end
+
+    describe "Company representative" do
+      let(:company) { Fabricate(:company) }
+      let(:second_company) { Fabricate(:company) }
+
+      it { expect(company.company_rep?).to be_truthy }
+      it { expect(company.company_rep?(second_company.id)).to be_falsey }
+    end
+  end
 end
