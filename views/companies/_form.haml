@@ -16,6 +16,11 @@
     %input.input-xlarge{type: 'password', id: 'password', name: "company[password]"}
 
 .control-group
+  %label.control-label{for: 'password_confirmation'} Lösenordet igen:
+  .controls
+    %input.input-xlarge{type: 'password', id: 'password_confirmation', name: "company[password_confirmation]"}
+
+.control-group
   %label.control-label{for: "company_img_url"} Url logo
   .controls
     %input.input-xlarge{id: "company_img_url", type: "text", name: "company[img_url]", value: @company.img_url}

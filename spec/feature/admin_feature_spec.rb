@@ -41,6 +41,13 @@ describe "Siging in as admin" do
 
     click_button "Skapa"
 
+    expect(page).to have_content "Lösenord matchar inte"
+
+    fill_in "company[password]", with: "comp_password"
+    fill_in "company[password_confirmation]", with: "comp_password"
+
+    click_button "Skapa"
+
     expect(page).to have_content "Nytt företag skapat!"
 
     click_link "Ändra"

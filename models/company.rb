@@ -19,9 +19,18 @@ class Company
 
   has n, :jobs
 
+  validates_with_method :presence_of_password
   before :valid?, :encryptpassword
 
   validates_uniqueness_of :email, :name
+
+  def presence_of_password
+    if should_update_password? && !new_passwords_match?
+      [ false, "Lösenord matchar inte" ]
+    else
+      true
+    end
+  end
 
   def ensure_salt
     if should_update_password? || salt.blank?
@@ -30,14 +39,16 @@ class Company
   end
 
   def generate_new_salt
-    self.salt = (0..16).to_a.map { |a| rand(16).to_s(16) }.join
+    (0..16).to_a.map { |a| rand(16).to_s(16) }.join
   end
 
   def encryptpassword
     ensure_salt
     if should_update_password?
-      generate_new_salt
-      self.hashedpassword = digest_password(password, salt)
+      if new_passwords_match?
+        self.salt = generate_new_salt
+        self.hashedpassword = digest_password(password, self.salt)
+      end
     end
   end
 
@@ -53,7 +64,7 @@ class Company
     !password.blank?
   end
 
-  def new_password_should_match
+  def new_passwords_match?
     password == password_confirmation
   end
 
@@ -83,9 +94,9 @@ class Company
 
   def logo_url
     if self.img_url.blank?
-      return "/img/missing-image-640x360.png"
+      "/img/missing-image-640x360.png"
     else
-      return self.img_url
+      self.img_url
     end
   end
 end
