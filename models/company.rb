@@ -11,7 +11,7 @@ class Company
   property :email,          String,   required: true
   property :role,           String
   property :hashedpassword, String
-  property :salt,           String,   required: true
+  property :salt,           String
   property :created_on,     Date
   property :updated_at,     DateTime
   property :updated_on,     Date
@@ -19,19 +19,25 @@ class Company
 
   has n, :jobs
 
-  before :save, :encryptpassword
+  before :valid?, :encryptpassword
 
   validates_uniqueness_of :email, :name
 
-  def new_salt
+  def ensure_salt
+    if should_update_password? || salt.blank?
+      self.salt = generate_new_salt
+    end
+  end
+
+  def generate_new_salt
     self.salt = (0..16).to_a.map { |a| rand(16).to_s(16) }.join
   end
 
   def encryptpassword
-    unless self.password.nil?
-      if self.valid_password?
-        self.hashedpassword = Digest::SHA512.hexdigest("#{self.password}:#{self.salt}")
-      end
+    ensure_salt
+    if should_update_password?
+      generate_new_salt
+      self.hashedpassword = Digest::SHA512.hexdigest("#{self.password}:#{self.salt}")
     end
   end
 
@@ -43,11 +49,12 @@ class Company
     end
   end
 
-  def valid_password?
-    if self.password == self.password_confirmation
-      return true
-    end
-    return false
+  def should_update_password?
+    !self.password.blank?
+  end
+
+  def new_password_should_match
+    self.password == self.password_confirmation
   end
 
   def admin?

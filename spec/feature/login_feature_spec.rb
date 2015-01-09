@@ -25,7 +25,7 @@ def login_as_company(company)
   click_button "Logga in"
 end
 
-describe "if signed in as company1" do
+describe "if signed in as company" do
   before :each do
     @company1 = Fabricate :company, name: "company1"
     @company2 = Fabricate :company, name: "company2"
