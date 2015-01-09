@@ -7,11 +7,12 @@ module App
     register Sinatra::Flash
 
     get "/unauthenticated" do
+      flash[:error] = env["warden.options"][:message]
       redirect "/"
     end
 
     post "/unauthenticated" do
-      flash[:alert] = "Du kunde inte logga in"
+      flash[:error] = env["warden.options"][:message] || "Du kunde inte logga in"
       redirect "/"
     end
 
@@ -27,7 +28,7 @@ module App
       p "post login"
       env["warden"].authenticate!
 
-      flash[:success] = "Du har loggats in"
+      flash[:success] = "Du har loggats in som #{Role.get_user(env["warden"]).name}"
 
       redirect "/"
     end

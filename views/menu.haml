@@ -1,7 +1,7 @@
 %ul.nav.navbar-nav.navbar-right
   - if env["warden"].user.nil?
     %li
-      %a{href: "/auth/login"} 
+      %a{href: "/auth/login"}
         %span.glyphicon.glyphicon-log-in
         = "Logga in"
   - else

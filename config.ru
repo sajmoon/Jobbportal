@@ -28,7 +28,7 @@ end
 
 Warden::Strategies.add(:password) do
   def valid?
-    params["company"]["username"] && params["company"]["password"]
+    params["company"]["username"] || params["company"]["password"]
   end
 
   def authenticate!
