@@ -10,13 +10,10 @@ DataMapper.finalize.auto_upgrade!
 RSpec.configure do |config|
   config.include Rack::Test::Methods
 
-  # def app
-  #   Sinatra::Application
-  # end
-
   config.before :each do
     DatabaseCleaner.start
   end
+
   config.after :each do
     DatabaseCleaner.clean
   end
