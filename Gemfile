@@ -3,7 +3,6 @@ source "https://rubygems.org"
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.1.5'
 
 gem 'rake'
-gem 'tux'
 
 gem 'sinatra', require: "sinatra/base"
 gem 'sinatra-flash'

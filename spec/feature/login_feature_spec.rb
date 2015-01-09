@@ -62,6 +62,23 @@ describe "if signed in as company" do
   end
 end
 
+describe "wrong password" do
+  let(:company) { Fabricate(:company) }
+
+  it "gives error" do
+    visit "/"
+
+    click_on "Logga in"
+
+    fill_in "company[email]", with: company.email
+    fill_in "company[password]", with: "wrong password"
+
+    click_button "Logga in"
+
+    expect(page).to have_content("Du kunde inte logga in")
+  end
+end
+
 describe "fails if not signed in" do
   it "admin" do
     visit "/admin"

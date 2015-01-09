@@ -8,14 +8,14 @@ module App
     register Sinatra::Can
     register Sinatra::Authorization
 
-    ability do |user|
+    ability do |company|
       can :list, Job
       can :show, Job
       can :create, Subscribe
 
-      unless user.nil?
+      unless company.nil?
         can :view, :header
-        if user.admin?
+        if company.admin?
           can :list, :admin
           can :manage, Job
           can :manage, Subscribe
@@ -26,20 +26,16 @@ module App
         else
           can :create, Job
           can :edit, Job do |j|
-            j.company_id == user.id
+            j.company_id == company.id
           end
           can :show, Company do |c|
-            c.id == user.id
+            c.id == company.id
           end
           can :edit, Company do |c|
-            c.id == user.id
+            c.id == company.id
           end
         end
       end
-    end
-
-    user do
-      env["warden"].user
     end
 
     not_found do
