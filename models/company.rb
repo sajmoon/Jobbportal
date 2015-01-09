@@ -42,10 +42,10 @@ class Company
   end
 
   def checkpassword(pwd)
-    digest_password(pwd, self.salt) == self.hashedpassword
+    digest_password(pwd, salt) == hashedpassword
   end
 
-  def digest_password pwd, in_salt
+  def digest_password(pwd, in_salt)
     Digest::SHA512.hexdigest("#{pwd}:#{in_salt}")
   end
 
@@ -54,7 +54,7 @@ class Company
   end
 
   def new_password_should_match
-    self.password == password_confirmation
+    password == password_confirmation
   end
 
   def admin?
