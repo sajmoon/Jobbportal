@@ -96,7 +96,7 @@ class Company
     if self.img_url.blank?
       "/img/missing-image-640x360.png"
     else
-      self.img_url
+      img_url
     end
   end
 end
