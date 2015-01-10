@@ -93,7 +93,7 @@ class Job
 
   def is_new
     unless self.starttime.nil?
-      if (self.starttime - Date.today).abs.to_i < 1
+      if (self.starttime - Date.today).abs.to_i < 3
         true
       else
         false
