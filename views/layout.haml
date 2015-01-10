@@ -25,26 +25,27 @@
     - else
       = haml :"new_header"
     = haml :"flash"
+
     .container-fluid
       .content
         = yield
       .footer
         = haml :"subscribe"
         .row
-          .col-md-4.col-lg-4.col-lg-offset-2.center
-            %p
-              %a{href: "/jobs/rss.xml"}
-                %img{src: "https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/rss.png", class: "icon rss-feed"}
-                RSS Feed
-            %p
-              %a{href: "https://www.facebook.com/kth.d.naringsliv"}
-                %img{src: "http://img3.wikia.nocookie.net/__cb20101107023004/avatar/images/3/3f/Facebook_icon.png", class: "icon"}
-                Facebook
-          .col-md-4.col-lg-4.center
-            %p
-              %a{href: "http://www.datasektionen.se"} KTH Datasektionen
-            %p
-              %a{href: "mailto:foretag@d.kth.se"} Söker du studenter?
+          .col-sm-12
+            %ul.footer-links
+              %li.footer-link
+                %a{href: "/jobs/rss.xml"}
+                  %img{src: "https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/rss.png", class: "icon rss-feed"}
+                  RSS Feed
+              %li.footer-link
+                %a{href: "https://www.facebook.com/kth.d.naringsliv"}
+                  %img{src: "http://img3.wikia.nocookie.net/__cb20101107023004/avatar/images/3/3f/Facebook_icon.png", class: "icon"}
+                  Facebook
+              %li.footer-link
+                %a{href: "http://www.datasektionen.se"} KTH Datasektionen
+              %li.footer-link
+                %a{href: "mailto:foretag@d.kth.se"} Söker du studenter?
     %script{src: "https://code.jquery.com/jquery-1.11.1.min.js"}
     %script{src: "/js/application.js"}
     %script{src:"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"}

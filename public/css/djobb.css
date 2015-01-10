@@ -9,6 +9,19 @@
   font-size: 12px;
 }
 
+.footer-links {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  list-style-type: disc;
+}
+
+.footer-link {
+  display: inline-block;
+  padding: 10px 8px;
+  margin: 2px;
+}
+
 html, body {
   height: 100%;
   font-size: 16px;
