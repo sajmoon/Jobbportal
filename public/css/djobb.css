@@ -9,6 +9,19 @@
   font-size: 12px;
 }
 
+.footer-links {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  list-style-type: disc;
+}
+
+.footer-link {
+  display: inline-block;
+  padding: 10px 8px;
+  margin: 2px;
+}
+
 html, body {
   height: 100%;
   font-size: 16px;
@@ -45,7 +58,7 @@ html, body {
 }
 
 .subscribe {
-  padding-bottom: 1em;
+  padding-bottom: 4em;
 }
 
 .subscribe-email {
@@ -58,13 +71,16 @@ html, body {
 
 .content {
   min-height: 350px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .alert {
   text-align: center;
-  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 0px;
 }
 
 .strong {
