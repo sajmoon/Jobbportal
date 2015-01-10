@@ -14,5 +14,5 @@
       %span.glyphicon.glyphicon-info-sign
       Mer info
     - if can? :edit, job
-      %a.btn.btn-info.btn-lg{href: "/jobs/#{job.id}/edit"}
+      %a.btn.btn-info.btn-lg.edit-link{href: "/jobs/#{job.id}/edit"}
         %span.glyphicon.glyphicon-edit

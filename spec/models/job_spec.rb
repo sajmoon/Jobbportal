@@ -41,6 +41,14 @@ describe Job do
     expect(job.endtime).to eq (job.starttime + 7 * job.weeks)
   end
 
+  it "old ads" do
+    old_job = Fabricate(:job, starttime: Date.today - 21, endtime: Date.today - 3)
+    job = Fabricate(:job)
+
+    expect(old_job.is_old?).to eq true
+    expect(job.is_old?).to eq false
+  end
+
   it "is valid" do
     job = Fabricate(:job, company: company)
     expect(job.errors.count).to eq 0

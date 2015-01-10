@@ -99,7 +99,7 @@ describe Job do
 
     visit "/"
 
-    click_link "Redigera"
+    find(".edit-link").click
     expect(page).to have_content "Ändra din annons"
 
     within "#categories" do
@@ -111,7 +111,7 @@ describe Job do
 
     job = Job.first
     expect(job.categories.count).to eql 2
-    click_on "Redigera"
+    find(".edit-link").click
 
     within "#categories" do
       expect(all('input[type="checkbox"]').count).to eq 3

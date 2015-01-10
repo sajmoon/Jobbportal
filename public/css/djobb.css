@@ -69,6 +69,14 @@ html, body {
   border-radius: 1px;
 }
 
+.old_job_warning {
+  background-color: #f0ad4e;
+  padding: 20px;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 1px;
+}
+
 .content {
   min-height: 350px;
   max-width: 1000px;

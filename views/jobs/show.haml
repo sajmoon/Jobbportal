@@ -3,6 +3,10 @@
     .top
       %h1{itemprop: "title"}
         = @job.title
+      - if @job.is_old?
+        .old_job_warning
+          Den här annonsen verkar vara gammal. Du kan se nya annonser
+          %a{href: "/jobs/"} här.
       %hr
       .row
         .col-lg-3

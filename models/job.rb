@@ -101,6 +101,10 @@ class Job
     end
   end
 
+  def is_old?
+    endtime < Date.today
+  end
+
   def number_of_days
     (endtime - starttime).to_i
   end
