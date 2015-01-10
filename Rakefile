@@ -1,11 +1,12 @@
-require 'rspec/core'
-require 'rspec/core/rake_task'
+begin
+  require 'rspec/core'
+  require 'rspec/core/rake_task'
 
-%w[bundler rake/testtask].each { |lib| require lib }
+  %w[bundler rake/testtask].each { |lib| require lib }
 
-task :default => :spec
-
-RSpec::Core::RakeTask.new(:spec)
+  RSpec::Core::RakeTask.new(:spec)
+rescue LoadError
+end
 
 namespace :mail do
   desc "Send update mail to all subscribers"
