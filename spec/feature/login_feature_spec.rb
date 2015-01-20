@@ -27,7 +27,6 @@ def login_as_company_with_password(company, password)
   fill_in "company[email]", with: company.email
   fill_in "company[password]", with: password
   click_button "Logga in"
-
 end
 
 describe "if signed in as company" do
