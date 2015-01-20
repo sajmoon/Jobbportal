@@ -4,8 +4,6 @@ module App
 
     set :static_cache_control, [:public, :max_age => 300]
 
-    register Sinatra::Flash
-
     get "/unauthenticated" do
       flash[:error] = env["warden.options"][:message]
       redirect "/"
@@ -25,7 +23,6 @@ module App
     end
 
     post "/login" do
-      p "post login"
       env["warden"].authenticate!
 
       flash[:success] = "Du har loggats in som #{Role.get_user(env["warden"]).name}"

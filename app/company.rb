@@ -47,10 +47,10 @@ module App
       @company.password               = params[:company][:new_password]
       @company.password_confirmation  = params[:company][:confirm_password]
 
-      if @company.valid_password?
+      if @company.new_passwords_match?
         @company.encryptpassword
         @company.save
-        flash[:alert] = "Ditt losenord har blivit bytt"
+        flash[:success] = "Ditt losenord har blivit bytt"
         haml :"companies/show"
       else
         flash[:alert] = "Kunde inte byta losenord"
