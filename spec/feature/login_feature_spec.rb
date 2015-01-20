@@ -19,10 +19,15 @@ describe "not requiring sign in" do
 end
 
 def login_as_company(company)
+  login_as_company_with_password(company, "password")
+end
+
+def login_as_company_with_password(company, password)
   visit "/auth/login"
   fill_in "company[email]", with: company.email
-  fill_in "company[password]", with: "password"
+  fill_in "company[password]", with: password
   click_button "Logga in"
+
 end
 
 describe "if signed in as company" do
@@ -135,5 +140,48 @@ describe "fails if not signed in" do
       visit "/categories/#{@category.id}/edit"
       expect(page).to have_content "Nu har du kommit fel"
     end
+  end
+end
+
+describe "signed in user can change password" do
+  before do
+    @company = Fabricate(:company)
+  end
+
+  it "update password view renders" do
+    login_as_company @company
+
+    visit "/"
+
+    expect(page).to have_content "Min profil"
+
+    click_on "Min profil"
+
+    expect(page).to have_content "Ändra detaljer om företaget"
+    expect(page).to have_content "Byt lösenord"
+
+    click_on "Byt lösenord"
+
+    expect(page).to have_content "Ändra lösenord för "
+    new_password = "somestupidstuff"
+
+    fill_in "company[new_password]", with: new_password
+    fill_in "company[confirm_password]", with: new_password
+
+    click_on "Byt lösenord"
+
+    click_on "Logga ut"
+
+    expect(page).not_to have_content "Min profil"
+    expect(page).to have_content "Utloggning lyckades"
+
+    login_as_company @company
+    expect(page).to have_content "Du kunde inte logga in"
+
+    login_as_company_with_password @company, new_password
+
+    expect(page).to have_content "Du har loggats in som "
+
+    expect(page).to have_content "Min profil"
   end
 end
