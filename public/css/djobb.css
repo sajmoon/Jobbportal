@@ -109,6 +109,7 @@ a:hover {
 {
   max-height:42px;
   max-width: 75px;
+  padding-right: 10px;
 }
 
 .job {
