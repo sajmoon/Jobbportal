@@ -117,15 +117,4 @@ class Job
     ((Date.today - starttime)/7).to_i
   end
 
-  def apply_link
-    url = "mailto:#{company.email}" unless company.nil?
-    if !apply_url.empty?
-      if apply_url.match('^http://|https://')
-        url = apply_url
-      else
-        url = "http://#{apply_url}"
-      end
-    end
-    url
-  end
 end

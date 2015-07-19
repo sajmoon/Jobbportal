@@ -83,7 +83,7 @@ module App
     end
 
     get "/:id" do |id|
-      @job = Job.get(id)
+      @job = Job.get(id).extend(JobPresenter)
       if @job == nil
         redirect '/', 404
       end
